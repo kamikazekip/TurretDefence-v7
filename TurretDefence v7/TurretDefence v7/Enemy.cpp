@@ -1,12 +1,14 @@
 #include "Enemy.h"
 
-Enemy::Enemy( SDL_Renderer* renderTarget, Asset asset, int maxHealth, int movementSpeed )
+Enemy::Enemy( SDL_Texture* image, int maxHealth, int speed, int width, int height )
 {
-	sprite				= new Sprite( renderTarget, asset );
-	this->maxHealth		= maxHealth;
-	this->health		= this->maxHealth;
-	this->takenDamage	= 0;
-	behaviourFactory	= new EnemyBehaviourFactory( this );
+	this->maxHealth = maxHealth;
+	health = this->maxHealth;
+	takenDamage = 0;
+	this->speed = speed;
+	this->position.w = width;
+	this->position.h = height;
+	this->image = image;
 }
 
 Enemy::~Enemy()
@@ -38,4 +40,11 @@ void Enemy::animate( float deltaTime )
 void Enemy::draw( )
 {
 
+}
+
+Enemy* Enemy::clone( int spawnTimeMS )
+{
+	Enemy* newEnemy = new Enemy( image, maxHealth, speed, position.w, position.h );
+	newEnemy->spawnTimeMS = spawnTimeMS;
+	return newEnemy;
 }

@@ -29,6 +29,11 @@ void Assets::insertAssetMapEntry( Asset asset, std::string filePath )
 	assetMap.insert( std::pair<Asset, SDL_Texture*>( asset, loadTexture( filePath, renderTarget ) ) );
 }
 
+void Assets::insertAssetMapEntry( std::string key, std::string filePath )
+{
+	stringToAssetMap.insert( std::pair<std::string, SDL_Texture*>( key, loadTexture( filePath, renderTarget ) ) );
+}
+
 void Assets::setRenderTarget( SDL_Renderer* renderTarget )
 {
 	this->renderTarget = renderTarget;
@@ -43,6 +48,9 @@ void Assets::setRenderTarget( SDL_Renderer* renderTarget )
 	insertAssetMapEntry( Asset_HUD_PlayButton_FastForwardHover, "Buttons/Play/PlayButtonFastForwardedHover.png" );
 	insertAssetMapEntry( Asset_HUD_PauseButton,					"Buttons/Pause/PauseButton.png" );
 	insertAssetMapEntry( Asset_HUD_PauseButton_Hover,			"Buttons/Pause/PauseButtonHover.png" );
+
+	insertAssetMapEntry( "easy",								"Enemies/Weak.png" );
+	insertAssetMapEntry( "medium",								"Enemies/Intermediate.png" );
 }
 
 SDL_Texture* Assets::getAsset( Asset asset )
@@ -53,6 +61,11 @@ SDL_Texture* Assets::getAsset( Asset asset )
 SDL_Texture* Assets::getAsset( TTF_Font* font, std::string text, SDL_Color color )
 {
 	return createTextTexture( renderTarget, font, text, color );
+}
+
+SDL_Texture* Assets::getAsset( std::string key )
+{
+	return stringToAssetMap.at( key );
 }
 
 SDL_Texture* Assets::loadTexture( std::string filePath, SDL_Renderer *renderTarget )

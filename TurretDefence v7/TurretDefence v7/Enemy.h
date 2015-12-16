@@ -5,14 +5,15 @@
 
 class Enemy
 {
-private:
+protected:
 	int takenDamage;
-	Sprite* sprite;
+	SDL_Rect position;
+	SDL_Texture* image;
 	EnemyConditions currentCondition;
 	EnemyBehaviour* behaviour;
 	EnemyBehaviourFactory* behaviourFactory;
 public:
-	Enemy( SDL_Renderer* renderTarget, Asset asset, int maxHealth, int movementSpeed );
+	Enemy( SDL_Texture* image, int maxHealth, int speed, int width, int height );
 	~Enemy();
 
 	virtual void changeState( EnemyConditions condition );
@@ -22,9 +23,11 @@ public:
 	virtual void animate( float deltaTime );
 	virtual void draw();
 
+	virtual Enemy* clone( int spawnTimeMS );
+
 	int health;
 	int maxHealth;
-	float movementSpeed;
-
+	int speed;
+	int spawnTimeMS;
 };
 

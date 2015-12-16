@@ -9,10 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Source Files\GameControl">
       <UniqueIdentifier>{bb485e30-e06e-43dc-87f2-21bbf80f06ce}</UniqueIdentifier>
     </Filter>
@@ -54,6 +50,13 @@
     </Filter>
     <Filter Include="Header Files\Enemies">
       <UniqueIdentifier>{b7e7ca6d-1bd1-4362-9d51-19e3c20fb3ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RapidXML">
+      <UniqueIdentifier>{bf280601-fe85-4b55-9629-4c5398fee3ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -134,6 +137,12 @@
     </ClInclude>
     <ClInclude Include="WaveFactory.h">
       <Filter>Header Files\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="rapidxml.hpp">
+      <Filter>Header Files\RapidXML</Filter>
+    </ClInclude>
+    <ClInclude Include="rapidxml_utils.hpp">
+      <Filter>Header Files\RapidXML</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

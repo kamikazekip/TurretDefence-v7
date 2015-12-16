@@ -8,7 +8,7 @@ class Wave
 private:
 	std::vector<Enemy*>* enemies;
 public:
-	Wave();
+	Wave(std::vector<Enemy*>* enemies);
 	~Wave();
 	virtual void update( float deltaTime );
 };

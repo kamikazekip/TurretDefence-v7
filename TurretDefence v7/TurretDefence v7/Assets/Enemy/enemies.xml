@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<enemies>
+	<enemy>
+		<type>easy</type>
+		<health>100</health>
+		<speed>50</speed>
+		<width>50</width>
+		<height>50</height>
+	</enemy>
+	<enemy>
+		<type>medium</type>
+		<health>200</health>
+		<speed>50</speed>
+		<width>50</width>
+		<height>50</height>
+	</enemy>
+</enemies>

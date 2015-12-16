@@ -1,9 +1,9 @@
 #include "Wave.h"
 #include "Enemy.h"
 
-Wave::Wave()
+Wave::Wave(std::vector<Enemy*>* enemies)
 {
-	enemies = new std::vector<Enemy*>();
+	this->enemies = enemies;
 }
 
 

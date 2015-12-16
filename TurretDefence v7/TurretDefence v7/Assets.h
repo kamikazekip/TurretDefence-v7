@@ -24,6 +24,7 @@ class Assets
 {
 private:
 	std::map<Asset, SDL_Texture*> assetMap;
+	std::map<std::string, SDL_Texture*> stringToAssetMap;
 	SDL_Renderer* renderTarget;
 
 	/* Singleton */
@@ -34,6 +35,7 @@ private:
 	SDL_Texture* createTextTexture( SDL_Renderer* renderTarget, TTF_Font* font, std::string text, SDL_Color color );
 
 	void insertAssetMapEntry( Asset, std::string filePath );
+	void insertAssetMapEntry( std::string key, std::string filePath );
 public:
 	/* Singleton */
 	static Assets* getInstance();
@@ -42,6 +44,7 @@ public:
 	void setRenderTarget( SDL_Renderer* renderTarget );
 	SDL_Texture* getAsset( Asset asset );
 	SDL_Texture* getAsset( TTF_Font* font, std::string text, SDL_Color color );
+	SDL_Texture* getAsset( std::string key );
 };
 
 /**

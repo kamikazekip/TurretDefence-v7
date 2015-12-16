@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<waves>
+	<wave>
+		<enemy>
+			<spawntime>5</spawntime>
+			<quantity>2</quantity>
+			<type>easy</type>
+		</enemy>
+	</wave>
+	<wave>
+		<enemy>
+			<spawntime>5</spawntime>
+			<quantity>2</quantity>
+			<type>medium</type>
+		</enemy>
+	</wave>
+</waves>

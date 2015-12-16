@@ -99,6 +99,8 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuItem.h" />
     <ClInclude Include="PlayButton.h" />
+    <ClInclude Include="rapidxml.hpp" />
+    <ClInclude Include="rapidxml_utils.hpp" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Version.h" />
     <ClInclude Include="Wave.h" />
