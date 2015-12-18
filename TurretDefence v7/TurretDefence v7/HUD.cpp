@@ -1,20 +1,21 @@
 #include "HUD.h"
 #include "BaseLevelState.h"
 #include "Game.h"
+#include "BaseLevelState.h"
 
-HUD::HUD(Game* game, int windowWidth, int windowHeight )
+HUD::HUD(Game* game, BaseLevelState* level, int windowWidth, int windowHeight )
 {
 	this->game = game;
+	this->level = level;
 	this->windowWidth = windowWidth;
 	this->windowHeight = windowHeight;
 	buttons = new std::vector<HUDButton*>();
-	playButton = new PlayButton( game );
-	pauseButton = new HUDButton( game->getRenderer(), Asset::Asset_HUD_PauseButton, Asset::Asset_HUD_PauseButton_Hover );
+	playButton = new PlayButton( this->game, this->level );
+	pauseButton = new HUDButton( this->game, this->level, Asset::Asset_HUD_PauseButton, Asset::Asset_HUD_PauseButton_Hover );
 	buttons->push_back( playButton );
 	buttons->push_back( pauseButton );
 
 	rightMargin = 20;
-
 	positionButtons();
 }
 

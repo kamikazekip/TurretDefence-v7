@@ -1,15 +1,21 @@
 #pragma once
 #include "Assets.h"
+
+class Game;
+class BaseLevelState;
+
 class HUDButton
 {
 protected:
+	Game* game;
+	BaseLevelState* level;
 	SDL_Renderer* renderTarget;
 	SDL_Rect positionRect;
 	SDL_Texture* currentTexture;
 	SDL_Texture* normalTexture;
 	SDL_Texture* hoverTexture;
 public:
-	HUDButton(SDL_Renderer* renderTarget, Asset normal, Asset hover);
+	HUDButton(Game* game, BaseLevelState* level, Asset normal, Asset hover);
 	~HUDButton();
 	bool checkHover( int mouseX, int mouseY );
 	bool isTouching( int mouseX, int mouseY );

@@ -1,9 +1,12 @@
 #include "HUDButton.h"
+#include "Game.h"
+#include "BaseLevelState.h"
 
-
-HUDButton::HUDButton(SDL_Renderer* renderTarget, Asset normal, Asset hover)
+HUDButton::HUDButton(Game* game, BaseLevelState* level, Asset normal, Asset hover)
 {
-	this->renderTarget = renderTarget;
+	this->game = game;
+	this->level = level;
+	this->renderTarget = game->getRenderer();
 	normalTexture = Assets::getInstance()->getAsset( normal );
 	hoverTexture = Assets::getInstance()->getAsset( hover );
 	currentTexture = normalTexture;

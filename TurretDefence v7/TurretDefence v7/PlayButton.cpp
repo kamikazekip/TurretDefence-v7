@@ -1,10 +1,9 @@
 #include "PlayButton.h"
 #include "Game.h"
 
-PlayButton::PlayButton(Game* game)
-	: HUDButton( game->getRenderer(), Asset_HUD_PlayButton, Asset_HUD_PlayButton_Hover )
+PlayButton::PlayButton(Game* game, BaseLevelState* level)
+	: HUDButton( game, level, Asset_HUD_PlayButton, Asset_HUD_PlayButton_Hover )
 {
-	this->game = game;
 	inBetweenWaves		= Assets::getInstance()->getAsset( Asset_HUD_PlayButton );
 	inBetweenWavesHover = Assets::getInstance()->getAsset( Asset_HUD_PlayButton_Hover );
 	inWave				= Assets::getInstance()->getAsset( Asset_HUD_PlayButton_InWave );
@@ -42,6 +41,7 @@ void PlayButton::onClick()
 	{
 		case ( PlayButton_InBetweenWaves ) :
 			setState( PlayButton_InWave );
+			level->changeState( LevelCondition_Start );
 			game->setFPS( 60 );
 			break;
 		case( PlayButton_InWave ) :

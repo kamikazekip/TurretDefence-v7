@@ -4,9 +4,10 @@
 #include <iostream>
 #include "EnemyFactory.h"
 
-WaveFactory::WaveFactory()
+WaveFactory::WaveFactory( std::vector<SDL_Point> path )
 {
-	enemyFactory = new EnemyFactory();
+	this->path = path;
+	enemyFactory = new EnemyFactory( path );
 	wavesFile = assetBasePath + "Enemy/waves.xml";
 	rapidxml::file<> xmlFile( wavesFile.c_str() );
 	rapidxml::xml_document<> doc;

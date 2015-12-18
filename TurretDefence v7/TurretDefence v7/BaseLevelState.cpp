@@ -1,4 +1,5 @@
 #include "BaseLevelState.h"
+#include "LevelBehaviourFactory.h"
 #include "Game.h"
 
 BaseLevelState::BaseLevelState( Game* game, Camera* camera )
@@ -6,10 +7,9 @@ BaseLevelState::BaseLevelState( Game* game, Camera* camera )
 {
 	this->game = game;
 	background = new Sprite( game->getRenderer(), Asset::Asset_BaseLevel_Background );	
-	hud = new HUD( game, game->getWindowWidth(), game->getWindowHeight() );
-	waveCounter = 1;
-	waveFactory = new WaveFactory();
-	currentWave = waveFactory->createWave( waveCounter );
+	hud = new HUD( game, this, game->getWindowWidth(), game->getWindowHeight() );
+	behaviourFactory = new LevelBehaviourFactory( this );
+	currentBehaviour = behaviourFactory->createBehaviour( LevelCondition_Init );
 }
 
 
@@ -22,7 +22,7 @@ BaseLevelState::~BaseLevelState()
 
 void BaseLevelState::update( float deltaTime )
 {
-
+	currentBehaviour->update( deltaTime );
 }
 
 void BaseLevelState::animate( float deltaTime )
@@ -61,4 +61,18 @@ void BaseLevelState::onMouseButtonDown( int mouseX, int mouseY )
 void BaseLevelState::onMouseMotion( int mouseX, int mouseY )
 {
 	hud->onMouseMotion( mouseX, mouseY );
+}
+
+void BaseLevelState::setPath( std::vector<SDL_Point> path )
+{
+	this->path = path;
+	waveCounter = 1;
+	waveFactory = new WaveFactory(path);
+	currentWave = waveFactory->createWave( waveCounter );
+}
+
+void BaseLevelState::changeState( LevelConditions newCondition )
+{
+	delete currentBehaviour;
+	currentBehaviour = behaviourFactory->createBehaviour( newCondition );
 }

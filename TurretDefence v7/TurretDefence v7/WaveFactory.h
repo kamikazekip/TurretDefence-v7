@@ -1,4 +1,5 @@
 #pragma once
+#include "SDL.h"
 #include "rapidxml.hpp"
 #include "rapidxml_utils.hpp"
 
@@ -10,11 +11,12 @@ using namespace std;
 class WaveFactory
 {
 private:
+	std::vector<SDL_Point> path;
 	std::string wavesFile;
 	std::vector<Wave*> waves;
 	EnemyFactory* enemyFactory;
 public:
-	WaveFactory();
+	WaveFactory( std::vector<SDL_Point> path );
 	~WaveFactory();
 	Wave* createWave( int wave );
 };

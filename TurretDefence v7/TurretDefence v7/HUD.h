@@ -10,6 +10,7 @@ class HUD
 private:
 	std::vector<HUDButton*>* buttons;
 	Game* game;
+	BaseLevelState* level;
 	int windowWidth, windowHeight;
 	PlayButton* playButton;
 	HUDButton* pauseButton;
@@ -18,7 +19,7 @@ private:
 	
 	void positionButtons();
 public:
-	HUD(Game* game, int windowWidth, int windowHeight);
+	HUD(Game* game, BaseLevelState* level, int windowWidth, int windowHeight);
 	~HUD();
 
 	void setWindowDimension( int windowWidth, int windowHeight );

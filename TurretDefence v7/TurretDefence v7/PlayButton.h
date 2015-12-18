@@ -2,12 +2,10 @@
 #include "Assets.h"
 #include "HUDButton.h"
 #include <map>
-class Game;
 
 class PlayButton : public HUDButton
 {
 private:
-	Game* game;
 	enum PlayButtonState { PlayButton_InBetweenWaves, PlayButton_InWave, PlayButton_FastForward };
 	PlayButtonState currentState;
 	SDL_Texture* inBetweenWaves;
@@ -20,7 +18,7 @@ private:
 	std::map<PlayButtonState, SDL_Texture*> textureMap;
 	std::map<PlayButtonState, SDL_Texture*> hoverTextureMap;
 public:
-	PlayButton(Game* game);
+	PlayButton(Game* game, BaseLevelState* level);
 	~PlayButton();
 	void onClick();
 	void setState( PlayButtonState newState );

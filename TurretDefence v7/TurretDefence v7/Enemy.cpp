@@ -1,7 +1,8 @@
 #include "Enemy.h"
 
-Enemy::Enemy( SDL_Texture* image, int maxHealth, int speed, int width, int height )
+Enemy::Enemy( SDL_Texture* image, int maxHealth, int speed, int width, int height, std::vector<SDL_Point> path )
 {
+	this->path = path;
 	this->maxHealth = maxHealth;
 	health = this->maxHealth;
 	takenDamage = 0;
@@ -39,12 +40,12 @@ void Enemy::animate( float deltaTime )
 
 void Enemy::draw( )
 {
-
+	
 }
 
 Enemy* Enemy::clone( int spawnTimeMS )
 {
-	Enemy* newEnemy = new Enemy( image, maxHealth, speed, position.w, position.h );
+	Enemy* newEnemy = new Enemy( image, maxHealth, speed, position.w, position.h, path );
 	newEnemy->spawnTimeMS = spawnTimeMS;
 	return newEnemy;
 }

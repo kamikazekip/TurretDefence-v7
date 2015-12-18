@@ -1,8 +1,9 @@
 #include "EnemyFactory.h"
 #include "global.h"
 
-EnemyFactory::EnemyFactory()
+EnemyFactory::EnemyFactory( std::vector<SDL_Point> path )
 {
+	this->path = path;
 	enemiesFile = assetBasePath + "Enemy/enemies.xml";
 	rapidxml::file<> xmlFile( enemiesFile.c_str() );
 	rapidxml::xml_document<> doc;
@@ -17,7 +18,7 @@ EnemyFactory::EnemyFactory()
 		int speed = std::stoi( enemy->first_node( "speed" )->value() );
 		int width = std::stoi( enemy->first_node( "width" )->value() );
 		int height = std::stoi( enemy->first_node( "height" )->value() );
-		insertEntry( type, new Enemy( Assets::getInstance()->getAsset( type ), health, speed, width, height ) );
+		insertEntry( type, new Enemy( Assets::getInstance()->getAsset( type ), health, speed, width, height, path ) );
 	}
 }
 

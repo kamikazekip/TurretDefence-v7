@@ -5,19 +5,32 @@
 #include "HUD.h"
 #include "Wave.h"
 #include "WaveFactory.h"
+#include "LevelBehaviour.h"
 
+class LevelBehaviourFactory;
 class Game;
+
+enum LevelConditions
+{
+	LevelCondition_Init,
+	LevelCondition_Start,
+	LevelCondition_End
+};
 
 class BaseLevelState : public LoopHandler
 {
 protected:
 	/* Variables */
+	LevelBehaviour* currentBehaviour;
+	LevelBehaviourFactory* behaviourFactory;
 	Game* game;
 	Sprite* background;
 	HUD* hud;
 	Wave* currentWave;
 	WaveFactory* waveFactory;
 	int waveCounter;
+
+	std::vector<SDL_Point> path;
 
 	/* Functions */
 	virtual void update( float deltaTime );
@@ -34,5 +47,7 @@ public:
 	~BaseLevelState();
 
 	virtual void tick( float deltaTime );
+	virtual void setPath( std::vector<SDL_Point> path );
+	virtual void changeState( LevelConditions newCondition );
 };
 

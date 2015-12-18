@@ -92,7 +92,11 @@
     <ClInclude Include="HUD.h" />
     <ClInclude Include="HUDButton.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="LevelBehaviour.h" />
+    <ClInclude Include="LevelBehaviourFactory.h" />
+    <ClInclude Include="LevelBetweenWavesBehaviour.h" />
     <ClInclude Include="LevelFactory.h" />
+    <ClInclude Include="LevelInWaveBehaviour.h" />
     <ClInclude Include="LoopHandler.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="MainMenu.h" />
@@ -122,7 +126,11 @@
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="HUDButton.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="LevelBehaviour.cpp" />
+    <ClCompile Include="LevelBehaviourFactory.cpp" />
+    <ClCompile Include="LevelBetweenWavesBehaviour.cpp" />
     <ClCompile Include="LevelFactory.cpp" />
+    <ClCompile Include="LevelInWaveBehaviour.cpp" />
     <ClCompile Include="LoopHandler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
