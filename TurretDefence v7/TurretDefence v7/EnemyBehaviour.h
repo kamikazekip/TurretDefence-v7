@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 
 enum EnemyConditions
 {
@@ -11,7 +12,7 @@ class Enemy;
 
 class EnemyBehaviour
 {
-private:
+protected:
 	Enemy* enemy;
 public:
 	EnemyBehaviour(Enemy* enemy);

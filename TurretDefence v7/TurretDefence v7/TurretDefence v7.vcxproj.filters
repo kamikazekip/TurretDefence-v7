@@ -156,6 +156,12 @@
     <ClInclude Include="LevelInWaveBehaviour.h">
       <Filter>Header Files\Levels</Filter>
     </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseButton.h">
+      <Filter>Header Files\HUD</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -247,6 +253,12 @@
     </ClCompile>
     <ClCompile Include="LevelInWaveBehaviour.cpp">
       <Filter>Source Files\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseButton.cpp">
+      <Filter>Source Files\HUD</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

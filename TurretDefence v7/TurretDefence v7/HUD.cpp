@@ -11,7 +11,7 @@ HUD::HUD(Game* game, BaseLevelState* level, int windowWidth, int windowHeight )
 	this->windowHeight = windowHeight;
 	buttons = new std::vector<HUDButton*>();
 	playButton = new PlayButton( this->game, this->level );
-	pauseButton = new HUDButton( this->game, this->level, Asset::Asset_HUD_PauseButton, Asset::Asset_HUD_PauseButton_Hover );
+	pauseButton = new PauseButton( this->game, this->level );
 	buttons->push_back( playButton );
 	buttons->push_back( pauseButton );
 

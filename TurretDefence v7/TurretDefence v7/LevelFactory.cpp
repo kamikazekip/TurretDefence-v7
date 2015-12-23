@@ -20,7 +20,7 @@ LevelFactory::~LevelFactory()
 void LevelFactory::insertMapEntry( Levels levelEnum, BaseLevelState* level, std::string waypointsFile )
 {
 	std::vector<SDL_Point> path;
-	std::string file = assetBasePath + "Path/" + waypointsFile + "/waypoints_" + std::to_string(camera->windowWidth) + "_" + std::to_string(camera->windowHeight) + ".xml";
+	std::string file = assetBasePath + "Path/" + waypointsFile + "/waypoints_" + std::to_string(camera->w) + "_" + std::to_string(camera->h) + ".xml";
 	rapidxml::file<> xmlFile( file.c_str() );
 	rapidxml::xml_document<> doc;
 	doc.parse<0>( xmlFile.data() );

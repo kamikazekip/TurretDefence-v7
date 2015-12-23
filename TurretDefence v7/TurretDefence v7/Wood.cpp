@@ -12,10 +12,3 @@ Wood::~Wood()
 {
 
 }
-
-void Wood::tick( float deltaTime )
-{
-	update( deltaTime );
-	animate( deltaTime );
-	draw();
-}

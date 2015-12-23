@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <waypoints>
 	<waypoint>
-		<x>-20</x>
-		<y>645</y>
+		<x>-60</x>
+		<y>690</y>
 	</waypoint>
 	<waypoint>
 		<x>855</x>
-		<y>645</y>
+		<y>690</y>
 	</waypoint>
 	<waypoint>
 		<x>855</x>
-		<y>397</y>
+		<y>430</y>
 	</waypoint>
 	<waypoint>
 		<x>412</x>
-		<y>397</y>
+		<y>430</y>
 	</waypoint>
 	<waypoint>
 		<x>412</x>
-		<y>118</y>
+		<y>125</y>
 	</waypoint>
 	<waypoint>
 		<x>1390</x>
-		<y>118</y>
+		<y>125</y>
 	</waypoint>
 	<waypoint>
 		<x>1390</x>

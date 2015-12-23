@@ -4,10 +4,11 @@
 #include <iostream>
 #include "EnemyFactory.h"
 
-WaveFactory::WaveFactory( std::vector<SDL_Point> path )
+WaveFactory::WaveFactory( SDL_Renderer* renderTarget, std::vector<SDL_Point> path )
 {
+	this->renderTarget = renderTarget;
 	this->path = path;
-	enemyFactory = new EnemyFactory( path );
+	enemyFactory = new EnemyFactory( renderTarget, path );
 	wavesFile = assetBasePath + "Enemy/waves.xml";
 	rapidxml::file<> xmlFile( wavesFile.c_str() );
 	rapidxml::xml_document<> doc;
@@ -20,12 +21,12 @@ WaveFactory::WaveFactory( std::vector<SDL_Point> path )
 		std::vector<Enemy*>* enemies = new std::vector<Enemy*>();
 		for( rapidxml::xml_node<> *enemy = wave->first_node( "enemy" ); enemy; enemy = enemy->next_sibling( "enemy" ) )
 		{
-			int spawnTimeMS = stoi(enemy->first_node( "spawntime" )->value());
+			float spawnTime = stof( enemy->first_node( "spawntime" )->value() );
 			int quantity = stoi(enemy->first_node( "quantity" )->value());
 			std::string type = enemy->first_node( "type" )->value();
 			for( int x = 0; x < quantity; x++ )
 			{
-				Enemy* newEnemy = enemyFactory->createEnemy( type, spawnTimeMS );
+				Enemy* newEnemy = enemyFactory->createEnemy( type, spawnTime );
 				enemies->push_back( newEnemy );
 			}
 		}

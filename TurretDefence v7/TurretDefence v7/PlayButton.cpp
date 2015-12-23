@@ -42,15 +42,14 @@ void PlayButton::onClick()
 		case ( PlayButton_InBetweenWaves ) :
 			setState( PlayButton_InWave );
 			level->changeState( LevelCondition_Start );
-			game->setFPS( 60 );
 			break;
 		case( PlayButton_InWave ) :
 			setState( PlayButton_FastForward );
-			game->setFPS( 120 );
+			game->toggleGamespeed();
 			break;
 		case( PlayButton_FastForward ) :
 			setState( PlayButton_InWave );
-			game->setFPS( 60 );
+			game->toggleGamespeed();
 			break;
 	}
 }

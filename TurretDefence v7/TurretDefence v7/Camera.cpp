@@ -3,12 +3,10 @@
 
 Camera::Camera( int windowWidth, int windowHeight, int levelWidth, int levelHeight )
 {
-	cameraRect.x = 0;
-	cameraRect.y = 0;
-	cameraRect.w = windowWidth;
-	cameraRect.h = windowHeight;
-	this->windowWidth = windowWidth;
-	this->windowHeight = windowHeight;
+	x = 0;
+	y = 0;
+	w = windowWidth;
+	h = windowHeight;
 	this->levelWidth = levelWidth;
 	this->levelHeight = levelHeight;
 }

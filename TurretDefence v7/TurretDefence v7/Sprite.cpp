@@ -1,6 +1,5 @@
 #include "Sprite.h"
 
-
 Sprite::Sprite(SDL_Renderer* renderTarget, Asset asset)
 {
 	this->renderTarget = renderTarget;
@@ -25,14 +24,21 @@ Sprite::~Sprite()
 
 }
 
+void Sprite::draw( Camera* camera )
+{
+	SDL_Rect drawingRect = { positionRect.x - camera->x, positionRect.y - camera->y, positionRect.w, positionRect.h };
+	SDL_RenderCopy( renderTarget, texture, NULL, &drawingRect );
+}
+
 void Sprite::draw()
 {
 	SDL_RenderCopy( renderTarget, texture, NULL, &positionRect );
 }
 
-void Sprite::drawFullScreen()
+void Sprite::drawFullScreen( Camera* camera )
 {
-	SDL_RenderCopy( renderTarget, texture, NULL, NULL );
+	SDL_Rect drawingRect = { positionRect.x - camera->x, positionRect.y - camera->y, camera->w, camera->h };
+	SDL_RenderCopy( renderTarget, texture, NULL, &drawingRect );
 }
 
 void Sprite::setAsset(Asset asset)

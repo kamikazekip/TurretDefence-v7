@@ -1,5 +1,6 @@
 #pragma once
 #include "Enemy.h"
+#include "Assets.h"
 #include <string>
 #include <map>
 #include "rapidxml.hpp"
@@ -14,9 +15,9 @@ private:
 	std::map<std::string, Asset> stringToImageMage;
 	void insertEntry( std::string, Enemy* enemy );
 public:
-	EnemyFactory( std::vector<SDL_Point> path );
+	EnemyFactory( SDL_Renderer* renderTarget, std::vector<SDL_Point> path );
 	~EnemyFactory();
 
-	Enemy* createEnemy( std::string type, int spawnTimeMS );
+	Enemy* createEnemy( std::string type, float spawnTime );
 };
 

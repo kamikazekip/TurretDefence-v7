@@ -5,6 +5,7 @@ class LoopHandler
 {
 protected:
 	Camera* camera;
+	bool paused;
 public:
 	LoopHandler(Camera* camera);
 	~LoopHandler();
@@ -16,4 +17,5 @@ public:
 	virtual void onKeyUp( SDL_Keycode keyPressed );
 	virtual void firstTick();
 	virtual void tick( float deltaTime );
+	virtual void togglePause();
 };

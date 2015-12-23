@@ -1,7 +1,9 @@
 #pragma once
 #include "HUDButton.h"
 #include "PlayButton.h"
+#include "PauseButton.h"
 #include <vector>
+
 class BaseLevelState;
 class Game;
 
@@ -13,7 +15,7 @@ private:
 	BaseLevelState* level;
 	int windowWidth, windowHeight;
 	PlayButton* playButton;
-	HUDButton* pauseButton;
+	PauseButton* pauseButton;
 
 	int rightMargin;
 	

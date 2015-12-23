@@ -13,7 +13,6 @@ class Camera;
 enum GameState
 {
 	Running,
-	Paused,
 	In_Menu,
 	In_Game,
 	Quitting
@@ -25,6 +24,7 @@ private:
 	void gameLoop();
 	void updateDeltaTime();
 	void capFramesPerSecond();
+	bool fastForwarded;
 
 	SDL_Renderer* renderTarget;
 	GameState gameState;
@@ -50,6 +50,8 @@ public:
 	int getWindowWidth();
 	int getWindowHeight();
 	void setFPS( float fps );
+	void toggleGamespeed();
+	void togglePause();
 	SDL_Renderer* getRenderer();
 };
 

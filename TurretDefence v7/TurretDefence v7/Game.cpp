@@ -14,6 +14,7 @@ Game::Game()
 	currentTime = 0;
 	deltaTime = 0.0f;
 	setFPS( 60 );
+	fastForwarded = false;
 
 	gameState = GameState::In_Game;
 
@@ -47,7 +48,7 @@ void Game::gameLoop()
 		input->update();
 
 		SDL_RenderClear( renderTarget );
-		loopHandler->tick( deltaTime );
+	    loopHandler->tick( deltaTime );
 		SDL_RenderPresent( renderTarget );
 
 		capFramesPerSecond();
@@ -61,9 +62,6 @@ void Game::setGameState( GameState gameState )
 	{
 		case( GameState::In_Game ) :
 			setLoopHandler( currentLevel );
-			break;
-		case ( GameState::Paused ) :
-			setLoopHandler( mainMenu );
 			break;
 	}
 }
@@ -80,6 +78,8 @@ void Game::updateDeltaTime()
 	prevTime = currentTime;
 	currentTime = SDL_GetTicks();
 	deltaTime = (currentTime - prevTime) / 1000.0f;
+	if( fastForwarded )
+		deltaTime *= 2;
 }
 
 void Game::capFramesPerSecond()
@@ -101,6 +101,16 @@ int Game::getWindowHeight()
 void Game::setFPS( float fps )
 {
 	targetSleepTime = 1000.0f / fps;
+}
+
+void Game::toggleGamespeed()
+{
+	fastForwarded = !fastForwarded;
+}
+
+void Game::togglePause()
+{
+	loopHandler->togglePause();
 }
 
 SDL_Renderer* Game::getRenderer()

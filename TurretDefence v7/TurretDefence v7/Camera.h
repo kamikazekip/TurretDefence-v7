@@ -3,7 +3,7 @@
 class Camera
 {
 public:
-	int windowWidth, windowHeight, levelWidth, levelHeight;
+	int levelWidth, levelHeight, x, y, w, h;
 	SDL_Rect cameraRect;
 	Camera(int windowWidth, int windowHeight, int levelWidth, int levelHeight);
 	~Camera();

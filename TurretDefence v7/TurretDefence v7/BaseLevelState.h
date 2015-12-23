@@ -49,5 +49,6 @@ public:
 	virtual void tick( float deltaTime );
 	virtual void setPath( std::vector<SDL_Point> path );
 	virtual void changeState( LevelConditions newCondition );
+	virtual Wave* getWave();
 };
 

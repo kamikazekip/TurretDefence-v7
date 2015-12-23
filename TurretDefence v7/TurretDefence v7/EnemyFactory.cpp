@@ -1,7 +1,7 @@
 #include "EnemyFactory.h"
 #include "global.h"
 
-EnemyFactory::EnemyFactory( std::vector<SDL_Point> path )
+EnemyFactory::EnemyFactory( SDL_Renderer* renderTarget, std::vector<SDL_Point> path )
 {
 	this->path = path;
 	enemiesFile = assetBasePath + "Enemy/enemies.xml";
@@ -18,7 +18,7 @@ EnemyFactory::EnemyFactory( std::vector<SDL_Point> path )
 		int speed = std::stoi( enemy->first_node( "speed" )->value() );
 		int width = std::stoi( enemy->first_node( "width" )->value() );
 		int height = std::stoi( enemy->first_node( "height" )->value() );
-		insertEntry( type, new Enemy( Assets::getInstance()->getAsset( type ), health, speed, width, height, path ) );
+		insertEntry( type, new Enemy( renderTarget, Assets::getInstance()->getAsset( type ), health, speed, width, height, path, 0.00f ) );
 	}
 }
 
@@ -32,7 +32,7 @@ void EnemyFactory::insertEntry( std::string key, Enemy* enemy )
 	enemyMap.insert( std::pair<std::string, Enemy*>(key, enemy) );
 }
 
-Enemy* EnemyFactory::createEnemy( std::string type, int spawnTimeMS )
+Enemy* EnemyFactory::createEnemy( std::string type, float spawnTime )
 {
-	return enemyMap.at( type )->clone( spawnTimeMS );
+	return enemyMap.at( type )->clone( spawnTime );
 }

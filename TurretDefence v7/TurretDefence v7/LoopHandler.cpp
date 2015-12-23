@@ -4,6 +4,7 @@
 LoopHandler::LoopHandler(Camera* camera)
 {
 	this->camera = camera;
+	paused = false;
 }
 
 
@@ -50,4 +51,9 @@ void LoopHandler::firstTick()
 void LoopHandler::tick( float deltaTime )
 {
 
+}
+
+void LoopHandler::togglePause()
+{
+	paused = !paused;
 }

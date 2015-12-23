@@ -3,6 +3,7 @@
 #include "Assets.h"
 #include "SDL_ttf.h"
 #include <string>
+#include "Camera.h"
 
 class Sprite
 {
@@ -15,7 +16,9 @@ public:
 	~Sprite();
 
 	void draw();
-	void drawFullScreen();
+	void draw( Camera* camera );
+	void drawFullScreen( Camera* camera );
+
 	void setAsset( Asset asset );
 
 	SDL_Rect positionRect;

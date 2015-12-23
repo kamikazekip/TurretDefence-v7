@@ -32,7 +32,8 @@ void BaseLevelState::animate( float deltaTime )
 
 void BaseLevelState::draw()
 {
-	background->drawFullScreen();
+	background->drawFullScreen( camera );
+	currentWave->draw( camera );
 	hud->draw();
 }
 
@@ -43,8 +44,11 @@ void BaseLevelState::changeLevel()
 
 void BaseLevelState::tick( float deltaTime )
 {
-	update( deltaTime );
-	animate( deltaTime );
+	if( !paused )
+	{
+		update( deltaTime );
+		animate( deltaTime );
+	}
 	draw();
 }
 
@@ -67,7 +71,7 @@ void BaseLevelState::setPath( std::vector<SDL_Point> path )
 {
 	this->path = path;
 	waveCounter = 1;
-	waveFactory = new WaveFactory(path);
+	waveFactory = new WaveFactory(game->getRenderer(), path);
 	currentWave = waveFactory->createWave( waveCounter );
 }
 
@@ -75,4 +79,9 @@ void BaseLevelState::changeState( LevelConditions newCondition )
 {
 	delete currentBehaviour;
 	currentBehaviour = behaviourFactory->createBehaviour( newCondition );
+}
+
+Wave* BaseLevelState::getWave()
+{
+	return currentWave;
 }
