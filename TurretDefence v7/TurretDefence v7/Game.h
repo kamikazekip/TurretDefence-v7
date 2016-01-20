@@ -50,7 +50,7 @@ public:
 	int getWindowWidth();
 	int getWindowHeight();
 	void setFPS( float fps );
-	void toggleGamespeed();
+	void setFastForward(bool fastForward);
 	void togglePause();
 	SDL_Renderer* getRenderer();
 };

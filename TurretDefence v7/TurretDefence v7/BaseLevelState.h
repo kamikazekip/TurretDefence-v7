@@ -2,19 +2,21 @@
 
 #include "LoopHandler.h"
 #include "Sprite.h"
-#include "HUD.h"
 #include "Wave.h"
 #include "WaveFactory.h"
 #include "LevelBehaviour.h"
+#include "Turret.h"
 
 class LevelBehaviourFactory;
+class TurretFactory;
 class Game;
+class HUD;
 
 enum LevelConditions
 {
 	LevelCondition_Init,
-	LevelCondition_Start,
-	LevelCondition_End
+	LevelCondition_Start_Wave,
+	LevelCondition_End_Wave
 };
 
 class BaseLevelState : public LoopHandler
@@ -25,12 +27,15 @@ protected:
 	LevelBehaviourFactory* behaviourFactory;
 	Game* game;
 	Sprite* background;
+	Sprite* pausedScreen;
 	HUD* hud;
 	Wave* currentWave;
 	WaveFactory* waveFactory;
+	TurretFactory* turretFactory;
 	int waveCounter;
 
 	std::vector<SDL_Point> path;
+	std::vector<Turret*>* turrets;
 
 	/* Functions */
 	virtual void update( float deltaTime );
@@ -50,5 +55,6 @@ public:
 	virtual void setPath( std::vector<SDL_Point> path );
 	virtual void changeState( LevelConditions newCondition );
 	virtual Wave* getWave();
+	virtual void nextWave();
 };
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<turrets>
+	<turret>
+			<type>soldier</type>
+			<range>450.0</range>
+			<attackSpeed>1.00f</attackSpeed>
+			<width>100</width>
+			<height>100</height>
+	</turret>
+	<turret>
+			<type>sniper</type>
+			<range>2000.0</range>
+			<attackSpeed>1.00f</attackSpeed>
+			<width>100</width>
+			<height>100</height>
+	</turret>
+</turrets>

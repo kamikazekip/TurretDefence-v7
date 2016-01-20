@@ -15,7 +15,10 @@ EnemyMovingBehaviour::~EnemyMovingBehaviour()
 
 void EnemyMovingBehaviour::checkState()
 {
-
+	if( enemy->reachedEnd )
+	{
+		enemy->changeState( EnemyConditions::EnemyCondition_Reached_Last_Waypoint );
+	}
 }
 
 void EnemyMovingBehaviour::update( float deltaTime )
@@ -23,24 +26,43 @@ void EnemyMovingBehaviour::update( float deltaTime )
 	int targetX = enemy->target.x;
 	int targetY = enemy->target.y;
 
-	
-	float distancex = ( targetX - enemy->x ) * ( targetX - enemy->x );
-	float distancey = ( targetY - enemy->y ) * ( targetY - enemy->y );
-	double distanceBefore = sqrt( fabsf( distancex - distancey ) );
+	float distanceX = ( targetX - enemy->x ) * ( targetX - enemy->x );
+	float distanceY = ( targetY - enemy->y ) * ( targetY - enemy->y );
+	double distanceBefore = sqrt( fabsf( distanceX - distanceY ) );
 
 	float displacement = enemy->speed * deltaTime;
-	enemy->x += displacement * enemy->direction.x;
-	enemy->y += displacement * enemy->direction.y;
 
-	float distancexAfter = ( targetX - enemy->x ) * ( targetX - enemy->x );
-	float distanceyAfter = ( targetY - enemy->y ) * ( targetY - enemy->y );
+	double theoreticalX = enemy->x + displacement * enemy->direction.x;
+	double theoreticalY = enemy->y + displacement * enemy->direction.y;
 
-	double distanceAfter = sqrt( fabsf( distancexAfter - distanceyAfter ) );
-
-	if( distanceBefore < distanceAfter )
+	if( distanceBefore < displacement )
 	{
+		double oldTheoreticalX = theoreticalX;
+		double oldTheoreticalY = theoreticalY;
+
+		SDL_Point oldWaypoint = enemy->target;
+		double remainder = displacement - distanceBefore;
+
+		theoreticalX = oldWaypoint.x;
+		theoreticalY = oldWaypoint.y;
+		enemy->x = theoreticalX;
+		enemy->y = theoreticalY;
+
 		enemy->nextWaypoint();
+
+		SDL_Point newWaypoint = enemy->target;
+		theoreticalX = enemy->x + remainder * enemy->direction.x;
+		theoreticalY = enemy->y + remainder * enemy->direction.y;
+
+		if( oldWaypoint.x == newWaypoint.x && oldWaypoint.y == newWaypoint.y )
+		{
+			theoreticalX = oldTheoreticalX;
+			theoreticalY = oldTheoreticalY;
+		}
 	}
+
+	enemy->x = theoreticalX;
+	enemy->y = theoreticalY;
 }
 
 

@@ -2,14 +2,9 @@
 <waves>
 	<wave>
 		<enemy>
-			<spawntime>0.50f</spawntime>
+			<spawntime>0.10f</spawntime>
 			<quantity>5</quantity>
 			<type>easy</type>
-		</enemy>
-		<enemy>
-			<spawntime>0.50f</spawntime>
-			<quantity>2</quantity>
-			<type>medium</type>
 		</enemy>
 	</wave>
 	<wave>

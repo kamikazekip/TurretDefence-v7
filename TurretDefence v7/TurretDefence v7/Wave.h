@@ -7,13 +7,19 @@ class Wave
 private:
 	std::vector<Enemy*>* enemies;
 	std::vector<Enemy*>* unspawnedEnemies;
+	std::vector<Enemy*>* enemyRemoveStack;
 	float passedTime;
 
+	void removeFinishedEnemies();
 	void spawn( float deltaTime );
 public:
-	Wave(std::vector<Enemy*>* enemies);
+	Wave();
 	~Wave();
 	virtual void update( float deltaTime );
 	virtual void draw( Camera* camera );
+
+	virtual void setEnemies( std::vector<Enemy*>* enemies );
+
+	bool finished;
 };
 

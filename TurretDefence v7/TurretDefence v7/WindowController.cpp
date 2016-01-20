@@ -1,5 +1,5 @@
 #include "WindowController.h"
-
+#include "Assets.h"
 
 WindowController::WindowController()
 {
@@ -8,6 +8,7 @@ WindowController::WindowController()
 	flags = SDL_WINDOW_SHOWN;
 
 	window = SDL_CreateWindow( "TurretDefence v7!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, flags );
+	SDL_SetWindowIcon( window, Assets::getInstance()->getIcon() );
 }
 
 

@@ -77,3 +77,29 @@ void HUD::draw()
 		buttons->at( c )->draw();
 	}
 }
+
+void HUD::updateState( LevelConditions newCondition )
+{
+	if( newCondition == LevelCondition_End_Wave )
+	{
+		game->setFastForward( false );
+		playButton->setState( PlayButton_InBetweenWaves );
+	}		
+}
+
+bool HUD::isTouching( int mouseX, int mouseY )
+{
+	for( size_t c = 0; c < buttons->size(); c++ )
+	{
+		if( buttons->at( c )->isTouching( mouseX, mouseY ) )
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+PlayButton* HUD::getPlayButton()
+{
+	return playButton;
+}

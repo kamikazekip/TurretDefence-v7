@@ -1,12 +1,14 @@
 #include "Enemy.h"
 
-Enemy::Enemy( SDL_Renderer* renderTarget, SDL_Texture* image, int maxHealth, int speed, int width, int height, std::vector<SDL_Point> path, float spawnTime )
+Enemy::Enemy( SDL_Renderer* renderTarget, Wave* wave, SDL_Texture* image, int maxHealth, int speed, int width, int height, std::vector<SDL_Point> path, float spawnTime )
 {
 	this->renderTarget = renderTarget;
 	this->path = path;
 	this->maxHealth = maxHealth;
+	this->wave = wave;
 	health = this->maxHealth;
 	takenDamage = 0;
+	reachedEnd = false;
 	this->speed = speed;
 	w = width;
 	h = height;
@@ -41,6 +43,7 @@ void Enemy::changeState(EnemyConditions condition)
 
 void Enemy::update( float deltaTime )
 {
+	behaviour->checkState();
 	behaviour->update( deltaTime );
 }
 
@@ -59,12 +62,18 @@ void Enemy::nextWaypoint()
 {
 	currentTarget++;
 	if( currentTarget < path.size() )
-		target = path[ currentTarget ];
-	direction = Vector::getDirection( SDL_Point{ x, y }, target );
+	{
+		target = path[currentTarget];
+	}
+	else
+	{
+		reachedEnd = true;
+	}
+	direction = Vector::getDirection( SDL_Point{ int(x), int(y) }, target );
 }
 
-Enemy* Enemy::clone( float spawnTime )
+Enemy* Enemy::clone( float spawnTime, Wave* wave )
 {
-	Enemy* newEnemy = new Enemy(renderTarget, image, maxHealth, speed, w, h, path, spawnTime );
+	Enemy* newEnemy = new Enemy(renderTarget, wave, image, maxHealth, speed, w, h, path, spawnTime );
 	return newEnemy;
 }

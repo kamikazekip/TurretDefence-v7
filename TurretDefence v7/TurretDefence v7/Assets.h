@@ -17,7 +17,14 @@ enum Asset
 	Asset_HUD_PlayButton_FastForward,
 	Asset_HUD_PlayButton_FastForwardHover,
 	Asset_HUD_PauseButton,
-	Asset_HUD_PauseButton_Hover
+	Asset_HUD_PauseButton_Hover,
+	Asset_UI_Paused,
+	Asset_Turret_Soldier_Calm,
+	Asset_Turret_Soldier_Angry,
+	Asset_Turret_Sniper_Calm,
+	Asset_Turret_Sniper_Angry,
+	Asset_Range_Correct,
+	Asset_Range_Incorrect
 };
 
 class Assets
@@ -45,6 +52,7 @@ public:
 	SDL_Texture* getAsset( Asset asset );
 	SDL_Texture* getAsset( TTF_Font* font, std::string text, SDL_Color color );
 	SDL_Texture* getAsset( std::string key );
+	SDL_Surface* getIcon();
 };
 
 /**

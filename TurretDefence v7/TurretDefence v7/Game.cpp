@@ -103,9 +103,9 @@ void Game::setFPS( float fps )
 	targetSleepTime = 1000.0f / fps;
 }
 
-void Game::toggleGamespeed()
+void Game::setFastForward( bool fastForward )
 {
-	fastForwarded = !fastForwarded;
+	fastForwarded = fastForward;
 }
 
 void Game::togglePause()

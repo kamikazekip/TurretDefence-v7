@@ -37,20 +37,27 @@ void Assets::insertAssetMapEntry( std::string key, std::string filePath )
 void Assets::setRenderTarget( SDL_Renderer* renderTarget )
 {
 	this->renderTarget = renderTarget;
-	insertAssetMapEntry( Asset_MainMenu_Background,				"MainMenu/background.png" );
-	insertAssetMapEntry( Asset_BaseLevel_Background,			"Levels/Base/background.jpg" );
-	insertAssetMapEntry( Asset_WoodLevel_Background,			"Levels/Wood/wood.jpg" );
-	insertAssetMapEntry( Asset_HUD_PlayButton,					"Buttons/Play/PlayButton.png" );
-	insertAssetMapEntry( Asset_HUD_PlayButton_Hover,			"Buttons/Play/PlayButtonHover.png" );
-	insertAssetMapEntry( Asset_HUD_PlayButton_InWave,			"Buttons/Play/PlayButtonInWave.png" );
-	insertAssetMapEntry( Asset_HUD_PlayButton_InWaveHover,		"Buttons/Play/PlayButtonInWaveHover.png" );
-	insertAssetMapEntry( Asset_HUD_PlayButton_FastForward,		"Buttons/Play/PlayButtonFastForwarded.png" );
-	insertAssetMapEntry( Asset_HUD_PlayButton_FastForwardHover, "Buttons/Play/PlayButtonFastForwardedHover.png" );
-	insertAssetMapEntry( Asset_HUD_PauseButton,					"Buttons/Pause/PauseButton.png" );
-	insertAssetMapEntry( Asset_HUD_PauseButton_Hover,			"Buttons/Pause/PauseButtonHover.png" );
+	insertAssetMapEntry( Asset_MainMenu_Background,					"MainMenu/background.png" );
+	insertAssetMapEntry( Asset_BaseLevel_Background,				"Levels/Base/background.jpg" );
+	insertAssetMapEntry( Asset_WoodLevel_Background,				"Levels/Wood/wood.jpg" );
+	insertAssetMapEntry( Asset_HUD_PlayButton,						"Buttons/Play/PlayButton.png" );
+	insertAssetMapEntry( Asset_HUD_PlayButton_Hover,				"Buttons/Play/PlayButtonHover.png" );
+	insertAssetMapEntry( Asset_HUD_PlayButton_InWave,				"Buttons/Play/PlayButtonInWave.png" );
+	insertAssetMapEntry( Asset_HUD_PlayButton_InWaveHover,			"Buttons/Play/PlayButtonInWaveHover.png" );
+	insertAssetMapEntry( Asset_HUD_PlayButton_FastForward,			"Buttons/Play/PlayButtonFastForwarded.png" );
+	insertAssetMapEntry( Asset_HUD_PlayButton_FastForwardHover,		"Buttons/Play/PlayButtonFastForwardedHover.png" );
+	insertAssetMapEntry( Asset_HUD_PauseButton,						"Buttons/Pause/PauseButton.png" );
+	insertAssetMapEntry( Asset_HUD_PauseButton_Hover,				"Buttons/Pause/PauseButtonHover.png" );
+	insertAssetMapEntry( Asset_UI_Paused,							"UI/paused.png" );
+	insertAssetMapEntry( Asset_Turret_Soldier_Calm,					"Turrets/Soldier/soldier_calm.png" );
+	insertAssetMapEntry( Asset_Turret_Soldier_Angry,				"Turrets/Soldier/soldier_angry.png" );
+	insertAssetMapEntry( Asset_Turret_Sniper_Calm,					"Turrets/Sniper/sniper_calm.png" );
+	insertAssetMapEntry( Asset_Turret_Sniper_Angry,					"Turrets/Sniper/sniper_angry.png" );
+	insertAssetMapEntry( Asset_Range_Correct,						"UI/range_correct.png" );
+	insertAssetMapEntry( Asset_Range_Incorrect,						"UI/range_incorrect.png" );
 
-	insertAssetMapEntry( "easy",								"Enemies/Weak.png" );
-	insertAssetMapEntry( "medium",								"Enemies/Intermediate.png" );
+	insertAssetMapEntry( "easy",									"Enemies/Weak.png" );
+	insertAssetMapEntry( "medium",									"Enemies/Intermediate.png" );
 }
 
 SDL_Texture* Assets::getAsset( Asset asset )
@@ -66,6 +73,15 @@ SDL_Texture* Assets::getAsset( TTF_Font* font, std::string text, SDL_Color color
 SDL_Texture* Assets::getAsset( std::string key )
 {
 	return stringToAssetMap.at( key );
+}
+
+SDL_Surface* Assets::getIcon()
+{
+	std::string filePath = assetBasePath + "Images/UI/icon.png";
+	SDL_Surface *icon = IMG_Load( filePath.c_str() );
+	if( icon == NULL )
+		std::cout << "Error loading image from " << filePath << std::endl;
+	return icon;
 }
 
 SDL_Texture* Assets::loadTexture( std::string filePath, SDL_Renderer *renderTarget )

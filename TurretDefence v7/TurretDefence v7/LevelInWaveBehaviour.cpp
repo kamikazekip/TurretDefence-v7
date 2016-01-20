@@ -4,7 +4,7 @@
 LevelInWaveBehaviour::LevelInWaveBehaviour( BaseLevelState* level )
 	: LevelBehaviour( level )
 {
-
+	wave = level->getWave();
 }
 
 
@@ -15,7 +15,11 @@ LevelInWaveBehaviour::~LevelInWaveBehaviour()
 
 void LevelInWaveBehaviour::update( float deltaTime )
 {
-	level->getWave()->update( deltaTime );
+	wave->update( deltaTime );
+	if( wave->finished )
+	{
+		level->changeState( LevelCondition_End_Wave );
+	}
 }
 
 LevelBehaviour* LevelInWaveBehaviour::clone()

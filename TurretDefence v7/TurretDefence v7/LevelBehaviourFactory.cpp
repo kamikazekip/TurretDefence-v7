@@ -6,9 +6,9 @@
 LevelBehaviourFactory::LevelBehaviourFactory(BaseLevelState* level)
 {
 	LevelBetweenWavesBehaviour* inBetween = new LevelBetweenWavesBehaviour( level );
-	insertEntry( LevelCondition_Init,	inBetween);
-	insertEntry( LevelCondition_Start,	new LevelInWaveBehaviour( level ) );
-	insertEntry( LevelCondition_End,	inBetween );
+	insertEntry( LevelCondition_Init,			inBetween);
+	insertEntry( LevelCondition_Start_Wave,		new LevelInWaveBehaviour( level ) );
+	insertEntry( LevelCondition_End_Wave,		inBetween );
 }
 
 

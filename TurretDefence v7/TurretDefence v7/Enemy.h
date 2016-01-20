@@ -5,6 +5,8 @@
 #include "Vector.h"
 #include "Camera.h"
 
+class Wave;
+
 class Enemy
 {
 protected:
@@ -14,9 +16,9 @@ protected:
 	EnemyConditions currentCondition;
 	EnemyBehaviour* behaviour;
 	EnemyBehaviourFactory* behaviourFactory;
-	
+	Wave* wave;
 public:
-	Enemy( SDL_Renderer* renderTarget, SDL_Texture* image, int maxHealth, int speed, int width, int height, std::vector<SDL_Point> path, float spawnTime );
+	Enemy( SDL_Renderer* renderTarget, Wave* wave, SDL_Texture* image, int maxHealth, int speed, int width, int height, std::vector<SDL_Point> path, float spawnTime );
 	~Enemy();
 
 	virtual void changeState( EnemyConditions condition );
@@ -28,7 +30,7 @@ public:
 
 	virtual void nextWaypoint();
 
-	virtual Enemy* clone( float spawnTime );
+	virtual Enemy* clone( float spawnTime, Wave* wave );
 
 	double x, y, w, h;
 	Vector direction;
@@ -39,5 +41,6 @@ public:
 	int maxHealth;
 	int speed;
 	float spawnTime;
+	bool reachedEnd;
 };
 

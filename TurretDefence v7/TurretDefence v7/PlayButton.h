@@ -3,10 +3,16 @@
 #include "HUDButton.h"
 #include <map>
 
+enum PlayButtonState
+{
+	PlayButton_InBetweenWaves, 
+	PlayButton_InWave,
+	PlayButton_FastForward
+};
+
 class PlayButton : public HUDButton
 {
 private:
-	enum PlayButtonState { PlayButton_InBetweenWaves, PlayButton_InWave, PlayButton_FastForward };
 	PlayButtonState currentState;
 	SDL_Texture* inBetweenWaves;
 	SDL_Texture* inBetweenWavesHover;

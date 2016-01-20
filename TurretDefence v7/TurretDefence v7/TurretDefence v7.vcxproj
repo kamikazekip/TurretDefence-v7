@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -18,13 +18,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -75,12 +75,13 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Assets.h" />
     <ClInclude Include="BaseLevelState.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyBehaviour.h" />
@@ -106,7 +107,11 @@
     <ClInclude Include="PlayButton.h" />
     <ClInclude Include="rapidxml.hpp" />
     <ClInclude Include="rapidxml_utils.hpp" />
+    <ClInclude Include="SniperTurret.h" />
+    <ClInclude Include="SoldierTurret.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="Turret.h" />
+    <ClInclude Include="TurretFactory.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="Version.h" />
     <ClInclude Include="Wave.h" />
@@ -117,6 +122,7 @@
   <ItemGroup>
     <ClCompile Include="Assets.cpp" />
     <ClCompile Include="BaseLevelState.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyBehaviour.cpp" />
@@ -140,7 +146,11 @@
     <ClCompile Include="MenuItem.cpp" />
     <ClCompile Include="PauseButton.cpp" />
     <ClCompile Include="PlayButton.cpp" />
+    <ClCompile Include="SniperTurret.cpp" />
+    <ClCompile Include="SoldierTurret.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Turret.cpp" />
+    <ClCompile Include="TurretFactory.cpp" />
     <ClCompile Include="Vector.cpp" />
     <ClCompile Include="Version.cpp" />
     <ClCompile Include="Wave.cpp" />

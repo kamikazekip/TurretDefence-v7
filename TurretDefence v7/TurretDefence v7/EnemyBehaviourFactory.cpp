@@ -6,6 +6,7 @@ EnemyBehaviourFactory::EnemyBehaviourFactory(Enemy* enemy)
 {
 	this->enemy = enemy;
 	linkCondition( EnemyCondition_Spawned, new EnemyMovingBehaviour( enemy ) );
+	linkCondition( EnemyCondition_Reached_Last_Waypoint, new EnemyBehaviour( enemy ) );
 }
 
 EnemyBehaviourFactory::~EnemyBehaviourFactory()

@@ -58,6 +58,12 @@
     <Filter Include="Header Files\Levels">
       <UniqueIdentifier>{c273ea90-d620-45c1-a418-1566a67accc8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Turrets">
+      <UniqueIdentifier>{f2278ecc-c58a-4e24-abb9-242bb382ee06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Turrets">
+      <UniqueIdentifier>{1ff97e73-2332-4b0e-9ded-06ba76bb2f8c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -162,6 +168,21 @@
     <ClInclude Include="PauseButton.h">
       <Filter>Header Files\HUD</Filter>
     </ClInclude>
+    <ClInclude Include="Turret.h">
+      <Filter>Header Files\Turrets</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Header Files\Turrets</Filter>
+    </ClInclude>
+    <ClInclude Include="TurretFactory.h">
+      <Filter>Header Files\Turrets</Filter>
+    </ClInclude>
+    <ClInclude Include="SoldierTurret.h">
+      <Filter>Header Files\Turrets</Filter>
+    </ClInclude>
+    <ClInclude Include="SniperTurret.h">
+      <Filter>Header Files\Turrets</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -259,6 +280,21 @@
     </ClCompile>
     <ClCompile Include="PauseButton.cpp">
       <Filter>Source Files\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="Turret.cpp">
+      <Filter>Source Files\Turrets</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source Files\Turrets</Filter>
+    </ClCompile>
+    <ClCompile Include="TurretFactory.cpp">
+      <Filter>Source Files\Turrets</Filter>
+    </ClCompile>
+    <ClCompile Include="SoldierTurret.cpp">
+      <Filter>Source Files\Turrets</Filter>
+    </ClCompile>
+    <ClCompile Include="SniperTurret.cpp">
+      <Filter>Source Files\Turrets</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

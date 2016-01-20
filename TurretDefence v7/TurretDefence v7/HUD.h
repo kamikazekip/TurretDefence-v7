@@ -2,9 +2,9 @@
 #include "HUDButton.h"
 #include "PlayButton.h"
 #include "PauseButton.h"
+#include "BaseLevelState.h"
 #include <vector>
 
-class BaseLevelState;
 class Game;
 
 class HUD
@@ -30,5 +30,9 @@ public:
 	void onMouseMotion( int mouseX, int mouseY );
 	void animate( float deltaTime );
 	void draw();
+	void updateState( LevelConditions newCondition );
+	bool isTouching( int mouseX, int mouseY );
+
+	PlayButton* getPlayButton();
 };
 

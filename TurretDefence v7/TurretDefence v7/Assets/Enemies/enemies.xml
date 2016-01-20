@@ -3,14 +3,14 @@
 	<enemy>
 		<type>easy</type>
 		<health>100</health>
-		<speed>200</speed>
+		<speed>1000</speed>
 		<width>50</width>
 		<height>50</height>
 	</enemy>
 	<enemy>
 		<type>medium</type>
 		<health>200</health>
-		<speed>150</speed>
+		<speed>600</speed>
 		<width>100</width>
 		<height>100</height>
 	</enemy>

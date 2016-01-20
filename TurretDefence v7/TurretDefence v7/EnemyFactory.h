@@ -12,12 +12,11 @@ private:
 	std::vector<SDL_Point> path;
 	std::string enemiesFile;
 	std::map<std::string, Enemy*> enemyMap;
-	std::map<std::string, Asset> stringToImageMage;
 	void insertEntry( std::string, Enemy* enemy );
 public:
 	EnemyFactory( SDL_Renderer* renderTarget, std::vector<SDL_Point> path );
 	~EnemyFactory();
 
-	Enemy* createEnemy( std::string type, float spawnTime );
+	Enemy* createEnemy( std::string type, float spawnTime, Wave* wave );
 };
 
