@@ -6,6 +6,7 @@
 #include "WaveFactory.h"
 #include "LevelBehaviour.h"
 #include "Turret.h"
+#include "TurretContainer.h"
 
 class LevelBehaviourFactory;
 class TurretFactory;
@@ -35,7 +36,7 @@ protected:
 	int waveCounter;
 
 	std::vector<SDL_Point> path;
-	std::vector<Turret*>* turrets;
+	TurretContainer* turrets;
 
 	/* Functions */
 	virtual void update( float deltaTime );

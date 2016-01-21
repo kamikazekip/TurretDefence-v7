@@ -183,6 +183,21 @@
     <ClInclude Include="SniperTurret.h">
       <Filter>Header Files\Turrets</Filter>
     </ClInclude>
+    <ClInclude Include="TurretBehaviourFactory.h">
+      <Filter>Header Files\Turrets</Filter>
+    </ClInclude>
+    <ClInclude Include="TurretBehaviour.h">
+      <Filter>Header Files\Turrets</Filter>
+    </ClInclude>
+    <ClInclude Include="TurretCalmBehaviour.h">
+      <Filter>Header Files\Turrets</Filter>
+    </ClInclude>
+    <ClInclude Include="TurretAngryBehaviour.h">
+      <Filter>Header Files\Turrets</Filter>
+    </ClInclude>
+    <ClInclude Include="TurretContainer.h">
+      <Filter>Header Files\Turrets</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -294,6 +309,21 @@
       <Filter>Source Files\Turrets</Filter>
     </ClCompile>
     <ClCompile Include="SniperTurret.cpp">
+      <Filter>Source Files\Turrets</Filter>
+    </ClCompile>
+    <ClCompile Include="TurretBehaviourFactory.cpp">
+      <Filter>Source Files\Turrets</Filter>
+    </ClCompile>
+    <ClCompile Include="TurretCalmBehaviour.cpp">
+      <Filter>Source Files\Turrets</Filter>
+    </ClCompile>
+    <ClCompile Include="TurretBehaviour.cpp">
+      <Filter>Source Files\Turrets</Filter>
+    </ClCompile>
+    <ClCompile Include="TurretAngryBehaviour.cpp">
+      <Filter>Source Files\Turrets</Filter>
+    </ClCompile>
+    <ClCompile Include="TurretContainer.cpp">
       <Filter>Source Files\Turrets</Filter>
     </ClCompile>
   </ItemGroup>

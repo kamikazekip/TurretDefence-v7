@@ -110,6 +110,11 @@
     <ClInclude Include="SoldierTurret.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Turret.h" />
+    <ClInclude Include="TurretAngryBehaviour.h" />
+    <ClInclude Include="TurretBehaviour.h" />
+    <ClInclude Include="TurretBehaviourFactory.h" />
+    <ClInclude Include="TurretCalmBehaviour.h" />
+    <ClInclude Include="TurretContainer.h" />
     <ClInclude Include="TurretFactory.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="Version.h" />
@@ -149,6 +154,11 @@
     <ClCompile Include="SoldierTurret.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Turret.cpp" />
+    <ClCompile Include="TurretAngryBehaviour.cpp" />
+    <ClCompile Include="TurretBehaviour.cpp" />
+    <ClCompile Include="TurretBehaviourFactory.cpp" />
+    <ClCompile Include="TurretCalmBehaviour.cpp" />
+    <ClCompile Include="TurretContainer.cpp" />
     <ClCompile Include="TurretFactory.cpp" />
     <ClCompile Include="Vector.cpp" />
     <ClCompile Include="Version.cpp" />

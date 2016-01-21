@@ -69,7 +69,7 @@ void Enemy::nextWaypoint()
 	{
 		reachedEnd = true;
 	}
-	direction = Vector::getDirection( SDL_Point{ int(x), int(y) }, target );
+	direction = Vector::getDirection( SDL_Point{ x, y }, target );
 }
 
 Enemy* Enemy::clone( float spawnTime, Wave* wave )

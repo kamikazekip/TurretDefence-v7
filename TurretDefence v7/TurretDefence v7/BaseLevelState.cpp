@@ -13,10 +13,10 @@ BaseLevelState::BaseLevelState( Game* game, Camera* camera )
 	hud					= new HUD( game, this, game->getWindowWidth(), game->getWindowHeight() );
 	behaviourFactory	= new LevelBehaviourFactory( this );
 	turretFactory		= new TurretFactory( game->getRenderer() );
-	turrets				= new std::vector<Turret*>();
+	turrets				= new TurretContainer( game->getRenderer(), camera );
 	currentBehaviour	= nullptr;
 
-	turrets->push_back( turretFactory->createTurret( TurretType_Soldier, 250, 700 ) );
+	turrets->addTurret( TurretType_Sniper, 300, 500 );
 }
 
 
@@ -29,12 +29,18 @@ BaseLevelState::~BaseLevelState()
 
 void BaseLevelState::update( float deltaTime )
 {
+	/* Level */
 	currentBehaviour->update( deltaTime );
+
+	/* Turrets */
+	turrets->update( deltaTime );
+
 }
 
 void BaseLevelState::animate( float deltaTime )
 {
-
+	/* Turrets */
+	turrets->animate( deltaTime );
 }
 
 void BaseLevelState::draw()
@@ -46,14 +52,11 @@ void BaseLevelState::draw()
 	currentWave->draw( camera );
 
 	/* Turrets */
-	for( size_t c = 0; c < turrets->size(); c++ )
-		turrets->at( c )->draw( camera );
+	turrets->draw();
 
 	/* Pause screen */
 	if( paused )
-	{
 		pausedScreen->drawFullScreen( camera );
-	}
 
 	/* HUD */
 	hud->draw();

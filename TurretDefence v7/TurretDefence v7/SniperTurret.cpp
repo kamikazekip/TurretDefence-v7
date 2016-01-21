@@ -1,9 +1,9 @@
 #include "SniperTurret.h"
 
 SniperTurret::SniperTurret()
-	: Turret()
+	: Turret( Asset_Turret_Sniper_Calm, Asset_Turret_Sniper_Angry )
 {
-	setImages( Asset_Turret_Sniper_Calm, Asset_Turret_Sniper_Angry );
+
 }
 
 

@@ -27,7 +27,7 @@ Game::Game()
 	levelFactory = new LevelFactory( this, camera );
 	currentLevel = levelFactory->getStartLevel();
 
-	setLoopHandler( currentLevel );
+	setLoopHandler( mainMenu );
 
 	gameLoop();
 }
