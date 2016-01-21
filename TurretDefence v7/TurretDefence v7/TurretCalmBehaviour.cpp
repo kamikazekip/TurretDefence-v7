@@ -25,7 +25,7 @@ void TurretCalmBehaviour::checkState()
 void TurretCalmBehaviour::update( float deltaTime )
 {
 	float rotationToBeAdded = turret->rotationSpeed * deltaTime;
-	std::cout << turret->rotationSpeed << std::endl;
+	turret->rotation += rotationToBeAdded;
 }
 
 void TurretCalmBehaviour::move()

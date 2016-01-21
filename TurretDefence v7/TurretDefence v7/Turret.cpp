@@ -8,12 +8,11 @@ Turret::Turret( SDL_Renderer* renderTarget, float attackSpeed, double range, dou
 	pastTime = 0.00f;
 	spread = 0.00f;
 	rotation = 180.0f;
-	rotationSpeed = 10.0f;
+	rotationSpeed = 90.0f;
 	setProperties( renderTarget, attackSpeed, range, width, height );
 
 	currentBehaviour = nullptr;
 	behaviourFactory = new TurretBehaviourFactory( this );
-	changeState( TurretCondition_Enemy_Out_Of_Range );
 }
 
 Turret::Turret( Asset calm, Asset angry )
@@ -21,13 +20,18 @@ Turret::Turret( Asset calm, Asset angry )
 	image_calm = Assets::getInstance()->getAsset( calm );
 	image_angry = Assets::getInstance()->getAsset( angry );
 
-	imageMap.insert( std::make_pair( TurretImage_Calm, image_calm ) );
-	imageMap.insert( std::make_pair( TurretImage_Angry, image_angry ) );
+	image_range_correct = Assets::getInstance()->getAsset( Asset_Range_Correct );
+	image_range_incorrect = Assets::getInstance()->getAsset( Asset_Range_Incorrect );
+}
+
+Turret::Turret()
+{
+
 }
 
 Turret::~Turret()
 {
-
+	/* Used by factory */
 }
 
 
@@ -41,8 +45,6 @@ void Turret::setProperties( SDL_Renderer* renderTarget, float attackSpeed, doubl
 	this->range = range;
 	this->w = width;
 	this->h = height;
-	image_range_correct = Assets::getInstance()->getAsset( Asset_Range_Correct );
-	image_range_incorrect = Assets::getInstance()->getAsset( Asset_Range_Incorrect );
 }
 
 void Turret::changeState( TurretConditions newCondition )
@@ -88,12 +90,19 @@ Turret* Turret::clone( double x, double y )
 	newTurret->y = this->y;
 	newTurret->image_calm = image_calm;
 	newTurret->image_angry = image_angry;
-	newTurret->image_current = image_current;
+	newTurret->fillImageMap();
+	newTurret->changeState( TurretCondition_Enemy_Out_Of_Range );
 	return newTurret;
 }
 
 
 /* --------------------------- View --------------------------- */
+
+void Turret::fillImageMap()
+{
+	imageMap.insert( std::make_pair( TurretImage_Calm, image_calm ) );
+	imageMap.insert( std::make_pair( TurretImage_Angry, image_angry ) );
+}
 
 void Turret::setImage( TurretImages turretImage )
 {

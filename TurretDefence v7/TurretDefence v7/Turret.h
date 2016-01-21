@@ -33,6 +33,7 @@ protected:
 public:
 	Turret( SDL_Renderer* renderTarget, float attackSpeed, double range, double width, double height );
 	Turret( Asset calm, Asset angry );
+	Turret();
 	~Turret();
 
 	/* Model */
@@ -49,6 +50,7 @@ public:
 	virtual Turret* clone( double x, double y );
 
 	/* View */
+	virtual void fillImageMap();
 	virtual void setImage( TurretImages turretImage );
 	virtual void animate( float deltaTime );
 	virtual void draw( Camera* camera );
