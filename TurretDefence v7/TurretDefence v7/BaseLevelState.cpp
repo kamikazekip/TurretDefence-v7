@@ -8,7 +8,6 @@ BaseLevelState::BaseLevelState( Game* game, Camera* camera )
 	: LoopHandler( camera )
 {
 	this->game = game;
-	background			= new Sprite( game->getRenderer(), Asset_BaseLevel_Background );	
 	pausedScreen		= new Sprite( game->getRenderer(), Asset_UI_Paused );
 	hud					= new HUD( game, this, game->getWindowWidth(), game->getWindowHeight() );
 	behaviourFactory	= new LevelBehaviourFactory( this );
@@ -16,7 +15,7 @@ BaseLevelState::BaseLevelState( Game* game, Camera* camera )
 	turrets				= new TurretContainer( game->getRenderer(), camera );
 	currentBehaviour	= nullptr;
 
-	turrets->addTurret( TurretType_Sniper, 300, 500 );
+	turrets->addTurret( TurretType_Sniper, 800, 500 );
 }
 
 
@@ -85,6 +84,7 @@ void BaseLevelState::onQuit()
 void BaseLevelState::onMouseButtonDown( int mouseX, int mouseY )
 {
 	hud->onMouseButtonDown( mouseX, mouseY );
+	turrets->onMouseButtonDown( mouseX, mouseY );
 	
 	if( paused && !hud->isTouching( mouseX, mouseY ) )
 	{

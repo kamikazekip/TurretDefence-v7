@@ -104,6 +104,7 @@
     <ClInclude Include="MenuItem.h" />
     <ClInclude Include="PauseButton.h" />
     <ClInclude Include="PlayButton.h" />
+    <ClInclude Include="Random.h" />
     <ClInclude Include="rapidxml.hpp" />
     <ClInclude Include="rapidxml_utils.hpp" />
     <ClInclude Include="SniperTurret.h" />
@@ -150,6 +151,7 @@
     <ClCompile Include="MenuItem.cpp" />
     <ClCompile Include="PauseButton.cpp" />
     <ClCompile Include="PlayButton.cpp" />
+    <ClCompile Include="Random.cpp" />
     <ClCompile Include="SniperTurret.cpp" />
     <ClCompile Include="SoldierTurret.cpp" />
     <ClCompile Include="Sprite.cpp" />

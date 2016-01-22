@@ -18,5 +18,6 @@ public:
 	void animate( float deltaTime );
 	void draw();
 	void addTurret( TurretType turretType, double x, double y );
+	void onMouseButtonDown( int mouseX, int mouseY );
 };
 

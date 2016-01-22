@@ -5,8 +5,8 @@
 
 TurretFactory::TurretFactory( SDL_Renderer* renderTarget )
 {
-	insertEntry( TurretType_Soldier, "soldier", new SoldierTurret() );
-	insertEntry( TurretType_Sniper, "sniper", new SniperTurret() );
+	link( TurretType_Soldier, &TurretFactory::makeSoldierTurret );
+	link( TurretType_Sniper, &TurretFactory::makeSniperTurret );
 
 	turretsFile = assetBasePath + "Turrets/turrets.xml";
 	rapidxml::file<> xmlFile( turretsFile.c_str() );
@@ -22,7 +22,6 @@ TurretFactory::TurretFactory( SDL_Renderer* renderTarget )
 		float attackSpeed	= std::stof( turret->first_node( "attackSpeed" )->value() );
 		int width			= std::stoi( turret->first_node( "width" )->value() );
 		int height			= std::stoi( turret->first_node( "height" )->value() );
-		turretMap.at( type )->setProperties( renderTarget, attackSpeed, range, width, height );
 	}
 }
 
@@ -32,13 +31,22 @@ TurretFactory::~TurretFactory()
 
 }
 
-void TurretFactory::insertEntry( TurretType turretType, std::string type, Turret* turret)
-{
-	stringMap.insert( std::pair<TurretType, std::string>( turretType, type ) );
-	turretMap.insert( std::pair<std::string, Turret*>( type, turret ) );
-}
-
 Turret* TurretFactory::createTurret( TurretType turretType, double x, double y )
 {
-	return turretMap.at( stringMap.at( turretType ) )->clone( x, y );
+	return ( this->*( turretMap.at(turretType ) ) )(  );
+}
+
+void TurretFactory::link(TurretType turretType, turret_fetch_function fetchingFunction )
+{
+	turretMap.insert( std::make_pair( turretType, fetchingFunction ) );
+}
+
+Turret* makeSoldierTurret()
+{
+	return new SoldierTurret();
+}
+
+Turret* makeSniperTurret()
+{
+	return new SniperTurret();
 }

@@ -38,7 +38,6 @@ void Assets::setRenderTarget( SDL_Renderer* renderTarget )
 {
 	this->renderTarget = renderTarget;
 	insertAssetMapEntry( Asset_MainMenu_Background,					"MainMenu/background.png" );
-	insertAssetMapEntry( Asset_BaseLevel_Background,				"Levels/Base/background.jpg" );
 	insertAssetMapEntry( Asset_WoodLevel_Background,				"Levels/Wood/wood.jpg" );
 	insertAssetMapEntry( Asset_HUD_PlayButton,						"Buttons/Play/PlayButton.png" );
 	insertAssetMapEntry( Asset_HUD_PlayButton_Hover,				"Buttons/Play/PlayButtonHover.png" );

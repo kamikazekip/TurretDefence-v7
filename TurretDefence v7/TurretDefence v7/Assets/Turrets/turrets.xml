@@ -2,16 +2,16 @@
 <turrets>
 	<turret>
 			<type>soldier</type>
-			<range>450.0</range>
+			<range>250.0</range>
 			<attackSpeed>1.00f</attackSpeed>
 			<width>100</width>
 			<height>100</height>
 	</turret>
 	<turret>
 			<type>sniper</type>
-			<range>2000.0</range>
+			<range>350.0</range>
 			<attackSpeed>1.00f</attackSpeed>
-			<width>100</width>
-			<height>100</height>
+			<width>134</width>
+			<height>167</height>
 	</turret>
 </turrets>

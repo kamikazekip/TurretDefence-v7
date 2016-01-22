@@ -41,3 +41,10 @@ void TurretContainer::addTurret( TurretType turret, double x, double y )
 {
 	turrets.push_back( turretFactory->createTurret( turret, x, y ) );
 }
+
+void TurretContainer::onMouseButtonDown( int mouseX, int mouseY )
+{
+	for( size_t c = 0; c < turrets.size(); c++ )
+		if( turrets[c]->isTouching( mouseX, mouseY ) )
+			turrets[c]->onClick();
+}
