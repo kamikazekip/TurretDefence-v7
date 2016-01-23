@@ -14,6 +14,16 @@ enum TurretImages { TurretImage_Calm, TurretImage_Angry };
 class Turret
 {
 protected:
+	/* Model */
+	TurretBehaviourFactory* behaviourFactory;
+	TurretBehaviour* currentBehaviour;
+	bool selected;
+	bool projectileLoaded;
+	float pastTime;
+	float attackSpeed;
+	SDL_Point rotationCenter;
+	virtual void fire();
+
 	/* View */
 	SDL_Renderer* renderTarget;
 	SDL_Texture* image_calm;
@@ -23,16 +33,9 @@ protected:
 	SDL_Texture* image_range_incorrect;
 	std::map<TurretImages, SDL_Texture*> imageMap;
 
-	/* Model */
-	TurretBehaviourFactory* behaviourFactory;
-	TurretBehaviour* currentBehaviour;
-	bool selected;
-	bool projectileLoaded;
-	float pastTime;
-	float attackSpeed;
-	SDL_Point rotationCenter;
-	
-	virtual void fire();
+	/* Animation */
+	int maxRangeForAnimation;
+	float animationTime;
 public:
 	Turret( SDL_Renderer* renderTarget, Asset calm, Asset angry, float attackSpeed, double range, double x, double y, double width, double height );
 	~Turret();
