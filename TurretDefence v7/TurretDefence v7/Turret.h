@@ -26,6 +26,7 @@ protected:
 	/* Model */
 	TurretBehaviourFactory* behaviourFactory;
 	TurretBehaviour* currentBehaviour;
+	bool selected;
 	bool projectileLoaded;
 	float pastTime;
 	float attackSpeed;
@@ -33,25 +34,22 @@ protected:
 	
 	virtual void fire();
 public:
-	Turret( SDL_Renderer* renderTarget, Asset calm, Asset angry, float attackSpeed, double range, double width, double height );
+	Turret( SDL_Renderer* renderTarget, Asset calm, Asset angry, float attackSpeed, double range, double x, double y, double width, double height );
 	~Turret();
 
 	/* Model */
 	Vector direction;
-	double x, y, w, h, dominantDimension;
+	double x, y, w, h;
 	double range;
 	float spread;
 	float rotation;
 	float rotationSpeed;
-	bool selected;
-	virtual void setProperties( SDL_Renderer* renderTarget, float attackSpeed, double range, double width, double height );
 	virtual void changeState( TurretConditions newCondition );
 	virtual void pullTrigger();
 	virtual void update( float deltaTime );
 	virtual bool isTouching( int xPosition, int yPosition );
 	virtual void onClick();
-	virtual void transferOrgans( Turret* turret1, Turret* turret2 );
-	virtual Turret* clone( double x, double y );
+	virtual void onMissClick();
 
 	/* View */
 	virtual void setImage( TurretImages turretImage );

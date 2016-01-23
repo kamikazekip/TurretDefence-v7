@@ -5,6 +5,8 @@
 
 TurretFactory::TurretFactory( SDL_Renderer* renderTarget )
 {
+	this->renderTarget = renderTarget;
+
 	link( TurretType_Soldier, &TurretFactory::makeSoldierTurret );
 	link( TurretType_Sniper, &TurretFactory::makeSniperTurret );
 
@@ -33,7 +35,7 @@ TurretFactory::~TurretFactory()
 
 Turret* TurretFactory::createTurret( TurretType turretType, double x, double y )
 {
-	return ( this->*( turretMap.at(turretType ) ) )(  );
+	return ( this->*( turretMap.at(turretType ) ) )( x, y );
 }
 
 void TurretFactory::link(TurretType turretType, turret_fetch_function fetchingFunction )
@@ -41,12 +43,12 @@ void TurretFactory::link(TurretType turretType, turret_fetch_function fetchingFu
 	turretMap.insert( std::make_pair( turretType, fetchingFunction ) );
 }
 
-Turret* makeSoldierTurret()
+Turret* TurretFactory::makeSoldierTurret(double x, double y)
 {
-	return new SoldierTurret();
+	return new SoldierTurret( renderTarget, x, y );
 }
 
-Turret* makeSniperTurret()
+Turret* TurretFactory::makeSniperTurret( double x, double y )
 {
-	return new SniperTurret();
+	return new SniperTurret( renderTarget, x, y );
 }

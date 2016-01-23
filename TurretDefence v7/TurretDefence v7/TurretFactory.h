@@ -6,7 +6,7 @@
 
 class TurretFactory;
 
-typedef Turret* ( TurretFactory::*turret_fetch_function )( );
+typedef Turret* ( TurretFactory::*turret_fetch_function )( double x, double y );
 
 enum TurretType
 {
@@ -17,6 +17,7 @@ enum TurretType
 class TurretFactory
 {
 private:
+	SDL_Renderer* renderTarget;
 	std::string turretsFile;
 	std::map<TurretType, turret_fetch_function> turretMap;
 public:
@@ -25,7 +26,7 @@ public:
 
 	Turret* createTurret( TurretType turretType, double x, double y );
 	void link( TurretType turretType, turret_fetch_function fetchingFunction );
-	Turret* makeSoldierTurret();
-	Turret* makeSniperTurret();
+	Turret* makeSoldierTurret( double x, double y );
+	Turret* makeSniperTurret( double x, double y );
 };
 
