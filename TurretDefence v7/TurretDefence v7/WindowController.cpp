@@ -3,8 +3,8 @@
 
 WindowController::WindowController()
 {
-	width = 1600;
-	height = 900;
+	width = 1280;
+	height = 720;
 	flags = SDL_WINDOW_SHOWN;
 
 	window = SDL_CreateWindow( "TurretDefence v7!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, flags );
