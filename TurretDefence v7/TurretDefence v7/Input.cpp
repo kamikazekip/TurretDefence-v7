@@ -3,7 +3,7 @@ static Input* instance;
 
 Input::Input()
 {
-	
+	keyMap.insert( std::make_pair( SDLK_ESCAPE, &LoopHandler::onEscapeKeyDown ) );
 }
 
 /* Singleton */
@@ -47,12 +47,22 @@ void Input::update()
 
 			case(SDL_KEYDOWN) :
 				loopHandler->onKeyDown( keyPressed );
+				handleKeys( );
 				break;
 
 			case(SDL_KEYUP) :
 				loopHandler->onKeyUp( keyPressed );
 				break;
 		}
+	}
+}
+
+void Input::handleKeys()
+{
+	std::map<SDL_Keycode, key_handling_function>::iterator result = keyMap.find( keyPressed );
+	if( result != keyMap.end() )
+	{
+		( loopHandler->*( keyMap.at( keyPressed ) ) )( );
 	}
 }
 

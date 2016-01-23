@@ -28,6 +28,7 @@ public:
 
 	void onMouseButtonDown( int mouseX, int mouseY );
 	void onMouseMotion( int mouseX, int mouseY );
+	void onEscapeKeyDown();
 	void animate( float deltaTime );
 	void draw();
 	void updateState( LevelConditions newCondition );

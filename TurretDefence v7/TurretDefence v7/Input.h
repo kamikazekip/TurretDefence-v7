@@ -1,6 +1,9 @@
 #pragma once
 #include "SDL.h"
 #include "LoopHandler.h"
+#include <map>
+
+typedef void ( LoopHandler::*key_handling_function )( );
 
 class Input
 {
@@ -16,6 +19,10 @@ private:
 	int mouseX;
 	int mouseY;
 	SDL_Keycode keyPressed;
+	std::map<SDL_Keycode, key_handling_function> keyMap;
+
+	/* Functions */
+	void handleKeys();
 
 public:
 	/* Singleton */

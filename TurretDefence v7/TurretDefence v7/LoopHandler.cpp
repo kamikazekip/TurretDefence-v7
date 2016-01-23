@@ -43,6 +43,11 @@ void LoopHandler::onKeyUp( SDL_Keycode keyPressed )
 
 }
 
+void LoopHandler::onEscapeKeyDown()
+{
+
+}
+
 void LoopHandler::firstTick()
 {
 

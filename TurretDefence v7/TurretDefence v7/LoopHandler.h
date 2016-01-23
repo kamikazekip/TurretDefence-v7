@@ -15,6 +15,7 @@ public:
 	virtual void onMouseButtonUp( int mouseX, int mouseY );
 	virtual void onKeyDown( SDL_Keycode keyPressed );
 	virtual void onKeyUp( SDL_Keycode keyPressed );
+	virtual void onEscapeKeyDown();
 	virtual void firstTick();
 	virtual void tick( float deltaTime );
 	virtual void togglePause();

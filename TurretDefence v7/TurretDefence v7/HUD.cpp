@@ -65,6 +65,11 @@ void HUD::onMouseMotion( int mouseX, int mouseY )
 	}
 }
 
+void HUD::onEscapeKeyDown()
+{
+	pauseButton->onClick();
+}
+
 void HUD::animate( float deltaTime )
 {
 

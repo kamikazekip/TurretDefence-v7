@@ -48,6 +48,7 @@ protected:
 	virtual void onQuit();
 	virtual void onMouseButtonDown( int mouseX, int mouseY );
 	virtual void onMouseMotion( int mouseX, int mouseY );
+	virtual void onEscapeKeyDown();
 public:
 	BaseLevelState( Game* game, Camera* camera );
 	~BaseLevelState();

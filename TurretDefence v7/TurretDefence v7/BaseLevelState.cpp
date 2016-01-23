@@ -97,6 +97,11 @@ void BaseLevelState::onMouseMotion( int mouseX, int mouseY )
 	hud->onMouseMotion( mouseX, mouseY );
 }
 
+void BaseLevelState::onEscapeKeyDown()
+{
+	hud->onEscapeKeyDown();
+}
+
 void BaseLevelState::setPath( std::vector<SDL_Point> path )
 {
 	this->path = path;
