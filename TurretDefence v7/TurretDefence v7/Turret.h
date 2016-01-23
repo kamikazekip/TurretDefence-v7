@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "Assets.h"
 #include <map>
+#include "Animation.h"
 
 class TurretBehaviourFactory;
 class TurretBehaviour;
@@ -34,8 +35,7 @@ protected:
 	std::map<TurretImages, SDL_Texture*> imageMap;
 
 	/* Animation */
-	int maxRangeForAnimation;
-	float animationTime;
+	Animation* rangeAnimation;
 public:
 	Turret( SDL_Renderer* renderTarget, Asset calm, Asset angry, float attackSpeed, double range, double x, double y, double width, double height );
 	~Turret();

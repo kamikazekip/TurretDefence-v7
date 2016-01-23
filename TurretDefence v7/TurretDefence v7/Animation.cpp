@@ -4,8 +4,9 @@
 Animation::Animation(vector<pair<float, double>> steps )
 {
 	this->steps = steps;
-	currentStep = steps[0];
-	pastTime = 0.00f;
+	reversed = false;
+	reset();
+	currentState = AnimationState_Idle_Waiting;
 }
 
 
@@ -14,20 +15,66 @@ Animation::~Animation()
 
 }
 
+void Animation::calculateVPS()
+{
+	pastTime = 0.00f;
+
+	/* TimeDelta cannot be negative! */
+	float timeDelta = nextStep.first - currentStep.first;
+	if( timeDelta < 0 )
+		timeDelta *= -1;
+
+	double valueDelta = nextStep.second - currentStep.second;
+	currentVPS = 1.0 / timeDelta * valueDelta;
+	triggerTime = timeDelta;
+}
+
 void Animation::animate( float deltaTime )
 {
-	
+	if( currentState != AnimationState_Idle_Waiting )
+	{
+		pastTime += deltaTime;
+		if( pastTime >= triggerTime )
+		{
+			calculateNextStep();
+		}
+		if( !done )
+			value += currentVPS * deltaTime;
+	}
 }
 
 void Animation::reset()
 {
-	value = steps[0].second;
-	pastTime = 0.00f;
+	currentStep = steps[0];
+	nextStep = steps[1];
+	value = currentStep.second;
+	done = false;
+	calculateVPS();
 }
 
-void Animation::reverse()
+void Animation::setState(AnimationState newState)
 {
-	reversed = !reversed;
+	currentState = newState;
+	if( currentState == AnimationState_Reversed )
+	{
+		reverse( steps.begin(), steps.end() );
+		reversed = true;
+		reset();
+	}
+	else if( currentState == AnimationState_Normal )
+	{
+		if( reversed )
+		{
+			reverse( steps.begin(), steps.end() );
+			reversed = false;
+		}
+		reset();
+	}
+}
+
+AnimationState Animation::getState()
+{
+	return currentState;
 }
 
 double Animation::getValue()
@@ -40,7 +87,16 @@ bool Animation::isDone()
 	return done;
 }
 
-bool Animation::isReversed()
+void Animation::calculateNextStep()
 {
-	return reversed;
+	value = nextStep.second;
+	vector<pair<float, double>>::iterator stepIt = next( find( steps.begin(), steps.end(), nextStep ), 1 );
+	if( stepIt != steps.end() )
+	{
+		currentStep = nextStep;
+		nextStep = *stepIt;
+		calculateVPS();
+	}
+	else
+		done = true;
 }

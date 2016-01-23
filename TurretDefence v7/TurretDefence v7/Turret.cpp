@@ -14,6 +14,13 @@ Turret::Turret( SDL_Renderer* renderTarget, Asset calm, Asset angry, float attac
 	imageMap.insert( std::make_pair( TurretImage_Calm, image_calm ) );
 	imageMap.insert( std::make_pair( TurretImage_Angry, image_angry ) );
 
+	/* Animation */
+	vector<pair<float, double>> rangeAnimationSteps;
+	rangeAnimationSteps.push_back( make_pair( 0.00f, 0.0 ) );
+	rangeAnimationSteps.push_back( make_pair( 0.15f, range + 40 ) );
+	rangeAnimationSteps.push_back( make_pair( 0.18f, range ) );
+	rangeAnimation = new Animation( rangeAnimationSteps );
+
 	/* Model */
 	this->attackSpeed = attackSpeed;
 	this->range = range;
@@ -85,12 +92,19 @@ bool Turret::isTouching( int xPosition, int yPosition )
 void Turret::onClick()
 {
 	selected = !selected;
+	if( selected )
+		rangeAnimation->setState( AnimationState_Normal );
+	else
+		rangeAnimation->setState( AnimationState_Reversed );
 }
 
 void Turret::onMissClick()
 {
 	if( selected )
+	{
 		selected = false;
+		rangeAnimation->setState( AnimationState_Reversed );
+	}
 }
 
 /* --------------------------- View --------------------------- */
@@ -103,17 +117,18 @@ void Turret::setImage( TurretImages turretImage )
 
 void Turret::animate( float deltaTime )
 {
-
+	rangeAnimation->animate( deltaTime );
 }
 
 void Turret::draw( Camera* camera )
 {
 	SDL_Rect drawingRect = { x - camera->x, y - camera->y, w, h };
-	SDL_RenderCopyEx( renderTarget, image_current, NULL, &drawingRect, rotation, &rotationCenter, SDL_FLIP_NONE );
 
-	if( selected )
+	if( rangeAnimation->getState() != AnimationState_Idle_Waiting && rangeAnimation->getValue() > 0 )
 	{
-		SDL_Rect rangeDrawingRect = { drawingRect.x + w / 2 - range, drawingRect.y + h / 2 - range, range * 2, range * 2 };
+		double visualRange = rangeAnimation->getValue();
+		SDL_Rect rangeDrawingRect = { drawingRect.x + w / 2 - visualRange, drawingRect.y + h / 2 - visualRange, visualRange * 2, visualRange * 2 };
 		SDL_RenderCopy( renderTarget, image_range_correct, NULL, &rangeDrawingRect );
 	}
+	SDL_RenderCopyEx( renderTarget, image_current, NULL, &drawingRect, rotation, &rotationCenter, SDL_FLIP_NONE );
 }
