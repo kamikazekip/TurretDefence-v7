@@ -17,8 +17,8 @@ Turret::Turret( SDL_Renderer* renderTarget, Asset calm, Asset angry, float attac
 	/* Animation */
 	vector<pair<float, double>> rangeAnimationSteps;
 	rangeAnimationSteps.push_back( make_pair( 0.00f, 0.0 ) );
-	rangeAnimationSteps.push_back( make_pair( 0.15f, range + 40 ) );
-	rangeAnimationSteps.push_back( make_pair( 0.18f, range ) );
+	rangeAnimationSteps.push_back( make_pair( 0.08f, range + 40 ) );
+	rangeAnimationSteps.push_back( make_pair( 0.20f, range ) );
 	rangeAnimation = new Animation( rangeAnimationSteps );
 
 	/* Model */
