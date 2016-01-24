@@ -10,12 +10,8 @@
 
 Game::Game()
 {
-	prevTime = 0;
-	currentTime = 0;
-	deltaTime = 0.0f;
-	setFPS( 60 );
 	fastForwarded = false;
-
+	setFPS( 60 );
 	gameState = GameState::In_Game;
 
 	windowController = new WindowController();
@@ -42,6 +38,9 @@ Game::~Game()
 
 void Game::gameLoop()
 {
+	prevTime = 0;
+	currentTime = SDL_GetTicks( ) - 17; /* <-- forged first deltatime, comes in at about 0.017s */
+	deltaTime = 0.0f;
 	while( gameState != GameState::Quitting )
 	{
 		updateDeltaTime();

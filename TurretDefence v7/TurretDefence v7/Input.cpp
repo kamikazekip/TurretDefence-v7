@@ -3,7 +3,8 @@ static Input* instance;
 
 Input::Input()
 {
-	keyMap.insert( std::make_pair( SDLK_ESCAPE, &LoopHandler::onEscapeKeyDown ) );
+	
+	link( SDLK_ESCAPE, &LoopHandler::onEscapeKeyDown );
 }
 
 /* Singleton */
@@ -17,6 +18,18 @@ Input* Input::getInstance()
 Input::~Input()
 {
 
+}
+
+void Input::link( SDL_Keycode key, key_handling_function func )
+{
+	keyMap.insert( make_pair( key, func ) );
+	keyPressedMap.insert( make_pair( key, false ) );
+}
+
+void Input::linkMultiplePress( SDL_Keycode key, key_handling_function func )
+{
+	keyMap.insert( make_pair( key, func ) );
+	multiplePressExceptions.push_back( key );
 }
 
 void Input::update()
@@ -47,22 +60,42 @@ void Input::update()
 
 			case(SDL_KEYDOWN) :
 				loopHandler->onKeyDown( keyPressed );
-				handleKeys( );
+				handleDownKeys( );
 				break;
-
+			
 			case(SDL_KEYUP) :
 				loopHandler->onKeyUp( keyPressed );
+				handleUpKeys( );
 				break;
 		}
 	}
 }
 
-void Input::handleKeys()
+void Input::handleDownKeys()
 {
-	std::map<SDL_Keycode, key_handling_function>::iterator result = keyMap.find( keyPressed );
-	if( result != keyMap.end() )
+	map<SDL_Keycode, key_handling_function>::iterator result = keyMap.find( keyPressed );
+	map<SDL_Keycode, bool>::iterator isPressedResult = keyPressedMap.find( keyPressed );
+	vector<SDL_Keycode>::iterator multiplePressResult = find( multiplePressExceptions.begin(), multiplePressExceptions.end(), keyPressed );
+
+
+	bool keyExists = result != keyMap.end();
+	bool isException = multiplePressResult != multiplePressExceptions.end();
+	bool isNotPressed = isPressedResult != keyPressedMap.end() && keyPressedMap.at( keyPressed ) == false;
+
+	if( keyExists && ( isException || isNotPressed ) )
 	{
+		if( isNotPressed )
+			keyPressedMap.at( keyPressed ) = true;
 		( loopHandler->*( keyMap.at( keyPressed ) ) )( );
+	}
+}
+
+void Input::handleUpKeys()
+{
+	map<SDL_Keycode, bool>::iterator result = keyPressedMap.find( keyPressed );
+	if( result != keyPressedMap.end() )
+	{
+		result->second = false;
 	}
 }
 

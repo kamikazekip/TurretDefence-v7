@@ -2,8 +2,10 @@
 #include "SDL.h"
 #include "LoopHandler.h"
 #include <map>
+#include <vector>
 
 typedef void ( LoopHandler::*key_handling_function )( );
+using namespace std;
 
 class Input
 {
@@ -19,10 +21,16 @@ private:
 	int mouseX;
 	int mouseY;
 	SDL_Keycode keyPressed;
-	std::map<SDL_Keycode, key_handling_function> keyMap;
+	map<SDL_Keycode, key_handling_function> keyMap;
+	map<SDL_Keycode, bool> keyPressedMap;
+	vector<SDL_Keycode> multiplePressExceptions;
 
 	/* Functions */
-	void handleKeys();
+	void handleDownKeys();
+	void handleUpKeys( );
+
+	void link( SDL_Keycode, key_handling_function );
+	void linkMultiplePress( SDL_Keycode, key_handling_function );
 
 public:
 	/* Singleton */
