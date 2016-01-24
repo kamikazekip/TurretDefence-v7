@@ -15,7 +15,7 @@ BaseLevelState::BaseLevelState( Game* game, Camera* camera )
 	turrets				= new TurretContainer( game->getRenderer(), camera );
 	currentBehaviour	= nullptr;
 
-	turrets->addTurret( TurretType_Sniper, 800, 500 );
+	turrets->addTurret( TurretType_Sniper, 600, 300 );
 }
 
 
