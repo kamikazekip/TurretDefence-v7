@@ -37,7 +37,7 @@ protected:
 	/* Animation */
 	Animation* rangeAnimation;
 public:
-	Turret( SDL_Renderer* renderTarget, Asset calm, Asset angry, float attackSpeed, double range, double x, double y, double width, double height );
+	Turret( SDL_Renderer* renderTarget, Asset calm, Asset angry, double x, double y, double range, float attackSpeed, double width, double height );
 	~Turret();
 
 	/* Model */

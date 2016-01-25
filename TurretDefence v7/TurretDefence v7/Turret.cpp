@@ -2,7 +2,7 @@
 #include "TurretBehaviourFactory.h"
 
 
-Turret::Turret( SDL_Renderer* renderTarget, Asset calm, Asset angry, float attackSpeed, double range, double x, double y, double width, double height )
+Turret::Turret( SDL_Renderer* renderTarget, Asset calm, Asset angry, double x, double y, double range, float attackSpeed, double width, double height )
 {
 	/* View */
 	this->renderTarget = renderTarget;

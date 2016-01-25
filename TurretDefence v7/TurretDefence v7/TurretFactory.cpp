@@ -24,6 +24,8 @@ TurretFactory::TurretFactory( SDL_Renderer* renderTarget )
 		float attackSpeed	= std::stof( turret->first_node( "attackSpeed" )->value() );
 		int width			= std::stoi( turret->first_node( "width" )->value() );
 		int height			= std::stoi( turret->first_node( "height" )->value() );
+		TurretData turretData = { type, range, attackSpeed, width, height };
+		turretDataMap.insert( make_pair( type, turretData ));
 	}
 }
 
@@ -45,10 +47,12 @@ void TurretFactory::link(TurretType turretType, turret_fetch_function fetchingFu
 
 Turret* TurretFactory::makeSoldierTurret(double x, double y)
 {
-	return new SoldierTurret( renderTarget, x, y );
+	TurretData soldierData = turretDataMap.at( "soldier" );
+	return new SoldierTurret( renderTarget, x, y, soldierData.range, soldierData.attackSpeed, soldierData.width, soldierData.height );
 }
 
 Turret* TurretFactory::makeSniperTurret( double x, double y )
 {
-	return new SniperTurret( renderTarget, x, y );
+	TurretData sniperData = turretDataMap.at( "sniper" );
+	return new SniperTurret( renderTarget, x, y, sniperData.range, sniperData.attackSpeed, sniperData.width, sniperData.height );
 }

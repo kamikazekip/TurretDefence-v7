@@ -7,6 +7,7 @@
 #include "LevelFactory.h"
 #include "HUD.h"
 #include "Camera.h"
+#include "BaseLevelState.h"
 
 Game::Game()
 {
@@ -23,7 +24,7 @@ Game::Game()
 	levelFactory = new LevelFactory( this, camera );
 	currentLevel = levelFactory->getStartLevel();
 
-	setLoopHandler( currentLevel );
+	setLoopHandler( mainMenu );
 
 	gameLoop();
 }

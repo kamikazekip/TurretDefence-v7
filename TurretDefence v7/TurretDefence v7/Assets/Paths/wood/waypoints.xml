@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<waypoints>
+	<waypoint>
+		<x>-0.46875f</x>
+		<y>0.7680555555555556f</y>
+	</waypoint>
+	<waypoint>
+		<x>0.53671875f</x>
+		<y>0.7680555555555556f</y>
+	</waypoint>
+	<waypoint>
+		<x>0.53671875f</x>
+		<y>0.47638888888888886f</y>
+	</waypoint>
+	<waypoint>
+		<x>0.26015624999999996f</x>
+		<y>0.47638888888888886f</y>
+	</waypoint>
+	<waypoint>
+		<x>0.26015624999999996f</x>
+		<y>0.14583333333333334f</y>
+	</waypoint>
+	<waypoint>
+		<x>0.871875f</x>
+		<y>0.14583333333333334f</y>
+	</waypoint>
+	<waypoint>
+		<x>0.871875f</x>
+		<y>1.25f</y>
+	</waypoint>
+</waypoints>

@@ -7,6 +7,8 @@ Camera::Camera( int windowWidth, int windowHeight, int levelWidth, int levelHeig
 	y = 0;
 	w = windowWidth;
 	h = windowHeight;
+	this->windowWidth = windowWidth;
+	this->windowHeight = windowHeight;
 	this->levelWidth = levelWidth;
 	this->levelHeight = levelHeight;
 }

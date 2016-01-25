@@ -9,9 +9,9 @@
 	</turret>
 	<turret>
 			<type>sniper</type>
-			<range>350.0</range>
+			<range>300.0</range>
 			<attackSpeed>1.00f</attackSpeed>
-			<width>134</width>
-			<height>167</height>
+			<width>70</width>
+			<height>87</height>
 	</turret>
 </turrets>
