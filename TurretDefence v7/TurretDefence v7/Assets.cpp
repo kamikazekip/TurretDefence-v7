@@ -37,7 +37,7 @@ void Assets::insertAssetMapEntry( std::string key, std::string filePath )
 void Assets::setRenderTarget( SDL_Renderer* renderTarget )
 {
 	this->renderTarget = renderTarget;
-	insertAssetMapEntry( Asset_MainMenu_Background,					"MainMenu/background.png" );
+	insertAssetMapEntry( Asset_OptionsMenu_Overlay,					"Menu/Options/OptionsOverlay.png" );
 	insertAssetMapEntry( Asset_WoodLevel_Background,				"Levels/Wood/wood.jpg" );
 	insertAssetMapEntry( Asset_HUD_PlayButton,						"Buttons/Play/PlayButton.png" );
 	insertAssetMapEntry( Asset_HUD_PlayButton_Hover,				"Buttons/Play/PlayButtonHover.png" );

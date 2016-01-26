@@ -103,6 +103,7 @@
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuItem.h" />
+    <ClInclude Include="OptionsMenu.h" />
     <ClInclude Include="PauseButton.h" />
     <ClInclude Include="PlayButton.h" />
     <ClInclude Include="Random.h" />
@@ -151,6 +152,7 @@
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MenuItem.cpp" />
+    <ClCompile Include="OptionsMenu.cpp" />
     <ClCompile Include="PauseButton.cpp" />
     <ClCompile Include="PlayButton.cpp" />
     <ClCompile Include="Random.cpp" />

@@ -16,10 +16,12 @@ protected:
 	SDL_Color menuFontColorSelected;
 	SDL_Renderer* renderTarget;
 	Game* game;
+	std::string action_jackson;
+	std::string york;
 	TTF_Font* versionFont;
 	TTF_Font* menuItemFont;
+	TTF_Font* titleFont;
 	Sprite* version;
-	Sprite* background;
 
 	/* Functions */
 	virtual void addMenuItem( std::string text );
@@ -27,7 +29,7 @@ protected:
 	virtual void drawMenuItems();
 	virtual void checkHover(int mouseX, int mouseY);
 public:
-	Menu(SDL_Renderer* renderTarget, Game* game, Camera* camera);
+	Menu(Game* game);
 	~Menu();
 	virtual void draw();
 	void tick();

@@ -53,5 +53,7 @@ public:
 	void setFastForward(bool fastForward);
 	void togglePause();
 	SDL_Renderer* getRenderer();
+	Camera* getCamera();
+	WindowController* getWindowController();
 };
 

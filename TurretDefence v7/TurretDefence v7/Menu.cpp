@@ -1,21 +1,23 @@
 #include "Menu.h"
 #include "Version.h"
 
-Menu::Menu(SDL_Renderer* renderTarget, Game* game, Camera* camera)
-	: LoopHandler( camera )
+Menu::Menu( Game* game )
+	: LoopHandler( game->getCamera() )
 {
 	menuItems = new std::vector<MenuItem*>();
 
 	menuFontColor			= { 253, 122, 6, 255 }; /* orange */
 	menuFontColorSelected	= { 253, 80, 6, 255 };	/* light orange*/
-	this->renderTarget = renderTarget;
 	this->game = game;
+	this->renderTarget = game->getRenderer();
 
-	std::string fontPath = assetBasePath + "Fonts/action_jackson.ttf";
-	std::string fontPath2 = assetBasePath + "Fonts/yorkwhiteletter.ttf";
-	
-	menuItemFont = TTF_OpenFont( fontPath.c_str(), 70 );
-	versionFont = TTF_OpenFont( fontPath2.c_str(), 45 );
+	action_jackson = assetBasePath + "Fonts/action_jackson.ttf";
+	york = assetBasePath + "Fonts/yorkwhiteletter.ttf";
+
+	titleFont = TTF_OpenFont( action_jackson.c_str(), 140 );
+	menuItemFont = TTF_OpenFont( action_jackson.c_str(), 70 );
+	versionFont = TTF_OpenFont( york.c_str(), 45 );
+
 	version = new Sprite( renderTarget, versionFont, Version::getInstance()->getYorkVersion(), menuFontColor );
 	version->positionRect.x = 20;
 	version->positionRect.y = game->getWindowHeight() - version->positionRect.h - 10;
@@ -35,7 +37,7 @@ Menu::~Menu()
 
 void Menu::draw()
 {
-	version->draw();
+	
 }
 
 void Menu::tick()
@@ -80,10 +82,10 @@ void Menu::drawMenuItems()
 	}
 }
 
-void Menu::checkHover(int mouseX, int mouseY)
+void Menu::checkHover( int mouseX, int mouseY )
 {
 	for( size_t c = 0; c < menuItems->size(); c++ )
 	{
-		menuItems->at( c )->checkHover(mouseX, mouseY);
+		menuItems->at( c )->checkHover( mouseX, mouseY );
 	}
 }

@@ -21,3 +21,18 @@ SDL_Window* WindowController::getWindow()
 {
 	return this->window;
 }
+
+void WindowController::setResolution( int resX, int resY )
+{
+	SDL_SetWindowSize( window, resX, resY );
+}
+
+void WindowController::setFullScreen( bool fs )
+{
+	Uint32 flags = 0;
+	if( fs )
+	{
+		flags = SDL_WINDOW_FULLSCREEN;
+	}
+	SDL_SetWindowFullscreen( window, flags );
+}

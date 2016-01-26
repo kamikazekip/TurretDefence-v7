@@ -7,7 +7,7 @@
 
 enum Asset
 {
-	Asset_MainMenu_Background,
+	Asset_OptionsMenu_Overlay,
 	Asset_WoodLevel_Background,
 	Asset_HUD_PlayButton,
 	Asset_HUD_PlayButton_Hover,

@@ -1,21 +1,18 @@
 #include "MainMenu.h"
 #include "Assets.h"
 
-MainMenu::MainMenu( SDL_Renderer* renderTarget, Game* game, Camera* camera )
-	: Menu( renderTarget, game, camera )
+MainMenu::MainMenu( Game* game )
+	: Menu( game )
 {
-	std::string fontPath = assetBasePath + "Fonts/action_jackson.ttf";
-	mainTitleFont = TTF_OpenFont( fontPath.c_str(), 140 );
-	
-	mainTitle = new Sprite( renderTarget, mainTitleFont, "TurretDefence!", menuFontColor );
+	mainTitle = new Sprite( renderTarget, titleFont, "TurretDefence!", menuFontColor );
 	mainTitle->positionRect.x = (game->getWindowWidth() - mainTitle->positionRect.w ) / 2;
 	mainTitle->positionRect.y = 50;
-
-	background = new Sprite( renderTarget, Asset::Asset_MainMenu_Background );
 
 	addMenuItem( "Play" );
 	addMenuItem( "Options" );
 	addMenuItem( "Exit" );
+
+	optionsMenu = new OptionsMenu( game, this );
 }
 
 
@@ -69,7 +66,11 @@ void MainMenu::handleChoice( Choice choice )
 		case (Choice::Exit) :
 			onQuit();
 			break;
+		case( Choice::Options ) :
+			game->setLoopHandler( optionsMenu );
+			break;
 		case ( Choice::Play ) :
 			game->setGameState( GameState::In_Game );
+			break;
 	}
 }

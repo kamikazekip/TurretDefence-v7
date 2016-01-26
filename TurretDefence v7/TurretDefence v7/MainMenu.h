@@ -1,14 +1,15 @@
 #pragma once
 #include "Menu.h"
+#include "OptionsMenu.h"
 
 class MainMenu : public Menu
 {
 private:
-	TTF_Font* mainTitleFont;
+	OptionsMenu* optionsMenu;
 	Sprite* mainTitle;
 	enum Choice { Play, Options, Exit };
 public:
-	MainMenu(SDL_Renderer* renderTarget, Game* game, Camera* camera );
+	MainMenu( Game* game );
 	~MainMenu();
 	void firstTick();
 	void tick( float deltaTime );

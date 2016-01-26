@@ -3,6 +3,10 @@
 
 MenuItem::MenuItem( SDL_Renderer* renderTarget, TTF_Font* font, std::string text, SDL_Color color, SDL_Color selectedColor )
 {
+	this->renderTarget = renderTarget;
+	this->font = font;
+	this->color = color;
+	this->selectedColor = selectedColor;
 	normalSprite = new Sprite( renderTarget, font, text,  color );
 	selectedSprite = new Sprite( renderTarget, font, text, selectedColor );
 	currentSprite = normalSprite;
@@ -64,4 +68,14 @@ void MenuItem::setYPosition( int y )
 void MenuItem::draw()
 {
 	currentSprite->draw();
+}
+
+void MenuItem::setText( std::string text )
+{
+	delete normalSprite;
+	delete selectedSprite;
+
+	normalSprite = new Sprite( renderTarget, font, text, color );
+	selectedSprite = new Sprite( renderTarget, font, text, selectedColor );
+	currentSprite = normalSprite;
 }

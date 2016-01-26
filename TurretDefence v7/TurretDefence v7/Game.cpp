@@ -20,7 +20,7 @@ Game::Game()
 	camera = new Camera( getWindowWidth(), getWindowHeight(), getWindowWidth(), getWindowHeight() );
 	Assets::getInstance()->setRenderTarget( renderTarget );
 	input = Input::getInstance();
-	mainMenu = new MainMenu( renderTarget, this, camera );
+	mainMenu = new MainMenu( this );
 	levelFactory = new LevelFactory( this, camera );
 	currentLevel = levelFactory->getStartLevel();
 
@@ -85,7 +85,7 @@ void Game::updateDeltaTime()
 void Game::capFramesPerSecond()
 {
 	sleepTime = targetSleepTime - ((SDL_GetTicks() - currentTime) / 1000.0f);
-	SDL_Delay( sleepTime );
+	SDL_Delay( Uint32(sleepTime) );
 }
 
 int Game::getWindowWidth()
@@ -116,4 +116,14 @@ void Game::togglePause()
 SDL_Renderer* Game::getRenderer()
 {
 	return renderTarget;
+}
+
+Camera* Game::getCamera()
+{
+	return camera;
+}
+
+WindowController* Game::getWindowController()
+{
+	return windowController;
 }
