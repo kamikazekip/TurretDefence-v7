@@ -18,9 +18,9 @@ int main(int, char**){
 	
 	std::cout << Version::getInstance()->getVersion() << std::endl;
 
-	Game* game = new Game();
-	delete game;
+	Game* game = Game::getInstance();
 
+	Game_Quit();
 	Version_Quit();
 	SDL_Quit();
 	return 0;

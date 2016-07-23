@@ -1,58 +1,53 @@
 #include "TurretContainer.h"
 
 
-TurretContainer::TurretContainer( SDL_Renderer* renderTarget, Camera* camera )
+TurretContainer::TurretContainer( BaseLevelState* level, Camera* camera, CollisionManager* collisionManager )
 {
-	this->renderTarget = renderTarget;
+	this->level = level;
 	this->camera = camera;
-	turretFactory = new TurretFactory( renderTarget );
+	this->collisionManager = collisionManager;
+	turretFactory = new TurretFactory( );
 }
 
 
 TurretContainer::~TurretContainer()
 {
+
 }
 
 void TurretContainer::update( float deltaTime )
 {
-	for( size_t c = 0; c < turrets.size(); c++ )
-	{
-		turrets[c]->update( deltaTime );
-	}
+	for( Turret* turret : turrets )
+		turret->update( deltaTime );
 }
 
 void TurretContainer::animate( float deltaTime )
 {
-	for( size_t c = 0; c < turrets.size(); c++ )
-	{
-		turrets[c]->animate( deltaTime );
-	}
+	for( Turret* turret : turrets )
+		turret->animate( deltaTime );
 }
 
 void TurretContainer::draw()
 {
-	for( size_t c = 0; c < turrets.size(); c++ )
-	{
-		turrets[c]->draw( camera );
-	}
+	for( Turret* turret : turrets )
+		turret->draw( camera );
 }
 
-void TurretContainer::addTurret( TurretType turret, double x, double y )
+void TurretContainer::addTurret( TurretType turretType, double x, double y )
 {
-	turrets.push_back( turretFactory->createTurret( turret, x, y ) );
+	Turret* turret = turretFactory->createTurret( turretType, x, y );
+	turret->setCollisionManager( collisionManager );
+	turret->setLevel( level );
+	turrets.push_back( turret );
 }
 
 void TurretContainer::onMouseButtonDown( int mouseX, int mouseY )
 {
-	for( size_t c = 0; c < turrets.size(); c++ )
+	for( Turret* turret : turrets )
 	{
-		if( turrets[c]->isTouching( mouseX, mouseY ) )
-		{
-			turrets[c]->onClick();
-		}
+		if( turret->isTouching( mouseX, mouseY ) )
+			turret->onClick();
 		else
-		{
-			turrets[c]->onMissClick();
-		}	
+			turret->onMissClick();
 	}
 }

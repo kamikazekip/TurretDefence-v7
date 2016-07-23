@@ -9,12 +9,11 @@ private:
 	Sprite* mainTitle;
 	enum Choice { Play, Options, Exit };
 public:
-	MainMenu( Game* game );
+	MainMenu( );
 	~MainMenu();
 	void firstTick();
 	void tick( float deltaTime );
 	void draw();
-	void onQuit();
 	void onMouseMotion( int mouseX, int mouseY );
 	void onMouseButtonDown( int mouseX, int mouseY );
 	void handleChoice( Choice choice );

@@ -6,7 +6,7 @@ class SniperTurret : public Turret
 protected:
 	int radius;
 public:
-	SniperTurret( SDL_Renderer* renderTarget, double x, double y, double range, float attackSpeed, int width, int height );
+	SniperTurret( double x, double y, double range, float attackSpeed, float scale );
 	~SniperTurret();
 	bool isTouching( int xPosition, int yPosition );
 };

@@ -21,7 +21,8 @@ void TurretCalmBehaviour::setup()
 
 void TurretCalmBehaviour::checkState()
 {
-
+	if( turret->target != nullptr )
+		turret->changeState( TurretCondition_Enemy_In_Range );
 }
 
 void TurretCalmBehaviour::update( float deltaTime )
@@ -31,7 +32,7 @@ void TurretCalmBehaviour::update( float deltaTime )
 	{
 		pastTime = 0.00f;
 		triggerTime = Random::getInstance().nextFloat( 4.00f, 6.00f );
-		rotateFor = Random::getInstance().nextFloat( 0.50f, 2.00f );
+		rotateFor = Random::getInstance().nextFloat( 0.30f, 0.60f );
 		rotationToBeAdded = turret->rotationSpeed * deltaTime;
 		if( Random::getInstance().nextBool() )
 			rotationToBeAdded *= -1;
@@ -41,9 +42,7 @@ void TurretCalmBehaviour::update( float deltaTime )
 	{
 		rotationTime += deltaTime;
 		if( rotationTime < rotateFor )
-		{
 			turret->rotation += rotationToBeAdded;
-		}
 	}
 }
 

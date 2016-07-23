@@ -8,39 +8,55 @@
 #include "HUD.h"
 #include "Camera.h"
 #include "BaseLevelState.h"
+#include "AssetLoader.h"
+
+static Game* instance;
 
 Game::Game()
+{
+	
+}
+
+void Game::init()
 {
 	fastForwarded = false;
 	setFPS( 60 );
 	gameState = GameState::In_Game;
-
-	windowController = new WindowController();
-	renderTarget = SDL_CreateRenderer( windowController->getWindow(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
-	camera = new Camera( getWindowWidth(), getWindowHeight(), getWindowWidth(), getWindowHeight() );
-	Assets::getInstance()->setRenderTarget( renderTarget );
+	windowController = WindowController::getInstance();
+	renderTarget = windowController->getRenderTarget();
+	camera = new Camera( windowController->width, windowController->height, windowController->width, windowController->height );
+	assetLoader = new AssetLoader();
 	input = Input::getInstance();
-	mainMenu = new MainMenu( this );
-	levelFactory = new LevelFactory( this, camera );
+	mainMenu = new MainMenu();
+	levelFactory = new LevelFactory();
 	currentLevel = levelFactory->getStartLevel();
 
-	setLoopHandler( mainMenu );
-
+	setLoopHandler( currentLevel );
 	gameLoop();
+}
+
+/* Singleton */
+Game* Game::getInstance()
+{
+	if( !instance )
+	{
+		instance = new Game();
+		instance->init();
+	}
+	return instance;
 }
 
 Game::~Game()
 {
-	delete mainMenu;							mainMenu = nullptr;
-	Input_Quit();								input = nullptr;
-	SDL_DestroyRenderer( renderTarget );		renderTarget = nullptr;
-	delete windowController;					windowController = nullptr;
+	delete mainMenu;							mainMenu			= nullptr;
+	Input_Quit();								input				= nullptr;
+	SDL_DestroyRenderer( renderTarget );		renderTarget		= nullptr;
 }
 
 void Game::gameLoop()
 {
 	prevTime = 0;
-	currentTime = SDL_GetTicks( ) - 17; /* <-- forged first deltatime, comes in at about 0.017s */
+	currentTime = SDL_GetTicks();
 	deltaTime = 0.0f;
 	while( gameState != GameState::Quitting )
 	{
@@ -48,11 +64,37 @@ void Game::gameLoop()
 		input->update();
 
 		SDL_RenderClear( renderTarget );
-	    loopHandler->tick( deltaTime );
+		if( fastForwarded )
+			loopHandler->tick( getFastForwardDeltaTime() );
+		else 
+			loopHandler->tick( getDeltaTime() );
+
+		/* DEBUG DRAW A LINE AT A LOCATION
+		SDL_SetRenderDrawColor( renderTarget, 255, 0, 0, 255 );
+		SDL_RenderDrawLine( renderTarget, 0, 193.5, WindowController::getInstance()->width, 193.5 );
+		SDL_RenderDrawLine( renderTarget, 0, 212, WindowController::getInstance()->width, 212 );
+		*/
+
+		SDL_SetRenderDrawColor( renderTarget, 0, 0, 0, 255 );
 		SDL_RenderPresent( renderTarget );
 
 		capFramesPerSecond();
 	}
+}
+
+float Game::getDeltaTime()
+{
+	return deltaTime;
+}
+
+float Game::getFastForwardDeltaTime()
+{
+	return deltaTime * 2;
+}
+
+bool Game::getFastForwarded()
+{
+	return fastForwarded;
 }
 
 void Game::setGameState( GameState gameState )
@@ -60,8 +102,11 @@ void Game::setGameState( GameState gameState )
 	this->gameState = gameState;
 	switch( gameState )
 	{
-		case( GameState::In_Game ) :
+		case ( GameState::In_Game ) :
 			setLoopHandler( currentLevel );
+			break;
+		case ( GameState::Preloading ) :
+			setLoopHandler( assetLoader );
 			break;
 	}
 }
@@ -78,24 +123,12 @@ void Game::updateDeltaTime()
 	prevTime = currentTime;
 	currentTime = SDL_GetTicks();
 	deltaTime = (currentTime - prevTime) / 1000.0f;
-	if( fastForwarded )
-		deltaTime *= 2;
 }
 
 void Game::capFramesPerSecond()
 {
 	sleepTime = targetSleepTime - ((SDL_GetTicks() - currentTime) / 1000.0f);
 	SDL_Delay( Uint32(sleepTime) );
-}
-
-int Game::getWindowWidth()
-{
-	return windowController->width;
-}
-
-int Game::getWindowHeight()
-{
-	return windowController->height;
 }
 
 void Game::setFPS( float fps )
@@ -113,17 +146,12 @@ void Game::togglePause()
 	loopHandler->togglePause();
 }
 
-SDL_Renderer* Game::getRenderer()
-{
-	return renderTarget;
-}
-
 Camera* Game::getCamera()
 {
 	return camera;
 }
 
-WindowController* Game::getWindowController()
+extern __declspec( dllexport ) void Game_Quit()
 {
-	return windowController;
+	delete instance; instance = nullptr;
 }

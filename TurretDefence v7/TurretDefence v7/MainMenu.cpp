@@ -1,24 +1,25 @@
 #include "MainMenu.h"
 #include "Assets.h"
+#include "Game.h"
 
-MainMenu::MainMenu( Game* game )
-	: Menu( game )
+MainMenu::MainMenu( )
+	: Menu( )
 {
-	mainTitle = new Sprite( renderTarget, titleFont, "TurretDefence!", menuFontColor );
-	mainTitle->positionRect.x = (game->getWindowWidth() - mainTitle->positionRect.w ) / 2;
+	mainTitle = new Sprite( FontAsset_TitleFont, "TurretDefence!", menuFontColor );
+	mainTitle->positionRect.x = (windowWidth - mainTitle->positionRect.w ) / 2;
 	mainTitle->positionRect.y = 50;
 
 	addMenuItem( "Play" );
 	addMenuItem( "Options" );
 	addMenuItem( "Exit" );
 
-	optionsMenu = new OptionsMenu( game, this );
+	optionsMenu = new OptionsMenu( this );
 }
 
 
 MainMenu::~MainMenu()
 {
-
+	std::cout << "HALLO" << std::endl;
 }
 
 void MainMenu::firstTick()
@@ -36,11 +37,6 @@ void MainMenu::draw()
 	version->draw();
 	mainTitle->draw();
 	drawMenuItems();
-}
-
-void MainMenu::onQuit()
-{
-	game->setGameState( GameState::Quitting );
 }
 
 void MainMenu::onMouseMotion( int mouseX, int mouseY )

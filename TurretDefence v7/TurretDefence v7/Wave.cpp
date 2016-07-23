@@ -23,17 +23,13 @@ void Wave::update( float deltaTime )
 	spawn( deltaTime );
 
 	for( size_t c = 0; c < enemies->size(); c++ )
-	{
 		enemies->at( c )->update( deltaTime );
-	}	
 }
 
 void Wave::draw( Camera* camera )
 {
 	for( size_t c = 0; c < enemies->size(); c++ )
-	{
 		enemies->at( c )->draw( camera );
-	}
 }
 
 void Wave::removeFinishedEnemies()
@@ -47,9 +43,7 @@ void Wave::removeFinishedEnemies()
 	enemyRemoveStack->clear();
 
 	if( enemies->size() == 0 && unspawnedEnemies->size() == 0 )
-	{
 		finished = true;
-	}
 }
 
 void Wave::spawn( float deltaTime )
@@ -74,4 +68,9 @@ void Wave::setEnemies( std::vector<Enemy*>* enemies )
 	for( size_t c = 0; c < enemies->size(); c++ )
 		unspawnedEnemies->push_back( enemies->at( c ) );
 	passedTime = 0.00f;
+}
+
+std::vector<Enemy*>* Wave::getEnemies()
+{
+	return enemies;
 }

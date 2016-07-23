@@ -12,8 +12,11 @@ private:
 	TTF_Font* font;
 	SDL_Color color;
 	SDL_Color selectedColor;
+
+	void commonInit( std::string text, SDL_Color color, SDL_Color selectedColor );
 public:
-	MenuItem( SDL_Renderer* renderTarget, TTF_Font* font, std::string text, SDL_Color color, SDL_Color selectedColor );
+	MenuItem( FontAsset font, std::string text, SDL_Color color, SDL_Color selectedColor );
+	MenuItem( TTF_Font* font, std::string text, SDL_Color color, SDL_Color selectedColor );
 	~MenuItem();
 
 	bool checkHover(int mouseX, int mouseY);

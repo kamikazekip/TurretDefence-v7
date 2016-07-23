@@ -7,7 +7,7 @@ protected:
 	Camera* camera;
 	bool paused;
 public:
-	LoopHandler(Camera* camera);
+	LoopHandler();
 	~LoopHandler();
 	virtual void onQuit();
 	virtual void onMouseMotion( int mouseX, int mouseY );

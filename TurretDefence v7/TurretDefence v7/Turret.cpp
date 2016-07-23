@@ -1,15 +1,19 @@
 #include "Turret.h"
 #include "TurretBehaviourFactory.h"
+#include "WindowController.h"
+#include "ProjectileFactory.h"
+#include "global.h"
+#include "BaseLevelState.h"
 
-
-Turret::Turret( SDL_Renderer* renderTarget, Asset calm, Asset angry, double x, double y, double range, float attackSpeed, double width, double height )
+Turret::Turret(  ImageAsset calm, ImageAsset angry, ImageAsset barrel_calm, ImageAsset barrel_angry, double x, double y, double range, float attackSpeed, float scale )
 {
 	/* View */
-	this->renderTarget = renderTarget;
-	image_calm = Assets::getInstance()->getAsset( calm );
-	image_angry = Assets::getInstance()->getAsset( angry );
-	image_range_correct = Assets::getInstance()->getAsset( Asset_Range_Correct );
-	image_range_incorrect = Assets::getInstance()->getAsset( Asset_Range_Incorrect );
+	this->scale				= scale;
+	image_calm				= Assets::getInstance()->getImageAsset( calm );
+	image_angry				= Assets::getInstance()->getImageAsset( angry );
+	image_range_correct		= Assets::getInstance()->getImageAsset( ImageAsset_Range_Correct );
+	image_range_incorrect	= Assets::getInstance()->getImageAsset( ImageAsset_Range_Incorrect );
+	image_muzzle_flash		= Assets::getInstance()->getImageAsset( ImageAsset_MuzzleFlash_Default );
 	
 	imageMap.insert( std::make_pair( TurretImage_Calm, image_calm ) );
 	imageMap.insert( std::make_pair( TurretImage_Angry, image_angry ) );
@@ -17,23 +21,31 @@ Turret::Turret( SDL_Renderer* renderTarget, Asset calm, Asset angry, double x, d
 	/* Animation */
 	vector<pair<float, double>> rangeAnimationSteps;
 	rangeAnimationSteps.push_back( make_pair( 0.00f, 0.0 ) );
-	rangeAnimationSteps.push_back( make_pair( 0.20f, range + 40 ) );	/* 0.08f default */
-	rangeAnimationSteps.push_back( make_pair( 0.40f, range ) );			/* 0.20f default */
-	rangeAnimation = new Animation( rangeAnimationSteps );
+	rangeAnimationSteps.push_back( make_pair( 0.15f, range + 60 ) );	/* 0.08f default */
+	rangeAnimationSteps.push_back( make_pair( 0.25f, range ) );			/* 0.20f default */
+	rangeAnimation = new Animation( rangeAnimationSteps, AnimationSpeed_Fixed_Speed );
 
 	/* Model */
 	this->attackSpeed = attackSpeed;
 	this->range = range;
+	int imageWidth = 0;
+	int imageHeight = 0;
+	SDL_QueryTexture( image_calm, NULL, NULL, &imageWidth, &imageHeight );
 	this->x = x;
 	this->y = y;
-	w = width;
-	h = height;
+	this->w = imageWidth * scale;
+	this->h = imageHeight * scale;
 	projectileLoaded = true;
 	pastTime = 0.00f;
 	spread = 0.00f;
 	rotation = 180.0f;
-	rotationSpeed = 100.0f;
+	rotationSpeed = 360.0f;
+	target = nullptr;
 	selected = false;
+	ammo = nullptr;
+	setAmmo();
+	barrel = new TurretBarrel( barrel_calm, barrel_angry, rotation, getOriginX(), getOriginY(), scale );
+	this->distanceToMuzzle = barrel->getDistanceToMuzzle();
 
 	/* Behaviour */
 	currentBehaviour = nullptr;
@@ -46,9 +58,7 @@ Turret::~Turret()
 
 }
 
-
 /* --------------------------- Model --------------------------- */
-
 
 void Turret::changeState( TurretConditions newCondition )
 {
@@ -58,6 +68,15 @@ void Turret::changeState( TurretConditions newCondition )
 	currentBehaviour->setup();
 }
 
+void Turret::targetEnemy( )
+{
+	std::vector<Enemy*> enemiesInRange = collisionManager->enemiesInRange( getOriginX(), getOriginY(), range );
+	if( enemiesInRange.size() > 0 )
+		target = enemiesInRange[0];
+	else
+		target = nullptr;
+}
+
 void Turret::update( float deltaTime )
 {
 	pastTime += deltaTime;
@@ -65,8 +84,18 @@ void Turret::update( float deltaTime )
 	if( pastTime >= 1.00f / attackSpeed )
 		projectileLoaded = true;
 
+	targetEnemy();
+
 	currentBehaviour->checkState();
 	currentBehaviour->update( deltaTime );
+	barrel->updateRotation( rotation );
+}
+
+void Turret::setAmmo()
+{
+	if( ammo != nullptr )
+		delete ammo;
+	ammo = ProjectileFactory::getInstance()->getProjectilePrototype( "default" );
 }
 
 void Turret::pullTrigger()
@@ -81,12 +110,13 @@ void Turret::pullTrigger()
 
 void Turret::fire()
 {
-	std::cout << "Pew pew!" << std::endl;
-}
-
-bool Turret::isTouching( int xPosition, int yPosition )
-{
-	return ( xPosition >= x && xPosition <= x + w && yPosition >= y && yPosition <= y + h );
+	float radians = ( rotation - 90 ) * DEGTORAD;
+	Vector direction = { cos( radians ), sin( radians ) };
+	direction.normalize();
+	double projectileX = getOriginX() + ( direction.x * distanceToMuzzle );
+	double projectileY = getOriginY() + ( direction.y * distanceToMuzzle );
+	Projectile* newProjectile = ammo->clone( projectileX, projectileY, direction, rotation, image_muzzle_flash );
+	level->addProjectile( newProjectile );
 }
 
 void Turret::onClick()
@@ -107,12 +137,22 @@ void Turret::onMissClick()
 	}
 }
 
-/* --------------------------- View --------------------------- */
+void Turret::setLevel( BaseLevelState* level )
+{
+	this->level = level;
+}
 
+void Turret::setCollisionManager( CollisionManager* collisionManager )
+{
+	this->collisionManager = collisionManager;
+}
+
+/* --------------------------- View --------------------------- */
 
 void Turret::setImage( TurretImages turretImage )
 {
-	image_current = imageMap.at( turretImage );
+	image_current				= imageMap.at( turretImage );
+	barrel->setImage( turretImage );
 }
 
 void Turret::animate( float deltaTime )
@@ -122,7 +162,7 @@ void Turret::animate( float deltaTime )
 
 void Turret::draw( Camera* camera )
 {
-	SDL_Rect drawingRect = { x - camera->x, y - camera->y, w, h };
+	SDL_Rect drawingRect = getDrawingRect( camera );
 
 	if( rangeAnimation->getState() != AnimationState_Idle_Waiting && rangeAnimation->getValue() > 0 )
 	{
@@ -131,4 +171,6 @@ void Turret::draw( Camera* camera )
 		SDL_RenderCopy( renderTarget, image_range_correct, NULL, &rangeDrawingRect );
 	}
 	SDL_RenderCopyEx( renderTarget, image_current, NULL, &drawingRect, rotation, &rotationCenter, SDL_FLIP_NONE );
+
+	barrel->draw( camera );
 }

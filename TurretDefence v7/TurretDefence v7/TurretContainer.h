@@ -2,16 +2,20 @@
 #include <vector>
 #include "Turret.h"
 #include "TurretFactory.h"
+#include "CollisionManager.h"
+#include "BaseLevelState.h"
 
 class TurretContainer
 {
 private:
 	SDL_Renderer* renderTarget;
+	BaseLevelState* level;
 	Camera* camera;
+	CollisionManager* collisionManager;
 	std::vector<Turret*> turrets;
 	TurretFactory* turretFactory;
 public:
-	TurretContainer( SDL_Renderer* renderTarget, Camera* camera );
+	TurretContainer( BaseLevelState* level, Camera* camera, CollisionManager* collisionManager );
 	~TurretContainer();
 
 	void update( float deltaTime );

@@ -21,18 +21,22 @@ private:
 	MenuItem* resolutionValue;
 	Sprite* fullscreenLabel;
 	MenuItem* fullscreenValue;
+	SDL_Rect cancelButtonRect;
+	SDL_Rect applyButtonRect;
+	SDL_Color currentCancelColor;
+	SDL_Color currentApplyColor;
 
 	std::vector<Resolution> possibleResolutions;
 	int currentResolution;
 	bool fullscreen;
 	enum Choice { Back };
 public:
-	OptionsMenu( Game* game, LoopHandler* previousHandler );
+	OptionsMenu( LoopHandler* previousHandler );
 	~OptionsMenu();
 	void firstTick();
 	void tick( float deltaTime );
 	void draw();
-	void onQuit();
+	void drawButtons();
 	void onMouseMotion( int mouseX, int mouseY );
 	void onMouseButtonDown( int mouseX, int mouseY );
 	void handleChoice( Choice choice );

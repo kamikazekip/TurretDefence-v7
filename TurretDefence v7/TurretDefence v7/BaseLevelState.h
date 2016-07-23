@@ -6,10 +6,11 @@
 #include "WaveFactory.h"
 #include "LevelBehaviour.h"
 #include "Turret.h"
-#include "TurretContainer.h"
+#include "CollisionManager.h"
+#include "Projectile.h"
 
 class LevelBehaviourFactory;
-class TurretFactory;
+class TurretContainer;
 class Game;
 class HUD;
 
@@ -24,33 +25,34 @@ class BaseLevelState : public LoopHandler
 {
 protected:
 	/* Variables */
+	CollisionManager* collisionManager;
 	LevelBehaviour* currentBehaviour;
 	LevelBehaviourFactory* behaviourFactory;
 	Game* game;
 	Sprite* background;
-	Sprite* pausedScreen;
 	HUD* hud;
 	Wave* currentWave;
 	WaveFactory* waveFactory;
-	TurretFactory* turretFactory;
 	int waveCounter;
 
 	std::vector<SDL_Point> path;
+	std::vector<Enemy*>* enemies;
 	TurretContainer* turrets;
+	std::vector<Projectile*>* projectiles;
 
 	/* Functions */
 	virtual void update( float deltaTime );
+	virtual void collide();
 	virtual void animate( float deltaTime );
 	virtual void draw();
 	virtual void changeLevel();
 
 	/* Events */
-	virtual void onQuit();
 	virtual void onMouseButtonDown( int mouseX, int mouseY );
 	virtual void onMouseMotion( int mouseX, int mouseY );
 	virtual void onEscapeKeyDown();
 public:
-	BaseLevelState( Game* game, Camera* camera );
+	BaseLevelState( );
 	~BaseLevelState();
 
 	virtual void tick( float deltaTime );
@@ -58,5 +60,6 @@ public:
 	virtual void changeState( LevelConditions newCondition );
 	virtual Wave* getWave();
 	virtual void nextWave();
+	virtual void addProjectile( Projectile* projectile );
 };
 

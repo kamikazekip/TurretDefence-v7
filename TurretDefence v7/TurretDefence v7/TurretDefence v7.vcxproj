@@ -79,16 +79,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="AssetLoader.h" />
     <ClInclude Include="Assets.h" />
     <ClInclude Include="BaseLevelState.h" />
-    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyBehaviour.h" />
     <ClInclude Include="EnemyBehaviourFactory.h" />
     <ClInclude Include="EnemyFactory.h" />
     <ClInclude Include="EnemyMovingBehaviour.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="HUDButton.h" />
@@ -106,6 +108,9 @@
     <ClInclude Include="OptionsMenu.h" />
     <ClInclude Include="PauseButton.h" />
     <ClInclude Include="PlayButton.h" />
+    <ClInclude Include="Projectile.h" />
+    <ClInclude Include="ProjectileFactory.h" />
+    <ClInclude Include="QuadTree.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="rapidxml.hpp" />
     <ClInclude Include="rapidxml_utils.hpp" />
@@ -114,6 +119,7 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Turret.h" />
     <ClInclude Include="TurretAngryBehaviour.h" />
+    <ClInclude Include="TurretBarrel.h" />
     <ClInclude Include="TurretBehaviour.h" />
     <ClInclude Include="TurretBehaviourFactory.h" />
     <ClInclude Include="TurretCalmBehaviour.h" />
@@ -128,16 +134,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="AssetLoader.cpp" />
     <ClCompile Include="Assets.cpp" />
     <ClCompile Include="BaseLevelState.cpp" />
-    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyBehaviour.cpp" />
     <ClCompile Include="EnemyBehaviourFactory.cpp" />
     <ClCompile Include="EnemyFactory.cpp" />
     <ClCompile Include="EnemyMovingBehaviour.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="global.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="HUDButton.cpp" />
@@ -155,12 +163,16 @@
     <ClCompile Include="OptionsMenu.cpp" />
     <ClCompile Include="PauseButton.cpp" />
     <ClCompile Include="PlayButton.cpp" />
+    <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="ProjectileFactory.cpp" />
+    <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="SniperTurret.cpp" />
     <ClCompile Include="SoldierTurret.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Turret.cpp" />
     <ClCompile Include="TurretAngryBehaviour.cpp" />
+    <ClCompile Include="TurretBarrel.cpp" />
     <ClCompile Include="TurretBehaviour.cpp" />
     <ClCompile Include="TurretBehaviourFactory.cpp" />
     <ClCompile Include="TurretCalmBehaviour.cpp" />
@@ -172,6 +184,12 @@
     <ClCompile Include="WaveFactory.cpp" />
     <ClCompile Include="WindowController.cpp" />
     <ClCompile Include="Wood.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Assets\Enemies\enemies.xml" />
+    <Xml Include="Assets\Enemies\waves.xml" />
+    <Xml Include="Assets\Projectiles\projectiles.xml" />
+    <Xml Include="Assets\Turrets\turrets.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,17 +1,27 @@
 #include "MenuItem.h"
 
 
-MenuItem::MenuItem( SDL_Renderer* renderTarget, TTF_Font* font, std::string text, SDL_Color color, SDL_Color selectedColor )
+MenuItem::MenuItem( FontAsset font, std::string text, SDL_Color color, SDL_Color selectedColor )
 {
-	this->renderTarget = renderTarget;
-	this->font = font;
-	this->color = color;
-	this->selectedColor = selectedColor;
-	normalSprite = new Sprite( renderTarget, font, text,  color );
-	selectedSprite = new Sprite( renderTarget, font, text, selectedColor );
-	currentSprite = normalSprite;
+	this->font = Assets::getInstance()->getFont(font);
+	commonInit( text, color, selectedColor );
 }
 
+MenuItem::MenuItem( TTF_Font* font, std::string text, SDL_Color color, SDL_Color selectedColor )
+{
+	this->font = font;
+	commonInit( text, color, selectedColor );
+}
+
+void MenuItem::commonInit( std::string text, SDL_Color color, SDL_Color selectedColor )
+{
+	this->renderTarget = renderTarget;
+	this->color = color;
+	this->selectedColor = selectedColor;
+	normalSprite = new Sprite( font, text, color );
+	selectedSprite = new Sprite( font, text, selectedColor );
+	currentSprite = normalSprite;
+}
 
 MenuItem::~MenuItem()
 {
@@ -75,7 +85,7 @@ void MenuItem::setText( std::string text )
 	delete normalSprite;
 	delete selectedSprite;
 
-	normalSprite = new Sprite( renderTarget, font, text, color );
-	selectedSprite = new Sprite( renderTarget, font, text, selectedColor );
+	normalSprite = new Sprite( font, text, color );
+	selectedSprite = new Sprite( font, text, selectedColor );
 	currentSprite = normalSprite;
 }

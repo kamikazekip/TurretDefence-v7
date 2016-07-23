@@ -15,7 +15,7 @@ protected:
 	SDL_Texture* normalTexture;
 	SDL_Texture* hoverTexture;
 public:
-	HUDButton(Game* game, BaseLevelState* level, Asset normal, Asset hover);
+	HUDButton( Game* game, BaseLevelState* level, ImageAsset normal, ImageAsset hover );
 	~HUDButton();
 	bool checkHover( int mouseX, int mouseY );
 	bool isTouching( int mouseX, int mouseY );

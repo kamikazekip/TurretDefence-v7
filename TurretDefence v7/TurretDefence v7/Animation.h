@@ -4,6 +4,7 @@
 using namespace std;
 
 enum AnimationState { AnimationState_Idle_Waiting, AnimationState_Normal, AnimationState_Reversed };
+enum AnimationSpeed { AnimationSpeed_Fixed_Speed, AnimationSpeed_DeltaTime_Speed };
 
 class Animation
 {
@@ -17,11 +18,12 @@ private:
 	double currentVPS;
 	bool done;
 	AnimationState currentState;
+	AnimationSpeed animationSpeed;
 	void calculateVPS();
 	void calculateNextStep();
 	bool reversed;
 public:
-	Animation( vector<pair<float, double>> steps );
+	Animation( vector<pair<float, double>> steps, AnimationSpeed animationSpeed );
 	~Animation();
 	void animate( float deltaTime );
 	void reset();

@@ -3,10 +3,8 @@
 #include "SoldierTurret.h"
 #include "SniperTurret.h"
 
-TurretFactory::TurretFactory( SDL_Renderer* renderTarget )
+TurretFactory::TurretFactory()
 {
-	this->renderTarget = renderTarget;
-
 	link( TurretType_Soldier, &TurretFactory::makeSoldierTurret );
 	link( TurretType_Sniper, &TurretFactory::makeSniperTurret );
 
@@ -22,9 +20,8 @@ TurretFactory::TurretFactory( SDL_Renderer* renderTarget )
 		std::string type	= turret->first_node( "type" )->value();
 		double range		= std::stod( turret->first_node( "range" )->value() );
 		float attackSpeed	= std::stof( turret->first_node( "attackSpeed" )->value() );
-		int width			= std::stoi( turret->first_node( "width" )->value() );
-		int height			= std::stoi( turret->first_node( "height" )->value() );
-		TurretData turretData = { type, range, attackSpeed, width, height };
+		float scale			= std::stof( turret->first_node( "scale" )->value() );
+		TurretData turretData = { type, range, attackSpeed, scale };
 		turretDataMap.insert( make_pair( type, turretData ));
 	}
 }
@@ -48,11 +45,11 @@ void TurretFactory::link(TurretType turretType, turret_fetch_function fetchingFu
 Turret* TurretFactory::makeSoldierTurret(double x, double y)
 {
 	TurretData soldierData = turretDataMap.at( "soldier" );
-	return new SoldierTurret( renderTarget, x, y, soldierData.range, soldierData.attackSpeed, soldierData.width, soldierData.height );
+	return new SoldierTurret( x, y, soldierData.range, soldierData.attackSpeed, soldierData.scale );
 }
 
 Turret* TurretFactory::makeSniperTurret( double x, double y )
 {
 	TurretData sniperData = turretDataMap.at( "sniper" );
-	return new SniperTurret( renderTarget, x, y, sniperData.range, sniperData.attackSpeed, sniperData.width, sniperData.height );
+	return new SniperTurret( x, y, sniperData.range, sniperData.attackSpeed, sniperData.scale );
 }

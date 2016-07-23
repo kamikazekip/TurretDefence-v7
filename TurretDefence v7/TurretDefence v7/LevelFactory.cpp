@@ -3,13 +3,13 @@
 #include "Wood.h"
 #include "Camera.h"
 #include "global.h"
+#include "Game.h"
 
-LevelFactory::LevelFactory(Game* game, Camera* camera)
+LevelFactory::LevelFactory()
 {
-	this->game = game;
-	this->camera = camera;
+	this->camera = Game::getInstance()->getCamera();
 
-	insertMapEntry( Level_Wood, new Wood( game, camera ), "wood" );
+	insertMapEntry( Level_Wood, new Wood(), "wood" );
 }
 
 LevelFactory::~LevelFactory()

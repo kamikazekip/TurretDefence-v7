@@ -1,9 +1,9 @@
 #include "LoopHandler.h"
+#include "Game.h"
 
-
-LoopHandler::LoopHandler(Camera* camera)
+LoopHandler::LoopHandler( )
 {
-	this->camera = camera;
+	this->camera = Game::getInstance()->getCamera();
 	paused = false;
 }
 
@@ -15,7 +15,7 @@ LoopHandler::~LoopHandler()
 
 void LoopHandler::onQuit()
 {
-
+	Game::getInstance()->setGameState( GameState::Quitting );
 }
 
 void LoopHandler::onMouseMotion( int mouseX, int mouseY )

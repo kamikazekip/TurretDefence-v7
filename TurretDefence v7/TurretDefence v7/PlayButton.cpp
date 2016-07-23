@@ -2,14 +2,14 @@
 #include "Game.h"
 
 PlayButton::PlayButton(Game* game, BaseLevelState* level)
-	: HUDButton( game, level, Asset_HUD_PlayButton, Asset_HUD_PlayButton_Hover )
+	: HUDButton( game, level, ImageAsset_HUD_PlayButton, ImageAsset_HUD_PlayButton_Hover )
 {
-	inBetweenWaves		= Assets::getInstance()->getAsset( Asset_HUD_PlayButton );
-	inBetweenWavesHover = Assets::getInstance()->getAsset( Asset_HUD_PlayButton_Hover );
-	inWave				= Assets::getInstance()->getAsset( Asset_HUD_PlayButton_InWave );
-	inWaveHover			= Assets::getInstance()->getAsset( Asset_HUD_PlayButton_InWaveHover );
-	fastForward			= Assets::getInstance()->getAsset( Asset_HUD_PlayButton_FastForward );
-	fastForwardHover	= Assets::getInstance()->getAsset( Asset_HUD_PlayButton_FastForwardHover );
+	inBetweenWaves			= Assets::getInstance()->getImageAsset( ImageAsset_HUD_PlayButton );
+	inBetweenWavesHover		= Assets::getInstance()->getImageAsset( ImageAsset_HUD_PlayButton_Hover );
+	inWave					= Assets::getInstance()->getImageAsset( ImageAsset_HUD_PlayButton_InWave );
+	inWaveHover				= Assets::getInstance()->getImageAsset( ImageAsset_HUD_PlayButton_InWaveHover );
+	fastForward				= Assets::getInstance()->getImageAsset( ImageAsset_HUD_PlayButton_FastForward );
+	fastForwardHover		= Assets::getInstance()->getImageAsset( ImageAsset_HUD_PlayButton_FastForwardHover );
 
 	textureMap.insert( std::pair<PlayButtonState, SDL_Texture*>( PlayButton_InBetweenWaves, inBetweenWaves ) );
 	textureMap.insert( std::pair<PlayButtonState, SDL_Texture*>( PlayButton_InWave, inWave ) );

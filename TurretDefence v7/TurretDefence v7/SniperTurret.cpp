@@ -1,9 +1,10 @@
 #include "SniperTurret.h"
 
-SniperTurret::SniperTurret( SDL_Renderer* renderTarget, double x, double y, double range, float attackSpeed, int width, int height )
-	: Turret( renderTarget, Asset_Turret_Sniper_Calm, Asset_Turret_Sniper_Angry, x, y, range, attackSpeed, width, height )
+SniperTurret::SniperTurret( double x, double y, double range, float attackSpeed, float scale )
+	: Turret( ImageAsset_Turret_Sniper_Base_Calm, ImageAsset_Turret_Sniper_Base_Angry, ImageAsset_Turret_Sniper_Barrel_Calm, ImageAsset_Turret_Sniper_Barrel_Angry, x, y, range, attackSpeed, scale )
 {
-	rotationCenter = SDL_Point{ w / 2, h * 0.5868263473053892 };
+	//rotationCenter = SDL_Point{ w / 2, h * 0.5868263473053892 };
+	rotationCenter = SDL_Point{ w / 2, h / 2 };
 	radius = w / 2;
 }
 

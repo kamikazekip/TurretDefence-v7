@@ -1,12 +1,13 @@
 #include "Animation.h"
+#include "Game.h"
 
-
-Animation::Animation(vector<pair<float, double>> steps )
+Animation::Animation(vector<pair<float, double>> steps, AnimationSpeed animationSpeed )
 {
 	this->steps = steps;
 	reversed = false;
 	reset();
 	currentState = AnimationState_Idle_Waiting;
+	this->animationSpeed = animationSpeed;
 }
 
 
@@ -32,12 +33,12 @@ void Animation::calculateVPS()
 void Animation::animate( float deltaTime )
 {
 	if( currentState != AnimationState_Idle_Waiting )
-	{
+	{		
+		if( animationSpeed == AnimationSpeed_Fixed_Speed )
+			deltaTime = Game::getInstance()->getDeltaTime();
 		pastTime += deltaTime;
 		if( pastTime >= triggerTime )
-		{
 			calculateNextStep();
-		}
 		if( !done )
 			value += currentVPS * deltaTime;
 	}

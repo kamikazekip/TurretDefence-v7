@@ -12,5 +12,6 @@ public:
 	void normalize();
 	static Vector getVector( SDL_Point one, SDL_Point two );
 	static Vector getDirection( SDL_Point one, SDL_Point two );
+	static Vector getDirection( double x, double y, SDL_Point two );
 };
 

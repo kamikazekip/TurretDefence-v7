@@ -19,7 +19,7 @@ public:
 	virtual void draw( Camera* camera );
 
 	virtual void setEnemies( std::vector<Enemy*>* enemies );
-
+	virtual std::vector<Enemy*>* getEnemies();
 	bool finished;
 };
 

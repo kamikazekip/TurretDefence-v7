@@ -5,57 +5,69 @@
 #include "SDL_image.h"
 #include "SDL_ttf.h"
 
-enum Asset
+enum ImageAsset
 {
-	Asset_OptionsMenu_Overlay,
-	Asset_WoodLevel_Background,
-	Asset_HUD_PlayButton,
-	Asset_HUD_PlayButton_Hover,
-	Asset_HUD_PlayButton_InWave,
-	Asset_HUD_PlayButton_InWaveHover,
-	Asset_HUD_PlayButton_FastForward,
-	Asset_HUD_PlayButton_FastForwardHover,
-	Asset_HUD_PauseButton,
-	Asset_HUD_PauseButton_Hover,
-	Asset_UI_Paused,
-	Asset_Turret_Soldier_Calm,
-	Asset_Turret_Soldier_Angry,
-	Asset_Turret_Sniper_Calm,
-	Asset_Turret_Sniper_Angry,
-	Asset_Range_Correct,
-	Asset_Range_Incorrect
+	ImageAsset_OptionsMenu_Overlay,
+	ImageAsset_WoodLevel_Background,
+	ImageAsset_HUD_PlayButton,
+	ImageAsset_HUD_PlayButton_Hover,
+	ImageAsset_HUD_PlayButton_InWave,
+	ImageAsset_HUD_PlayButton_InWaveHover,
+	ImageAsset_HUD_PlayButton_FastForward,
+	ImageAsset_HUD_PlayButton_FastForwardHover,
+	ImageAsset_HUD_PauseButton,
+	ImageAsset_HUD_PauseButton_Hover,
+	ImageAsset_UI_Paused,
+	ImageAsset_Turret_Soldier_Calm,
+	ImageAsset_Turret_Soldier_Angry,
+	ImageAsset_Turret_Sniper_Base_Calm,
+	ImageAsset_Turret_Sniper_Base_Angry,
+	ImageAsset_Turret_Sniper_Barrel_Calm,
+	ImageAsset_Turret_Sniper_Barrel_Angry,
+	ImageAsset_Range_Correct,
+	ImageAsset_Range_Incorrect,
+	ImageAsset_MuzzleFlash_Default
+};
+
+enum FontAsset
+{
+	FontAsset_Action_Jackson,
+	FontAsset_York,
+	FontAsset_VersionFont,
+	FontAsset_TitleFont,
+	FontAsset_MenuItemFont
 };
 
 class Assets
 {
 private:
-	std::map<Asset, SDL_Texture*> assetMap;
-	std::map<std::string, SDL_Texture*> stringToAssetMap;
+	std::map<ImageAsset, SDL_Texture*> imageAssetMap;
+	std::map<std::string, SDL_Texture*> stringToImageMap;
+	std::map<FontAsset, TTF_Font*> fontAssetMap;
+	std::map<FontAsset, std::string> fontAssetToFilePathMap;
 	SDL_Renderer* renderTarget;
+
+	SDL_Texture*	loadImage( std::string filePath, SDL_Renderer *renderTarget );
+	TTF_Font*		loadFont( std::string filePath, int ptsize );
+	SDL_Texture*	loadText( SDL_Renderer* renderTarget, TTF_Font* font, std::string text, SDL_Color color );
+	void insertImageAssetEntry( ImageAsset key, std::string filePath );
+	void insertFontAssetEntry( FontAsset key, std::string filePath, int ptsize );
 
 	/* Singleton */
 	Assets();
 	Assets( Assets const& );
-	void operator=(Assets const&);
-	SDL_Texture* loadTexture( std::string filePath, SDL_Renderer *renderTarget );
-	SDL_Texture* createTextTexture( SDL_Renderer* renderTarget, TTF_Font* font, std::string text, SDL_Color color );
-
-	void insertAssetMapEntry( Asset, std::string filePath );
-	void insertAssetMapEntry( std::string key, std::string filePath );
 public:
 	/* Singleton */
 	static Assets* getInstance();
 	~Assets();
-
-	void setRenderTarget( SDL_Renderer* renderTarget );
-	SDL_Texture* getAsset( Asset asset );
-	SDL_Texture* getAsset( TTF_Font* font, std::string text, SDL_Color color );
-	SDL_Texture* getAsset( std::string key );
+	SDL_Texture* getImageAsset( ImageAsset asset );
+	SDL_Texture* getImageAsset( std::string key );
+	SDL_Texture* getText( FontAsset font, std::string text, SDL_Color color );
+	SDL_Texture* getText( TTF_Font* font, std::string text, SDL_Color color );
+	TTF_Font*	 getFont( FontAsset font, int ptsize );
+	TTF_Font*	 getFont( FontAsset font );
 	SDL_Surface* getIcon();
 };
 
-/**
-This function cleans up the entire sound system. You should call it upon all exit conditions.
-*/
 extern __declspec(dllexport) void Assets_Quit();
 

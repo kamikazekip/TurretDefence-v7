@@ -2,20 +2,21 @@
 #include "LevelBehaviourFactory.h"
 #include "Game.h"
 #include "HUD.h"
-#include "TurretFactory.h"
+#include "TurretContainer.h"
+#include "WindowController.h"
 
-BaseLevelState::BaseLevelState( Game* game, Camera* camera )
-	: LoopHandler( camera )
+BaseLevelState::BaseLevelState( )
+	: LoopHandler( )
 {
-	this->game = game;
-	pausedScreen		= new Sprite( game->getRenderer(), Asset_UI_Paused );
-	hud					= new HUD( game, this, game->getWindowWidth(), game->getWindowHeight() );
+	this->game = Game::getInstance();
+	hud					= new HUD( game, this );
 	behaviourFactory	= new LevelBehaviourFactory( this );
-	turretFactory		= new TurretFactory( game->getRenderer() );
-	turrets				= new TurretContainer( game->getRenderer(), camera );
 	currentBehaviour	= nullptr;
 
-	turrets->addTurret( TurretType_Sniper, 600, 300 );
+	collisionManager	= new CollisionManager();
+	turrets = new TurretContainer( this, camera, collisionManager );
+	turrets->addTurret( TurretType_Sniper, 360, 420 );
+	projectiles = new std::vector<Projectile*>();
 }
 
 
@@ -31,15 +32,30 @@ void BaseLevelState::update( float deltaTime )
 	/* Level */
 	currentBehaviour->update( deltaTime );
 
+	/* Projectiles */
+	for( Projectile* projectile : *projectiles )
+		projectile->update( deltaTime );
+
 	/* Turrets */
 	turrets->update( deltaTime );
+}
 
+void BaseLevelState::collide()
+{
+	collisionManager->clear();
+	for( Enemy* enemy : *enemies )
+		collisionManager->insert( enemy );
+	for( Projectile* projectile : *projectiles )
+		collisionManager->insert( projectile );
 }
 
 void BaseLevelState::animate( float deltaTime )
 {
 	/* Turrets */
 	turrets->animate( deltaTime );
+
+	for( Projectile* projectile : *projectiles )
+		projectile->animate( deltaTime );
 }
 
 void BaseLevelState::draw()
@@ -53,9 +69,12 @@ void BaseLevelState::draw()
 	/* Turrets */
 	turrets->draw();
 
-	/* Pause screen */
-	if( paused )
-		pausedScreen->drawFullScreen( camera );
+	/* Projectiles */
+	for( Projectile* projectile : *projectiles )
+		projectile->draw( camera );
+
+	/* Collision grid */
+	collisionManager->draw();
 
 	/* HUD */
 	hud->draw();
@@ -71,25 +90,18 @@ void BaseLevelState::tick( float deltaTime )
 	if( !paused )
 	{
 		update( deltaTime );
+		collide();
 		animate( deltaTime );
 	}
 	draw();
 }
 
-void BaseLevelState::onQuit()
-{
-	game->setGameState( GameState::Quitting );
-}
-
 void BaseLevelState::onMouseButtonDown( int mouseX, int mouseY )
 {
-	hud->onMouseButtonDown( mouseX, mouseY );
-	turrets->onMouseButtonDown( mouseX, mouseY );
-	
+	if( !hud->onMouseButtonDown( mouseX, mouseY ) )
+		turrets->onMouseButtonDown( mouseX, mouseY );
 	if( paused && !hud->isTouching( mouseX, mouseY ) )
-	{
 		game->togglePause();
-	}
 }
 
 void BaseLevelState::onMouseMotion( int mouseX, int mouseY )
@@ -106,7 +118,7 @@ void BaseLevelState::setPath( std::vector<SDL_Point> path )
 {
 	this->path = path;
 	waveCounter = 0;
-	waveFactory = new WaveFactory(game->getRenderer(), path);
+	waveFactory = new WaveFactory(path);
 	changeState( LevelCondition_Init );
 }
 
@@ -129,9 +141,13 @@ void BaseLevelState::nextWave()
 	if( waveFactory->canCreateWave( waveCounter ) )
 	{
 		currentWave = waveFactory->createWave( waveCounter );
+		enemies = currentWave->getEnemies();
 	}
 	else
-	{
 		std::cout << "Gewonnen!" << std::endl;
-	}
+}
+
+void BaseLevelState::addProjectile( Projectile* projectile )
+{
+	projectiles->push_back( projectile );
 }

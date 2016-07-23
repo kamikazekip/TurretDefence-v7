@@ -3,24 +3,20 @@
 #include "LoopHandler.h"
 #include "SDL.h"
 #include "SDL_ttf.h"
-#include "Game.h"
 #include "Sprite.h"
 #include "global.h"
 #include "MenuItem.h"
 
+class Game;
+
 class Menu : public LoopHandler
 {
 protected:
+	int windowWidth, windowHeight;
 	std::vector<MenuItem*>* menuItems;
-	SDL_Color menuFontColor;
-	SDL_Color menuFontColorSelected;
-	SDL_Renderer* renderTarget;
 	Game* game;
-	std::string action_jackson;
-	std::string york;
-	TTF_Font* versionFont;
-	TTF_Font* menuItemFont;
-	TTF_Font* titleFont;
+	SDL_Renderer* renderTarget;
+	Assets* assets;
 	Sprite* version;
 
 	/* Functions */
@@ -29,7 +25,7 @@ protected:
 	virtual void drawMenuItems();
 	virtual void checkHover(int mouseX, int mouseY);
 public:
-	Menu(Game* game);
+	Menu();
 	~Menu();
 	virtual void draw();
 	void tick();

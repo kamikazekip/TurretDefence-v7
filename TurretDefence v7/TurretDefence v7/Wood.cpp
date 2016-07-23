@@ -1,10 +1,11 @@
 #include "Wood.h"
 #include "Game.h"
+#include "WindowController.h"
 
-Wood::Wood( Game* game, Camera* camera )
-	: BaseLevelState( game, camera )
+Wood::Wood()
+	: BaseLevelState( )
 {
-	background = new Sprite( game->getRenderer(), Asset::Asset_WoodLevel_Background );
+	background = new Sprite( ImageAsset_WoodLevel_Background );
 }
 
 

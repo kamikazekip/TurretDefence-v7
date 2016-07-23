@@ -59,3 +59,9 @@ Vector Vector::getDirection( SDL_Point base, SDL_Point target )
 	Vector v = { float( target.x - base.x ), float( target.y - base.y ) };
 	return v.getNormalisation();
 }
+
+Vector Vector::getDirection( double x, double y, SDL_Point target )
+{
+	SDL_Point base = { x, y };
+	return getDirection( base, target );
+}

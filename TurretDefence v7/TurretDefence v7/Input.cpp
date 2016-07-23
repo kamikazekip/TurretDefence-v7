@@ -3,7 +3,6 @@ static Input* instance;
 
 Input::Input()
 {
-	
 	link( SDLK_ESCAPE, &LoopHandler::onEscapeKeyDown );
 }
 

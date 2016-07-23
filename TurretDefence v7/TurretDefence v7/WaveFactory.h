@@ -17,7 +17,7 @@ private:
 	EnemyFactory* enemyFactory;
 	SDL_Renderer* renderTarget;
 public:
-	WaveFactory( SDL_Renderer* renderTarget, std::vector<SDL_Point> path );
+	WaveFactory( std::vector<SDL_Point> path );
 	~WaveFactory();
 	bool canCreateWave( int wave );
 	Wave* createWave( int wave );

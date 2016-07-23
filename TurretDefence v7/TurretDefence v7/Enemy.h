@@ -1,4 +1,5 @@
 #pragma once
+#include "GameObject.h"
 #include "EnemyBehaviour.h"
 #include "EnemyBehaviourFactory.h"
 #include <vector>
@@ -7,10 +8,9 @@
 
 class Wave;
 
-class Enemy
+class Enemy : public GameObject
 {
 protected:
-	SDL_Renderer* renderTarget;
 	int takenDamage;
 	SDL_Texture* image;
 	EnemyConditions currentCondition;
@@ -18,21 +18,20 @@ protected:
 	EnemyBehaviourFactory* behaviourFactory;
 	Wave* wave;
 public:
-	Enemy( SDL_Renderer* renderTarget, Wave* wave, SDL_Texture* image, int maxHealth, int speed, int width, int height, std::vector<SDL_Point> path, float spawnTime );
+	Enemy( Wave* wave, SDL_Texture* image, int maxHealth, int speed, int width, int height, std::vector<SDL_Point> path, float spawnTime );
 	~Enemy();
 
 	virtual void changeState( EnemyConditions condition );
 	virtual void takeDamage( int damage );
 
-	virtual void update( float deltaTime );
-	virtual void animate( float deltaTime );
-	virtual void draw( Camera* camera );
+	void update( float deltaTime );
+	void draw( Camera* camera );
 
 	virtual void nextWaypoint();
+	virtual void setTarget(SDL_Point point);
 
 	virtual Enemy* clone( float spawnTime, Wave* wave );
 
-	double x, y, w, h;
 	Vector direction;
 	std::vector<SDL_Point> path;
 	SDL_Point target;

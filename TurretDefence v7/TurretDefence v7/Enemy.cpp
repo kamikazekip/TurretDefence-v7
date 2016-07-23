@@ -1,8 +1,8 @@
 #include "Enemy.h"
 
-Enemy::Enemy( SDL_Renderer* renderTarget, Wave* wave, SDL_Texture* image, int maxHealth, int speed, int width, int height, std::vector<SDL_Point> path, float spawnTime )
+Enemy::Enemy( Wave* wave, SDL_Texture* image, int maxHealth, int speed, int width, int height, std::vector<SDL_Point> path, float spawnTime )
+	: GameObject(path[x].x - (width / 2), path[0].y - (height / 2), width, height)
 {
-	this->renderTarget = renderTarget;
 	this->path = path;
 	this->maxHealth = maxHealth;
 	this->wave = wave;
@@ -10,19 +10,15 @@ Enemy::Enemy( SDL_Renderer* renderTarget, Wave* wave, SDL_Texture* image, int ma
 	takenDamage = 0;
 	reachedEnd = false;
 	this->speed = speed;
-	w = width;
-	h = height;
-	x = path[0].x;
-	y = path[0].y;
 	this->image = image;
 	this->spawnTime = spawnTime;
 
 	behaviourFactory = new EnemyBehaviourFactory( this );
 	changeState( EnemyCondition_Spawned );
 
-	target = path[1];
+	setTarget(path[1]);
 	currentTarget = 1;
-	direction = Vector::getDirection( path[0], target );
+	direction = Vector::getDirection( SDL_Point{ x, y }, target );
 }
 
 Enemy::~Enemy()
@@ -47,14 +43,9 @@ void Enemy::update( float deltaTime )
 	behaviour->update( deltaTime );
 }
 
-void Enemy::animate( float deltaTime )
-{
-
-}
-
 void Enemy::draw( Camera* camera )
 {
-	SDL_Rect drawingRect = { x - camera->x - w / 2, y - camera->y - h / 2, w, h };
+	SDL_Rect drawingRect = { x - camera->x, y - camera->y, w, h };
 	SDL_RenderCopy( renderTarget, image, NULL, &drawingRect );
 }
 
@@ -62,18 +53,21 @@ void Enemy::nextWaypoint()
 {
 	currentTarget++;
 	if( currentTarget < path.size() )
-	{
-		target = path[currentTarget];
-	}
+		setTarget( path[currentTarget] );
 	else
-	{
 		reachedEnd = true;
-	}
-	direction = Vector::getDirection( SDL_Point{ x, y }, target );
+	direction = Vector::getDirection( x, y, target );
+}
+
+void Enemy::setTarget( SDL_Point point )
+{
+	target = point;
+	target.x = target.x - ( w / 2 );
+	target.y = target.y - ( h / 2 );
 }
 
 Enemy* Enemy::clone( float spawnTime, Wave* wave )
 {
-	Enemy* newEnemy = new Enemy(renderTarget, wave, image, maxHealth, speed, w, h, path, spawnTime );
+	Enemy* newEnemy = new Enemy(wave, image, maxHealth, speed, w, h, path, spawnTime );
 	return newEnemy;
 }

@@ -13,13 +13,12 @@ class LevelFactory
 {
 private:
 	static enum Levels { Level_Wood, Level_Grass };
-	Game* game;
 	Camera* camera;
 	std::map<Levels, BaseLevelState*> levelMap;
 	void insertMapEntry( Levels levelEnum, BaseLevelState* level, std::string );
 	
 public:
-	LevelFactory(Game* game, Camera* camera);
+	LevelFactory();
 	~LevelFactory();
 
 	BaseLevelState* getStartLevel();

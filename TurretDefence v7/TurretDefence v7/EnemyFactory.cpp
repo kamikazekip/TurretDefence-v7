@@ -2,7 +2,7 @@
 #include "global.h"
 #include "Wave.h"
 
-EnemyFactory::EnemyFactory( SDL_Renderer* renderTarget, std::vector<SDL_Point> path )
+EnemyFactory::EnemyFactory( std::vector<SDL_Point> path )
 {
 	this->path = path;
 	enemiesFile = assetBasePath + "Enemies/enemies.xml";
@@ -19,7 +19,8 @@ EnemyFactory::EnemyFactory( SDL_Renderer* renderTarget, std::vector<SDL_Point> p
 		int speed = std::stoi( enemy->first_node( "speed" )->value() );
 		int width = std::stoi( enemy->first_node( "width" )->value() );
 		int height = std::stoi( enemy->first_node( "height" )->value() );
-		insertEntry( type, new Enemy( renderTarget, new Wave(), Assets::getInstance()->getAsset( type ), health, speed, width, height, path, 0.00f ) );
+		std::string image = enemy->first_node( "image" )->value();
+		insertEntry( type, new Enemy( new Wave(), Assets::getInstance()->getImageAsset( image ), health, speed, width, height, path, 0.00f ) );
 	}
 }
 

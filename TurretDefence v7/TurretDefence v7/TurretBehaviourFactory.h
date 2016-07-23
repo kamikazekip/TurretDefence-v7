@@ -12,4 +12,3 @@ public:
 	~TurretBehaviourFactory();
 	TurretBehaviour* createBehaviour( TurretConditions condition );
 };
-

@@ -14,7 +14,7 @@ private:
 	std::map<std::string, Enemy*> enemyMap;
 	void insertEntry( std::string, Enemy* enemy );
 public:
-	EnemyFactory( SDL_Renderer* renderTarget, std::vector<SDL_Point> path );
+	EnemyFactory( std::vector<SDL_Point> path );
 	~EnemyFactory();
 
 	Enemy* createEnemy( std::string type, float spawnTime, Wave* wave );

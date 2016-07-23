@@ -9,9 +9,11 @@ class MainMenu;
 class LoopHandler;
 class LevelFactory;
 class Camera;
+class AssetLoader;
 
 enum GameState
 {
+	Preloading,
 	Running,
 	In_Menu,
 	In_Game,
@@ -21,6 +23,7 @@ enum GameState
 class Game
 {
 private:
+	void init();
 	void gameLoop();
 	void updateDeltaTime();
 	void capFramesPerSecond();
@@ -34,26 +37,37 @@ private:
 	LoopHandler* loopHandler;
 	Camera* camera;
 
+	AssetLoader* assetLoader;
 	LevelFactory* levelFactory;
 	BaseLevelState* currentLevel;
 	int prevTime;
 	int currentTime;
 	float deltaTime;
+	float fastForwardDeltaTime;
 	float targetSleepTime;
 	float sleepTime;
-public:
+
+	/* Singleton */
 	Game();
+	Game( Game const& );
+public:
 	~Game();
+
+	/* Singleton */
+	static Game* getInstance();
+
+	float getDeltaTime();
+	float getFastForwardDeltaTime();
+	bool getFastForwarded();
 	void setGameState( GameState gameState );
 	void setLoopHandler( LoopHandler* loopHandler );
-	
-	int getWindowWidth();
-	int getWindowHeight();
 	void setFPS( float fps );
 	void setFastForward(bool fastForward);
 	void togglePause();
-	SDL_Renderer* getRenderer();
 	Camera* getCamera();
-	WindowController* getWindowController();
 };
 
+/**
+This function cleans up the entire sound system. You should call it upon all exit conditions.
+*/
+extern __declspec( dllexport ) void Game_Quit();

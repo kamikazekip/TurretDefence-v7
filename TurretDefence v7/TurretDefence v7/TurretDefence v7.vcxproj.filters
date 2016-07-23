@@ -42,12 +42,6 @@
     <Filter Include="Header Files\HUD">
       <UniqueIdentifier>{4cb822ef-dd1e-42be-a119-96539269ccce}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Enemies">
-      <UniqueIdentifier>{eabba98a-b3e9-4986-a58b-a29b5d31cda0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Enemies">
-      <UniqueIdentifier>{b7e7ca6d-1bd1-4362-9d51-19e3c20fb3ec}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\RapidXML">
       <UniqueIdentifier>{bf280601-fe85-4b55-9629-4c5398fee3ed}</UniqueIdentifier>
     </Filter>
@@ -58,24 +52,57 @@
     <Filter Include="Header Files\Levels">
       <UniqueIdentifier>{c273ea90-d620-45c1-a418-1566a67accc8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Turrets">
+    <Filter Include="Header Files\GameObjects">
+      <UniqueIdentifier>{71619a16-a18b-45e6-80a3-478c83e6c881}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects">
+      <UniqueIdentifier>{c376f051-2062-4dd7-99a6-ef0cf8fb60d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Enemies">
+      <UniqueIdentifier>{b7e7ca6d-1bd1-4362-9d51-19e3c20fb3ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Turrets">
       <UniqueIdentifier>{f2278ecc-c58a-4e24-abb9-242bb382ee06}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Turrets">
+    <Filter Include="Source Files\GameObjects\Turrets">
       <UniqueIdentifier>{1ff97e73-2332-4b0e-9ded-06ba76bb2f8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Enemies">
+      <UniqueIdentifier>{eabba98a-b3e9-4986-a58b-a29b5d31cda0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Base">
+      <UniqueIdentifier>{fe50315c-b58e-4291-bf09-acabd8686fce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Base">
+      <UniqueIdentifier>{945755d4-1afd-40f7-a4a8-80a95018c909}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Other">
+      <UniqueIdentifier>{8598724f-a214-44d1-a302-dc6fcd2ff1fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Other">
+      <UniqueIdentifier>{6265a27d-b159-4418-810a-271fed4d0d05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CollisionDetection">
+      <UniqueIdentifier>{fa697540-5e95-4b69-bf75-b9525fefeb8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CollisionDetection">
+      <UniqueIdentifier>{ae3fa3c4-f4c4-4a8f-a522-ce071ac1c230}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Projectiles">
+      <UniqueIdentifier>{9d8e26b7-12bb-4005-ad3f-b965782cb11d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Projectiles">
+      <UniqueIdentifier>{04020b94-2269-4493-b74a-841bc95295ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Config Files">
+      <UniqueIdentifier>{25ffca78-bd19-4a8f-950c-ad2cf9206ef0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="main.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Header Files\GameControl</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">
-      <Filter>Header Files\GameControl</Filter>
-    </ClInclude>
-    <ClInclude Include="WindowController.h">
       <Filter>Header Files\GameControl</Filter>
     </ClInclude>
     <ClInclude Include="Menu.h">
@@ -89,9 +116,6 @@
     </ClInclude>
     <ClInclude Include="Version.h">
       <Filter>Header Files\Version</Filter>
-    </ClInclude>
-    <ClInclude Include="global.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LoopHandler.h">
       <Filter>Header Files\GameControl</Filter>
@@ -121,28 +145,25 @@
       <Filter>Header Files\HUD</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>Header Files\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameObjects\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Wave.h">
-      <Filter>Header Files\Enemies</Filter>
+      <Filter>Header Files\GameObjects\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBehaviour.h">
-      <Filter>Header Files\Enemies</Filter>
+      <Filter>Header Files\GameObjects\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="EnemyFactory.h">
-      <Filter>Header Files\Enemies</Filter>
+      <Filter>Header Files\GameObjects\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBehaviourFactory.h">
-      <Filter>Header Files\Enemies</Filter>
+      <Filter>Header Files\GameObjects\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="EnemyMovingBehaviour.h">
-      <Filter>Header Files\Enemies</Filter>
+      <Filter>Header Files\GameObjects\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="WaveFactory.h">
-      <Filter>Header Files\Enemies</Filter>
+      <Filter>Header Files\GameObjects\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="rapidxml.hpp">
       <Filter>Header Files\RapidXML</Filter>
@@ -162,44 +183,35 @@
     <ClInclude Include="LevelInWaveBehaviour.h">
       <Filter>Header Files\Levels</Filter>
     </ClInclude>
-    <ClInclude Include="Vector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PauseButton.h">
       <Filter>Header Files\HUD</Filter>
     </ClInclude>
     <ClInclude Include="Turret.h">
-      <Filter>Header Files\Turrets</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>Header Files\Turrets</Filter>
+      <Filter>Header Files\GameObjects\Turrets</Filter>
     </ClInclude>
     <ClInclude Include="TurretFactory.h">
-      <Filter>Header Files\Turrets</Filter>
+      <Filter>Header Files\GameObjects\Turrets</Filter>
     </ClInclude>
     <ClInclude Include="SoldierTurret.h">
-      <Filter>Header Files\Turrets</Filter>
+      <Filter>Header Files\GameObjects\Turrets</Filter>
     </ClInclude>
     <ClInclude Include="SniperTurret.h">
-      <Filter>Header Files\Turrets</Filter>
+      <Filter>Header Files\GameObjects\Turrets</Filter>
     </ClInclude>
     <ClInclude Include="TurretBehaviourFactory.h">
-      <Filter>Header Files\Turrets</Filter>
+      <Filter>Header Files\GameObjects\Turrets</Filter>
     </ClInclude>
     <ClInclude Include="TurretBehaviour.h">
-      <Filter>Header Files\Turrets</Filter>
+      <Filter>Header Files\GameObjects\Turrets</Filter>
     </ClInclude>
     <ClInclude Include="TurretCalmBehaviour.h">
-      <Filter>Header Files\Turrets</Filter>
+      <Filter>Header Files\GameObjects\Turrets</Filter>
     </ClInclude>
     <ClInclude Include="TurretAngryBehaviour.h">
-      <Filter>Header Files\Turrets</Filter>
+      <Filter>Header Files\GameObjects\Turrets</Filter>
     </ClInclude>
     <ClInclude Include="TurretContainer.h">
-      <Filter>Header Files\Turrets</Filter>
-    </ClInclude>
-    <ClInclude Include="Random.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameObjects\Turrets</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>Header Files\Graphics</Filter>
@@ -207,18 +219,51 @@
     <ClInclude Include="OptionsMenu.h">
       <Filter>Header Files\Menu</Filter>
     </ClInclude>
+    <ClInclude Include="AssetLoader.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\GameObjects\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>Header Files\GameControl</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h">
+      <Filter>Header Files\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>Header Files\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Header Files\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadTree.h">
+      <Filter>Header Files\CollisionDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowController.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>Header Files\CollisionDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Header Files\GameObjects\Projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileFactory.h">
+      <Filter>Header Files\GameObjects\Projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="TurretBarrel.h">
+      <Filter>Header Files\GameObjects\Turrets</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Source Files\GameControl</Filter>
     </ClCompile>
     <ClCompile Include="Input.cpp">
-      <Filter>Source Files\GameControl</Filter>
-    </ClCompile>
-    <ClCompile Include="WindowController.cpp">
       <Filter>Source Files\GameControl</Filter>
     </ClCompile>
     <ClCompile Include="Menu.cpp">
@@ -232,9 +277,6 @@
     </ClCompile>
     <ClCompile Include="Version.cpp">
       <Filter>Source Files\Version</Filter>
-    </ClCompile>
-    <ClCompile Include="global.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LoopHandler.cpp">
       <Filter>Source Files\GameControl</Filter>
@@ -264,28 +306,25 @@
       <Filter>Source Files\HUD</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>Source Files\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameObjects\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Wave.cpp">
-      <Filter>Source Files\Enemies</Filter>
+      <Filter>Source Files\GameObjects\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBehaviour.cpp">
-      <Filter>Source Files\Enemies</Filter>
+      <Filter>Source Files\GameObjects\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="EnemyFactory.cpp">
-      <Filter>Source Files\Enemies</Filter>
+      <Filter>Source Files\GameObjects\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBehaviourFactory.cpp">
-      <Filter>Source Files\Enemies</Filter>
+      <Filter>Source Files\GameObjects\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="EnemyMovingBehaviour.cpp">
-      <Filter>Source Files\Enemies</Filter>
+      <Filter>Source Files\GameObjects\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="WaveFactory.cpp">
-      <Filter>Source Files\Enemies</Filter>
+      <Filter>Source Files\GameObjects\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="LevelBehaviour.cpp">
       <Filter>Source Files\Levels</Filter>
@@ -299,44 +338,35 @@
     <ClCompile Include="LevelInWaveBehaviour.cpp">
       <Filter>Source Files\Levels</Filter>
     </ClCompile>
-    <ClCompile Include="Vector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PauseButton.cpp">
       <Filter>Source Files\HUD</Filter>
     </ClCompile>
     <ClCompile Include="Turret.cpp">
-      <Filter>Source Files\Turrets</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>Source Files\Turrets</Filter>
+      <Filter>Source Files\GameObjects\Turrets</Filter>
     </ClCompile>
     <ClCompile Include="TurretFactory.cpp">
-      <Filter>Source Files\Turrets</Filter>
+      <Filter>Source Files\GameObjects\Turrets</Filter>
     </ClCompile>
     <ClCompile Include="SoldierTurret.cpp">
-      <Filter>Source Files\Turrets</Filter>
+      <Filter>Source Files\GameObjects\Turrets</Filter>
     </ClCompile>
     <ClCompile Include="SniperTurret.cpp">
-      <Filter>Source Files\Turrets</Filter>
+      <Filter>Source Files\GameObjects\Turrets</Filter>
     </ClCompile>
     <ClCompile Include="TurretBehaviourFactory.cpp">
-      <Filter>Source Files\Turrets</Filter>
+      <Filter>Source Files\GameObjects\Turrets</Filter>
     </ClCompile>
     <ClCompile Include="TurretCalmBehaviour.cpp">
-      <Filter>Source Files\Turrets</Filter>
+      <Filter>Source Files\GameObjects\Turrets</Filter>
     </ClCompile>
     <ClCompile Include="TurretBehaviour.cpp">
-      <Filter>Source Files\Turrets</Filter>
+      <Filter>Source Files\GameObjects\Turrets</Filter>
     </ClCompile>
     <ClCompile Include="TurretAngryBehaviour.cpp">
-      <Filter>Source Files\Turrets</Filter>
+      <Filter>Source Files\GameObjects\Turrets</Filter>
     </ClCompile>
     <ClCompile Include="TurretContainer.cpp">
-      <Filter>Source Files\Turrets</Filter>
-    </ClCompile>
-    <ClCompile Include="Random.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameObjects\Turrets</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Source Files\Graphics</Filter>
@@ -344,5 +374,58 @@
     <ClCompile Include="OptionsMenu.cpp">
       <Filter>Source Files\Menu</Filter>
     </ClCompile>
+    <ClCompile Include="AssetLoader.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\GameObjects\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files\GameControl</Filter>
+    </ClCompile>
+    <ClCompile Include="global.cpp">
+      <Filter>Source Files\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>Source Files\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector.cpp">
+      <Filter>Source Files\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadTree.cpp">
+      <Filter>Source Files\CollisionDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowController.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>Source Files\CollisionDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Source Files\GameObjects\Projectiles</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileFactory.cpp">
+      <Filter>Source Files\GameObjects\Projectiles</Filter>
+    </ClCompile>
+    <ClCompile Include="TurretBarrel.cpp">
+      <Filter>Source Files\GameObjects\Turrets</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Assets\Enemies\enemies.xml">
+      <Filter>Config Files</Filter>
+    </Xml>
+    <Xml Include="Assets\Enemies\waves.xml">
+      <Filter>Config Files</Filter>
+    </Xml>
+    <Xml Include="Assets\Projectiles\projectiles.xml">
+      <Filter>Config Files</Filter>
+    </Xml>
+    <Xml Include="Assets\Turrets\turrets.xml">
+      <Filter>Config Files</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

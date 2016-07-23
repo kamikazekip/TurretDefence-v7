@@ -1,15 +1,16 @@
 #include "OptionsMenu.h"
 #include "Input.h"
+#include "Game.h"
 
-OptionsMenu::OptionsMenu( Game* game, LoopHandler* previousHandler )
-	: Menu( game )
+OptionsMenu::OptionsMenu( LoopHandler* previousHandler )
+	: Menu( )
 {
 	this->previousHandler = previousHandler;
-	optionsOverlay = new Sprite( renderTarget, Asset_OptionsMenu_Overlay );
+	optionsOverlay = new Sprite( ImageAsset_OptionsMenu_Overlay );
 	optionsOverlay->positionRect.h = camera->windowHeight;
 	optionsOverlay->positionRect.w = camera->windowWidth;
 
-	backButton = new MenuItem( renderTarget, menuItemFont, "Back", menuFontColor, menuFontColorSelected );
+	backButton = new MenuItem( FontAsset_MenuItemFont, "Back", menuFontColor, menuFontColorSelected );
 	backButton->setXPosition(40);
 	backButton->setYPosition( camera->windowHeight - backButton->getHeight() - 20 );
 
@@ -32,9 +33,10 @@ OptionsMenu::OptionsMenu( Game* game, LoopHandler* previousHandler )
 	fullscreenLabel = nullptr;
 	fullscreenValue = nullptr;
 	fullscreen = false;
+	currentApplyColor = menuFontColor;
+	currentCancelColor = menuFontColor;
 	scale();
 }
-
 
 OptionsMenu::~OptionsMenu()
 {
@@ -62,11 +64,16 @@ void OptionsMenu::draw()
 	resolutionValue->draw();
 	fullscreenLabel->draw();
 	fullscreenValue->draw();
+	drawButtons();
 }
 
-void OptionsMenu::onQuit()
+void OptionsMenu::drawButtons()
 {
-	game->setGameState( GameState::Quitting );
+	SDL_SetRenderDrawColor( renderTarget, currentCancelColor.r, currentCancelColor.g, currentCancelColor.b, currentCancelColor.a );
+	SDL_RenderDrawRect( renderTarget, &cancelButtonRect );
+
+	SDL_SetRenderDrawColor( renderTarget, currentApplyColor.r, currentApplyColor.g, currentApplyColor.b, currentApplyColor.a );
+	SDL_RenderDrawRect( renderTarget, &applyButtonRect );
 }
 
 void OptionsMenu::onMouseMotion( int mouseX, int mouseY )
@@ -121,18 +128,18 @@ void OptionsMenu::scale()
 	if( fullscreenValue )
 		delete fullscreenValue; fullscreenValue = nullptr;
 
-	optionsFont = TTF_OpenFont( action_jackson.c_str(), int(camera->windowWidth * 0.028125f) );
+	optionsFont = assets->getFont( FontAsset_MenuItemFont, int( camera->windowWidth * 0.028125f ) );
 
-	resolutionLabel = new Sprite( renderTarget, optionsFont, "Resolution", menuFontColor );
+	resolutionLabel = new Sprite( optionsFont, "Resolution", menuFontColor );
 	resolutionLabel->positionRect.x = int(camera->windowWidth * 0.046875f);
 	resolutionLabel->positionRect.y = int(camera->windowHeight * 0.3703703703703704f);
 
-	resolutionValue = new MenuItem(renderTarget, optionsFont, getCurrentResolution(), white, selectedWhite );
+	resolutionValue = new MenuItem( optionsFont, getCurrentResolution(), white, selectedWhite );
 	int xPos = resolutionLabel->positionRect.x + resolutionLabel->positionRect.w + int( camera->windowWidth * 0.03125f );
 	resolutionValue->setXPosition(xPos);
 	resolutionValue->setYPosition( resolutionLabel->positionRect.y );
 
-	fullscreenLabel = new Sprite( renderTarget, optionsFont, "Fullscreen", menuFontColor );
+	fullscreenLabel = new Sprite( optionsFont, "Fullscreen", menuFontColor );
 	fullscreenLabel->positionRect.x = int( camera->windowWidth * 0.046875f );
 	fullscreenLabel->positionRect.y = int( camera->windowHeight * 0.48148148148148145f );
 
@@ -140,10 +147,20 @@ void OptionsMenu::scale()
 	if( fullscreen )
 		fs = "Yes";
 
-	fullscreenValue = new MenuItem( renderTarget, optionsFont, fs, white, selectedWhite );
+	fullscreenValue = new MenuItem( optionsFont, fs, white, selectedWhite );
 	int xPosFS = resolutionLabel->positionRect.x + resolutionLabel->positionRect.w + int( camera->windowWidth * 0.03125f );
 	fullscreenValue->setXPosition( xPosFS );
 	fullscreenValue->setYPosition( fullscreenLabel->positionRect.y );
+
+	cancelButtonRect.w = int(camera->windowWidth * 0.1203125f);
+	cancelButtonRect.h = int(camera->windowHeight * 0.0925925925925926);
+	cancelButtonRect.x = int(camera->windowWidth * 0.12604166666666666f);
+	cancelButtonRect.y = int(camera->windowHeight * 0.7574074074074075f);
+
+	applyButtonRect.w = cancelButtonRect.w;
+	applyButtonRect.h = cancelButtonRect.h;
+	applyButtonRect.x = int(camera->windowWidth * 0.25416666666666664f);
+	applyButtonRect.y = cancelButtonRect.y;
 }
 
 std::string OptionsMenu::getCurrentResolution()

@@ -21,12 +21,12 @@ private:
 	
 	void positionButtons();
 public:
-	HUD(Game* game, BaseLevelState* level, int windowWidth, int windowHeight);
+	HUD(Game* game, BaseLevelState* level);
 	~HUD();
 
 	void setWindowDimension( int windowWidth, int windowHeight );
 
-	void onMouseButtonDown( int mouseX, int mouseY );
+	bool onMouseButtonDown( int mouseX, int mouseY );
 	void onMouseMotion( int mouseX, int mouseY );
 	void onEscapeKeyDown();
 	void animate( float deltaTime );

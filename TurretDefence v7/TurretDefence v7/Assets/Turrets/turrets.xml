@@ -4,14 +4,14 @@
 			<type>soldier</type>
 			<range>250.0</range>
 			<attackSpeed>1.00f</attackSpeed>
-			<width>100</width>
-			<height>100</height>
+      <scale>1.00f</scale>
 	</turret>
 	<turret>
 			<type>sniper</type>
-			<range>300.0</range>
-			<attackSpeed>1.00f</attackSpeed>
-			<width>70</width>
-			<height>87</height>
+			<range>250.0</range>
+			<attackSpeed>20.00f</attackSpeed>
+			<width>100</width>
+			<height>100</height>
+      <scale>0.40f</scale>
 	</turret>
 </turrets>

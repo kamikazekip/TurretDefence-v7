@@ -1,23 +1,35 @@
 #include "Sprite.h"
+#include "WindowController.h"
 
-Sprite::Sprite(SDL_Renderer* renderTarget, Asset asset)
+Sprite::Sprite( ImageAsset asset )
 {
-	this->renderTarget = renderTarget;
-	this->texture = Assets::getInstance()->getAsset( asset );
+	this->renderTarget = WindowController::getInstance()->getRenderTarget();
+	this->texture = Assets::getInstance()->getImageAsset( asset );
 	SDL_QueryTexture( texture, NULL, NULL, &positionRect.w, &positionRect.h );
 	positionRect.x = 0;
 	positionRect.y = 0;
 }
 
-Sprite::Sprite( SDL_Renderer* renderTarget, TTF_Font* font, std::string text, SDL_Color color)
+Sprite::Sprite( FontAsset font, std::string text, SDL_Color color)
 {
-	this->renderTarget = renderTarget;
-	this->texture = Assets::getInstance()->getAsset(font, text, color);
+	this->renderTarget = WindowController::getInstance()->getRenderTarget();
+	this->texture = Assets::getInstance()->getText(font, text, color);
 
 	SDL_QueryTexture( texture, NULL, NULL, &positionRect.w, &positionRect.h );
 	positionRect.x = 0;
 	positionRect.y = 0;
 }
+
+Sprite::Sprite( TTF_Font* font, std::string text, SDL_Color color )
+{
+	this->renderTarget = WindowController::getInstance()->getRenderTarget();
+	this->texture = Assets::getInstance()->getText( font, text, color );
+
+	SDL_QueryTexture( texture, NULL, NULL, &positionRect.w, &positionRect.h );
+	positionRect.x = 0;
+	positionRect.y = 0;
+}
+
 
 Sprite::~Sprite()
 {
@@ -41,8 +53,8 @@ void Sprite::drawFullScreen( Camera* camera )
 	SDL_RenderCopy( renderTarget, texture, NULL, &drawingRect );
 }
 
-void Sprite::setAsset(Asset asset)
+void Sprite::setImageAsset( ImageAsset asset )
 {
-	this->texture = Assets::getInstance()->getAsset( asset );
+	this->texture = Assets::getInstance()->getImageAsset( asset );
 	SDL_QueryTexture( texture, NULL, NULL, &positionRect.w, &positionRect.h );
 }
