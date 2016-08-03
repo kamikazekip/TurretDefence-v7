@@ -40,7 +40,16 @@ OptionsMenu::OptionsMenu( LoopHandler* previousHandler )
 
 OptionsMenu::~OptionsMenu()
 {
-
+	if( optionsOverlay )
+		delete optionsOverlay;	optionsOverlay = nullptr;
+	if( resolutionLabel )
+		delete resolutionLabel; resolutionLabel = nullptr;
+	if( resolutionValue )
+		delete resolutionValue; resolutionValue = nullptr;
+	if( fullscreenLabel )
+		delete fullscreenLabel; fullscreenLabel = nullptr;
+	if( fullscreenValue )
+		delete fullscreenValue; fullscreenValue = nullptr;
 }
 
 void OptionsMenu::firstTick()

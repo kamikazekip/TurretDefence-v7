@@ -2,7 +2,17 @@
 <waves>
 	<wave>
 		<enemy>
-			<spawntime>0.20f</spawntime>
+			<spawntime>0.30f</spawntime>
+			<quantity>80</quantity>
+			<type>easy</type>
+		</enemy>
+    <enemy>
+      <spawntime>0.50f</spawntime>
+      <quantity>10</quantity>
+      <type>medium</type>
+    </enemy>
+    <enemy>
+			<spawntime>0.30f</spawntime>
 			<quantity>20</quantity>
 			<type>easy</type>
 		</enemy>
@@ -10,8 +20,36 @@
 	<wave>
 		<enemy>
 			<spawntime>0.50f</spawntime>
-			<quantity>2</quantity>
+			<quantity>1</quantity>
 			<type>medium</type>
 		</enemy>
 	</wave>
+  <wave>
+    <enemy>
+      <spawntime>0.30f</spawntime>
+      <quantity>20</quantity>
+      <type>easy</type>
+    </enemy>
+  </wave>
+  <wave>
+    <enemy>
+      <spawntime>0.30f</spawntime>
+      <quantity>20</quantity>
+      <type>easy</type>
+    </enemy>
+  </wave>
+  <wave>
+    <enemy>
+      <spawntime>0.30f</spawntime>
+      <quantity>20</quantity>
+      <type>easy</type>
+    </enemy>
+  </wave>
+  <wave>
+    <enemy>
+      <spawntime>0.30f</spawntime>
+      <quantity>20</quantity>
+      <type>easy</type>
+    </enemy>
+  </wave>
 </waves>

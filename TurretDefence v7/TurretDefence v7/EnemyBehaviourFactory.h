@@ -3,6 +3,7 @@
 #include <map>
 
 class Enemy;
+enum EnemyConditions;
 
 class EnemyBehaviourFactory
 {

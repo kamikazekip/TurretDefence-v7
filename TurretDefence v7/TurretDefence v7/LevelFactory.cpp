@@ -14,7 +14,8 @@ LevelFactory::LevelFactory()
 
 LevelFactory::~LevelFactory()
 {
-
+	for( std::map<Levels, BaseLevelState*>::iterator it = levelMap.begin(); it != levelMap.end(); ++it )
+		delete it->second;
 }
 
 void LevelFactory::insertMapEntry( Levels levelEnum, BaseLevelState* level, std::string waypointsFile )

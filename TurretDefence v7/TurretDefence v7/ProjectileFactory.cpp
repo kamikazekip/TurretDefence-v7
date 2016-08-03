@@ -26,7 +26,8 @@ ProjectileFactory::ProjectileFactory()
 
 ProjectileFactory::~ProjectileFactory()
 {
-
+	for( std::map<std::string, Projectile*>::iterator iterator = projectileMap.begin(); iterator != projectileMap.end(); iterator++ )
+		delete iterator->second;
 }
 
 Projectile* ProjectileFactory::getProjectilePrototype( std::string type )
@@ -40,4 +41,9 @@ ProjectileFactory* ProjectileFactory::getInstance()
 	if( !instance )
 		instance = new ProjectileFactory();
 	return instance;
+}
+
+extern __declspec( dllexport ) void ProjectileFactory_Quit()
+{
+	delete instance; instance = nullptr;
 }

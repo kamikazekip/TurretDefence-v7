@@ -10,6 +10,7 @@ public:
 	LevelBehaviour( BaseLevelState* level );
 	~LevelBehaviour();
 
+	virtual void checkState();
 	virtual void update( float deltaTime );
 	virtual LevelBehaviour* clone();
 };

@@ -17,6 +17,6 @@ public:
 	EnemyFactory( std::vector<SDL_Point> path );
 	~EnemyFactory();
 
-	Enemy* createEnemy( std::string type, float spawnTime, Wave* wave );
+	Enemy* createEnemy( std::string type, float spawnTime );
 };
 

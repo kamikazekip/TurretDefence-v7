@@ -12,6 +12,11 @@ EnemyBehaviour::~EnemyBehaviour()
 
 }
 
+void EnemyBehaviour::setup()
+{
+
+}
+
 void EnemyBehaviour::checkState()
 {
 
@@ -19,7 +24,7 @@ void EnemyBehaviour::checkState()
 
 void EnemyBehaviour::update( float deltaTime )
 {
-	std::cout << "Done" << std::endl;
+	
 }
 
 void EnemyBehaviour::move()

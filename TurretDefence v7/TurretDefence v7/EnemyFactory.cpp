@@ -20,13 +20,14 @@ EnemyFactory::EnemyFactory( std::vector<SDL_Point> path )
 		int width = std::stoi( enemy->first_node( "width" )->value() );
 		int height = std::stoi( enemy->first_node( "height" )->value() );
 		std::string image = enemy->first_node( "image" )->value();
-		insertEntry( type, new Enemy( new Wave(), Assets::getInstance()->getImageAsset( image ), health, speed, width, height, path, 0.00f ) );
+		insertEntry( type, new Enemy( Assets::getInstance()->getImageAsset( image ), health, speed, width, height, path, 0.00f ) );
 	}
 }
 
 EnemyFactory::~EnemyFactory()
 {
-
+	for( std::map<std::string, Enemy*>::iterator iterator = enemyMap.begin(); iterator != enemyMap.end(); iterator++ )
+		delete iterator->second;
 }
 
 void EnemyFactory::insertEntry( std::string key, Enemy* enemy )
@@ -34,7 +35,7 @@ void EnemyFactory::insertEntry( std::string key, Enemy* enemy )
 	enemyMap.insert( std::pair<std::string, Enemy*>(key, enemy) );
 }
 
-Enemy* EnemyFactory::createEnemy( std::string type, float spawnTime, Wave* wave )
+Enemy* EnemyFactory::createEnemy( std::string type, float spawnTime )
 {
-	return enemyMap.at( type )->clone( spawnTime, wave );
+	return enemyMap.at( type )->clone( spawnTime );
 }

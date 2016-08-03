@@ -7,8 +7,8 @@ public:
 	EnemyMovingBehaviour(Enemy* enemy);
 	~EnemyMovingBehaviour();
 
-	virtual void checkState();
-	virtual void update( float deltaTime );
-	virtual EnemyBehaviour* clone();
+	void checkState();
+	void update( float deltaTime );
+	EnemyBehaviour* clone();
 };
 

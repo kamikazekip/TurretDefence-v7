@@ -1,13 +1,5 @@
 #pragma once
 #include <iostream>
-
-enum EnemyConditions
-{
-	EnemyCondition_Spawned,
-	EnemyCondition_Health_Depleted,
-	EnemyCondition_Reached_Last_Waypoint,
-};
-
 class Enemy;
 
 class EnemyBehaviour
@@ -17,6 +9,7 @@ protected:
 public:
 	EnemyBehaviour(Enemy* enemy);
 	~EnemyBehaviour();
+	virtual void setup();
 	virtual void checkState();
 	virtual void update( float deltaTime );
 	virtual void move();

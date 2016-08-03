@@ -28,7 +28,4 @@ public:
 	~Version();
 };
 
-/**
-This function cleans up the entire sound system. You should call it upon all exit conditions.
-*/
 extern __declspec(dllexport) void Version_Quit();

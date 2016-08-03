@@ -12,6 +12,11 @@ LevelBehaviour::~LevelBehaviour()
 
 }
 
+void LevelBehaviour::checkState()
+{
+
+}
+
 void LevelBehaviour::update( float deltaTime )
 {
 

@@ -13,13 +13,16 @@ LevelInWaveBehaviour::~LevelInWaveBehaviour()
 
 }
 
+void LevelInWaveBehaviour::checkState()
+{
+
+	if( wave->allEnemiesSpawn && level->enemies->size() == 0 )
+		level->changeState( LevelCondition_End_Wave );
+}
+
 void LevelInWaveBehaviour::update( float deltaTime )
 {
 	wave->update( deltaTime );
-	if( wave->finished )
-	{
-		level->changeState( LevelCondition_End_Wave );
-	}
 }
 
 LevelBehaviour* LevelInWaveBehaviour::clone()

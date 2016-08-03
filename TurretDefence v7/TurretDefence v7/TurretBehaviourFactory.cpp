@@ -12,7 +12,8 @@ TurretBehaviourFactory::TurretBehaviourFactory(Turret* turret)
 
 TurretBehaviourFactory::~TurretBehaviourFactory()
 {
-
+	for( std::map<TurretConditions, TurretBehaviour*>::iterator iterator = behaviourMap.begin(); iterator != behaviourMap.end(); iterator++ )
+		delete iterator->second;
 }
 
 TurretBehaviour* TurretBehaviourFactory::createBehaviour( TurretConditions condition )

@@ -8,8 +8,8 @@
 	</turret>
 	<turret>
 			<type>sniper</type>
-			<range>250.0</range>
-			<attackSpeed>20.00f</attackSpeed>
+			<range>600.0</range>
+			<attackSpeed>15.0f</attackSpeed>
 			<width>100</width>
 			<height>100</height>
       <scale>0.40f</scale>

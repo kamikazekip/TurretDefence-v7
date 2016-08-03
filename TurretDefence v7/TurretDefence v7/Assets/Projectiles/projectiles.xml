@@ -5,7 +5,7 @@
 		<width>10</width>
 		<height>20</height>
 		<speed>1000</speed>
-		<damage>50</damage>
+		<damage>1000</damage>
 		<image>Projectiles/default.png</image>
 	</projectile>
 </projectiles>

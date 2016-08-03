@@ -1,11 +1,10 @@
 #include "TurretContainer.h"
 
 
-TurretContainer::TurretContainer( BaseLevelState* level, Camera* camera, CollisionManager* collisionManager )
+TurretContainer::TurretContainer( BaseLevelState* level, Camera* camera )
 {
 	this->level = level;
 	this->camera = camera;
-	this->collisionManager = collisionManager;
 	turretFactory = new TurretFactory( );
 }
 
@@ -36,7 +35,6 @@ void TurretContainer::draw()
 void TurretContainer::addTurret( TurretType turretType, double x, double y )
 {
 	Turret* turret = turretFactory->createTurret( turretType, x, y );
-	turret->setCollisionManager( collisionManager );
 	turret->setLevel( level );
 	turrets.push_back( turret );
 }

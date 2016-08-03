@@ -38,8 +38,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)Deps/include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Deps/lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Prive_Projecten\Visual Leak Detector\include;$(SolutionDir)Deps/include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Prive_Projecten\Visual Leak Detector\lib\Win32;$(SolutionDir)Deps/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(SolutionDir)Deps/include;$(IncludePath)</IncludePath>
@@ -87,6 +87,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyBehaviour.h" />
     <ClInclude Include="EnemyBehaviourFactory.h" />
+    <ClInclude Include="EnemyDeadBehaviour.h" />
     <ClInclude Include="EnemyFactory.h" />
     <ClInclude Include="EnemyMovingBehaviour.h" />
     <ClInclude Include="Game.h" />
@@ -142,6 +143,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyBehaviour.cpp" />
     <ClCompile Include="EnemyBehaviourFactory.cpp" />
+    <ClCompile Include="EnemyDeadBehaviour.cpp" />
     <ClCompile Include="EnemyFactory.cpp" />
     <ClCompile Include="EnemyMovingBehaviour.cpp" />
     <ClCompile Include="Game.cpp" />

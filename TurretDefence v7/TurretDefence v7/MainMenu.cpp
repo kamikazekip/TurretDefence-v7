@@ -19,7 +19,8 @@ MainMenu::MainMenu( )
 
 MainMenu::~MainMenu()
 {
-	std::cout << "HALLO" << std::endl;
+	delete mainTitle; mainTitle = nullptr;
+	delete optionsMenu; optionsMenu = nullptr;
 }
 
 void MainMenu::firstTick()

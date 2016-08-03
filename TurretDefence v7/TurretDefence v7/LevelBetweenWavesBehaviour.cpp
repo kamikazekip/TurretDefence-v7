@@ -12,6 +12,11 @@ LevelBetweenWavesBehaviour::~LevelBetweenWavesBehaviour()
 
 }
 
+void LevelBetweenWavesBehaviour::checkState()
+{
+
+}
+
 void LevelBetweenWavesBehaviour::update( float deltaTime )
 {
 

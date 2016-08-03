@@ -68,11 +68,13 @@ public:
 	virtual void onClick();
 	virtual void onMissClick();
 	virtual void setLevel(BaseLevelState* level);
-	virtual void setCollisionManager( CollisionManager* collisionManager );
 
 	/* View */
 	virtual void setImage( TurretImages turretImage );
 	virtual void animate( float deltaTime );
 	virtual void draw( Camera* camera );
+
+	/* Input */
+	virtual void onMouseButtonDown( int mouseX, int mouseY );
 };
 

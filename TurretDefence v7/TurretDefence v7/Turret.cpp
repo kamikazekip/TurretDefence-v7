@@ -8,6 +8,7 @@
 Turret::Turret(  ImageAsset calm, ImageAsset angry, ImageAsset barrel_calm, ImageAsset barrel_angry, double x, double y, double range, float attackSpeed, float scale )
 {
 	/* View */
+	this->collisionManager	= CollisionManager::getInstance();
 	this->scale				= scale;
 	image_calm				= Assets::getInstance()->getImageAsset( calm );
 	image_angry				= Assets::getInstance()->getImageAsset( angry );
@@ -55,7 +56,10 @@ Turret::Turret(  ImageAsset calm, ImageAsset angry, ImageAsset barrel_calm, Imag
 
 Turret::~Turret()
 {
-
+	delete barrel; barrel = nullptr;
+	delete behaviourFactory; behaviourFactory = nullptr;
+	delete currentBehaviour; currentBehaviour = nullptr;
+	delete rangeAnimation; rangeAnimation = nullptr;
 }
 
 /* --------------------------- Model --------------------------- */
@@ -142,11 +146,6 @@ void Turret::setLevel( BaseLevelState* level )
 	this->level = level;
 }
 
-void Turret::setCollisionManager( CollisionManager* collisionManager )
-{
-	this->collisionManager = collisionManager;
-}
-
 /* --------------------------- View --------------------------- */
 
 void Turret::setImage( TurretImages turretImage )
@@ -173,4 +172,14 @@ void Turret::draw( Camera* camera )
 	SDL_RenderCopyEx( renderTarget, image_current, NULL, &drawingRect, rotation, &rotationCenter, SDL_FLIP_NONE );
 
 	barrel->draw( camera );
+}
+
+/* Input */
+
+void Turret::onMouseButtonDown( int mouseX, int mouseY )
+{
+	if( isTouching( mouseX, mouseY ) )
+		onClick();
+	else
+		onMissClick();
 }

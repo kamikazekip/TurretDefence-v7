@@ -10,6 +10,7 @@ public:
 	LevelInWaveBehaviour( BaseLevelState* level );
 	~LevelInWaveBehaviour();
 
+	void checkState();
 	void update( float deltaTime );
 	LevelBehaviour* clone();
 };

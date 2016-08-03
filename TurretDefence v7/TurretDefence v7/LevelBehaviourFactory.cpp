@@ -5,16 +5,16 @@
 
 LevelBehaviourFactory::LevelBehaviourFactory(BaseLevelState* level)
 {
-	LevelBetweenWavesBehaviour* inBetween = new LevelBetweenWavesBehaviour( level );
-	insertEntry( LevelCondition_Init,			inBetween);
+	insertEntry( LevelCondition_Init,			new LevelBetweenWavesBehaviour( level ) );
 	insertEntry( LevelCondition_Start_Wave,		new LevelInWaveBehaviour( level ) );
-	insertEntry( LevelCondition_End_Wave,		inBetween );
+	insertEntry( LevelCondition_End_Wave,		new LevelBetweenWavesBehaviour( level ) );
 }
 
 
 LevelBehaviourFactory::~LevelBehaviourFactory()
 {
-
+	for( std::map<LevelConditions, LevelBehaviour*>::iterator iterator = behaviourMap.begin(); iterator != behaviourMap.end(); iterator++ )
+		delete iterator->second;
 }
 
 void LevelBehaviourFactory::insertEntry( LevelConditions condition, LevelBehaviour* behaviour )

@@ -15,11 +15,12 @@ private:
 	/* Singleton */
 	ProjectileFactory();
 	ProjectileFactory( ProjectileFactory const& );
-	~ProjectileFactory();
 public:
+	~ProjectileFactory();
 	/* Singleton */
 	static ProjectileFactory* getInstance();
 
 	Projectile* getProjectilePrototype( std::string type );
 };
 
+extern __declspec( dllexport ) void ProjectileFactory_Quit();

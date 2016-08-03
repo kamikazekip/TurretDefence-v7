@@ -1,4 +1,5 @@
 #include "Projectile.h"
+#include "WindowController.h"
 
 Projectile::Projectile( double objectX, double objectY, double objectW, double objectH, Vector direction, double speed, double damage, float rotation, SDL_Texture* image,  SDL_Texture* muzzleFlashImage )
 	: GameObject(objectX, objectY, objectW, objectH)
@@ -12,6 +13,7 @@ Projectile::Projectile( double objectX, double objectY, double objectW, double o
 	this->image					= image;
 	this->muzzleFlashImage		= muzzleFlashImage;
 	this->shouldDrawMuzzleFlash = true;
+	this->boundary				= WindowController::getInstance()->getGameObjectBoundary();
 
 	int muzzleFlashW;
 	int muzzleFlashH;
@@ -44,6 +46,9 @@ void Projectile::update( float deltaTime )
 {
 	x += direction.x * speed * deltaTime;
 	y += direction.y * speed * deltaTime;
+
+	if( x < boundary.x || y < boundary.y || x > boundary.x + boundary.w || y > boundary.y + boundary.h )
+		this->trash = true;
 }
 
 void Projectile::draw( Camera* camera )

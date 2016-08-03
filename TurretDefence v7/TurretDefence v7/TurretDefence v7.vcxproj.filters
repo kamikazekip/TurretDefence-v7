@@ -258,6 +258,9 @@
     <ClInclude Include="TurretBarrel.h">
       <Filter>Header Files\GameObjects\Turrets</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyDeadBehaviour.h">
+      <Filter>Header Files\GameObjects\Enemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -412,6 +415,9 @@
     </ClCompile>
     <ClCompile Include="TurretBarrel.cpp">
       <Filter>Source Files\GameObjects\Turrets</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyDeadBehaviour.cpp">
+      <Filter>Source Files\GameObjects\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

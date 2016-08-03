@@ -8,12 +8,12 @@ class Projectile : public GameObject
 protected:
 	Vector direction;
 	double speed;
-	double damage;
 	float rotation;
 	SDL_Texture* image;
 	SDL_Texture* muzzleFlashImage;
 	double flashX, flashY, flashW, flashH;
 	bool shouldDrawMuzzleFlash;
+	SDL_Rect boundary;
 	Projectile( double objectX, double objectY, double objectW, double objectH, Vector direction, double speed, double damage, float rotation, SDL_Texture* image, SDL_Texture* muzzleFlashImage );
 public:
 	/* Ammo prototype constructor */
@@ -24,5 +24,7 @@ public:
 	void draw( Camera* camera );
 
 	virtual Projectile* clone(double x, double y, Vector direction, float rotation, SDL_Texture* muzzleFlashImage);
+
+	double damage;
 };
 

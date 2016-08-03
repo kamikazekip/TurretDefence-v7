@@ -52,7 +52,6 @@ private:
 	Game( Game const& );
 public:
 	~Game();
-
 	/* Singleton */
 	static Game* getInstance();
 

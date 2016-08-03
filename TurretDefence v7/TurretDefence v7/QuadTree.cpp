@@ -22,7 +22,7 @@ QuadTree::~QuadTree()
 	delete objects;		objects = nullptr;
 	for( size_t c = 0; c < 4; c++ )
 	{
-		delete nodes[c];
+		delete nodes[c]; nodes[c] = nullptr;
 	}
 }
 
@@ -35,8 +35,7 @@ void QuadTree::clear()
 	{
 		if( nodes[x] != NULL )
 		{
-			nodes[x]->clear();
-			nodes[x] = nullptr;
+			delete nodes[x]; nodes[x] = nullptr;
 		}
 	}
 }

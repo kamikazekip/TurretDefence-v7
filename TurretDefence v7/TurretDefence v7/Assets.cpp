@@ -50,6 +50,8 @@ Assets::~Assets()
 		SDL_DestroyTexture( iterator->second );
 	for( std::map<FontAsset, TTF_Font*>::iterator		iterator = fontAssetMap.begin(); iterator != fontAssetMap.end(); iterator++ )
 		TTF_CloseFont( iterator->second );
+	for( std::map<std::string, SDL_Texture*>::iterator iterator = stringToImageMap.begin(); iterator != stringToImageMap.end(); iterator++ )
+		SDL_DestroyTexture( iterator->second );
 }
 
 void Assets::insertImageAssetEntry( ImageAsset asset, std::string filePath )

@@ -7,17 +7,21 @@ private:
 	SDL_Window* window;
 	SDL_Renderer* renderTarget;
 
+	double gameObjectBoundarySize;
+	SDL_Rect gameObjectBoundary;
+
 	void init();
 	/* Singleton */
 	WindowController();
 	WindowController( WindowController const& );
-	~WindowController();
 public:
+	~WindowController();
 	/* Singleton */
 	static WindowController* getInstance();
 
-	SDL_Renderer* getRenderTarget();
 	SDL_Window* getWindow();
+	SDL_Renderer* getRenderTarget();
+	SDL_Rect getGameObjectBoundary();
 	void setResolution( int resX, int resY );
 	void setFullScreen( bool fs );
 
@@ -25,3 +29,4 @@ public:
 	Uint32 flags;
 };
 
+extern __declspec( dllexport ) void WindowController_Quit();

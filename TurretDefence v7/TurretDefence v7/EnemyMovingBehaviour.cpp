@@ -15,10 +15,8 @@ EnemyMovingBehaviour::~EnemyMovingBehaviour()
 
 void EnemyMovingBehaviour::checkState()
 {
-	if( enemy->reachedEnd )
-	{
-		enemy->changeState( EnemyConditions::EnemyCondition_Reached_Last_Waypoint );
-	}
+	if( enemy->health <= 0 )
+		enemy->changeState( EnemyConditions::EnemyCondition_Health_Depleted );
 }
 
 void EnemyMovingBehaviour::update( float deltaTime )

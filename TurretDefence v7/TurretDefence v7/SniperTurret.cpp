@@ -10,7 +10,7 @@ SniperTurret::SniperTurret( double x, double y, double range, float attackSpeed,
 
 SniperTurret::~SniperTurret()
 {
-
+	std::cout << "HALLO" << std::endl;
 }
 
 bool SniperTurret::isTouching( int xPosition, int yPosition )

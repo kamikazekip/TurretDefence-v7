@@ -48,9 +48,11 @@ Game* Game::getInstance()
 
 Game::~Game()
 {
-	delete mainMenu;							mainMenu			= nullptr;
-	Input_Quit();								input				= nullptr;
-	SDL_DestroyRenderer( renderTarget );		renderTarget		= nullptr;
+	delete levelFactory; levelFactory = nullptr;
+	delete assetLoader; assetLoader = nullptr;
+	delete camera;		camera = nullptr;
+	delete mainMenu;	mainMenu = nullptr;
+	Input_Quit();		input = nullptr;
 }
 
 void Game::gameLoop()
